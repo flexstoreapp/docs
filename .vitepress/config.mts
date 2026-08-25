@@ -1,15 +1,12 @@
 import { defineConfig } from 'vitepress';
 
-const isStatic = process.env.DOCS_SEARCH === 'false';
-
 const gaId = 'G-YEEGM3QNR0';
 
-const gaHead: [string, Record<string, string>, string][] = !isStatic
-    ? [
-          [
-              'script',
-              {},
-              `window.dataLayer = window.dataLayer || [];
+const gaHead: [string, Record<string, string>, string][] = [
+    [
+        'script',
+        {},
+        `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 window.__gaLocal = location.protocol === 'file:' || /^(localhost|127\\.0\\.0\\.1|\\[::1\\]|0\\.0\\.0\\.0)$/.test(location.hostname) || /\\.local$|\\.localhost$/.test(location.hostname);
 if (!window.__gaLocal) {
@@ -20,25 +17,18 @@ if (!window.__gaLocal) {
   gtag('js', new Date());
   gtag('config', '${gaId}');
 }`,
-          ],
-      ]
-    : [];
+    ],
+];
 
 export default defineConfig({
     title: 'FlexStore',
     description: 'FlexStore Documentation',
     srcExclude: ['README.md'],
-    appearance: !isStatic,
-    vite: {
-        define: {
-            __DOCS_GA__: !isStatic,
-        },
-    },
     head: [['link', { rel: 'icon', href: '/favicon.png' }], ...gaHead],
     themeConfig: {
         logo: { light: '/logo.svg', dark: '/logo-dark.svg' },
         siteTitle: false,
-        ...(!isStatic && { search: { provider: 'local' } }),
+        search: { provider: 'local' },
         sidebar: [
             { text: 'Introduction', link: '/introduction' },
             { text: 'Installation', link: '/installation' },
@@ -50,7 +40,7 @@ export default defineConfig({
             { text: 'Shared Payment Links', link: '/shared-payment-links' },
             {
                 text: 'Main',
-                ...(!isStatic && { collapsed: false }),
+                collapsed: false,
                 items: [
                     { text: 'Dashboard', link: '/dashboard' },
                     {
@@ -81,7 +71,7 @@ export default defineConfig({
             },
             {
                 text: 'System',
-                ...(!isStatic && { collapsed: false }),
+                collapsed: false,
                 items: [
                     { text: 'Account', link: '/account' },
                     { text: 'Users', link: '/users' },
@@ -92,7 +82,7 @@ export default defineConfig({
             },
             {
                 text: 'Settings',
-                ...(!isStatic && { collapsed: false }),
+                collapsed: false,
                 items: [
                     { text: 'General', link: '/settings-general' },
                     { text: 'Store', link: '/settings-store' },
@@ -113,7 +103,7 @@ export default defineConfig({
             },
             {
                 text: 'Developer',
-                ...(!isStatic && { collapsed: false }),
+                collapsed: false,
                 items: [
                     { text: 'Installation', link: '/developer/installation' },
                     { text: 'SSR', link: '/developer/ssr' },

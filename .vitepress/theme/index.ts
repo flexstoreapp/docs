@@ -3,14 +3,12 @@ import DefaultTheme from 'vitepress/theme';
 
 import './custom.css';
 
-declare const __DOCS_GA__: boolean;
-
 const gaId = 'G-YEEGM3QNR0';
 
 export default {
     extends: DefaultTheme,
     enhanceApp({ router }) {
-        if (!__DOCS_GA__ || import.meta.env.SSR) {
+        if (import.meta.env.SSR) {
             return;
         }
 
