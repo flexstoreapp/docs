@@ -1,0 +1,17 @@
+{
+	"name": "flexstore-docs",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vitepress dev",
+		"build": "vitepress build",
+		"preview": "vitepress preview"
+	},
+	"devDependencies": {
+		"vitepress": "^1.6.3"
+	},
+	"overrides": {
+		"vite": "^6.4.2",
+		"esbuild": "^0.25.0"
+	}
+}
