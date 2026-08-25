@@ -27,6 +27,7 @@ if (!window.__gaLocal) {
 export default defineConfig({
     title: 'FlexStore',
     description: 'FlexStore Documentation',
+    srcExclude: ['README.md'],
     appearance: !isStatic,
     vite: {
         define: {
