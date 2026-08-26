@@ -33,7 +33,7 @@ Pick your database type and enter the connection details.
 
 For **MySQL/MariaDB or PostgreSQL**: the **host** (usually `127.0.0.1` or `localhost`), the **port** (filled in automatically, 3306 for MySQL and 5432 for PostgreSQL), the **database name** you created, and the **username** and **password** of a user with access. Leave the password blank if there isn't one.
 
-For **SQLite**: just a **database filename**, defaulting to `database.sqlite`. The file is created in the database directory if it doesn't exist.
+For **SQLite**: just a **database filename**, defaulting to `database.sqlite`. The file is created in the `storage` folder if it doesn't exist, which keeps it out of the way when you update the software later.
 
 ### Demo Data
 
