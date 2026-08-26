@@ -9,7 +9,7 @@ Reports show how your store is performing, grouped into Sales, Orders, Products,
 
 ## Selecting a Date Range
 
-Every report has a date range selector at the top showing the range currently in use. Open it to pick a preset from the list on the left: **Today**, **Yesterday**, **Last 7 days**, **Last 30 days** (the default), **This month**, **Last month**, **This quarter**, **Last quarter**, **This year**, or **Lifetime**, which runs from your earliest recorded order to today.
+Every report has a date range selector at the top showing the range currently in use. Open it to pick a preset from the list on the left: **Today**, **Yesterday**, **Last 7 days**, **Last 30 days** (the default), **This month**, **Last month**, **This quarter**, **Last quarter**, **This year**, or **Lifetime**, which runs from your earliest recorded order to today. Before your first order there is nothing to measure from, so Lifetime starts at the date your store was set up.
 
 For anything else, click a start date and then an end date on the calendar. Neither can be later than today. Nothing changes until you click **Apply**, so you can preview a preset or adjust a range before committing to it.
 
