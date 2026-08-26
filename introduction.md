@@ -46,7 +46,7 @@ The sidebar is split into two groups. The main group covers day-to-day operation
 
 The **System** group covers store-wide configuration:
 
-- **Users**: staff accounts
+- **Staff**: staff accounts
 - **Roles**: roles and their permissions
 - **Regions**: country and state groups used by shipping, tax, and payment rules
 - **Storefront**: homepage sections, menus, announcements, footer, and theme

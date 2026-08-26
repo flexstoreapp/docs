@@ -74,7 +74,7 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                     { text: 'Account', link: '/account' },
-                    { text: 'Users', link: '/users' },
+                    { text: 'Staff', link: '/staff' },
                     { text: 'Roles', link: '/roles' },
                     { text: 'Regions', link: '/regions' },
                     { text: 'Storefront', link: '/storefront' },

@@ -51,7 +51,7 @@ Published posts show up in four places:
 
 - **Blog page** at `/blog`: a grid of post cards, newest first, paginated. Each card shows the featured image, publish date, author, title, and excerpt.
 - **Post page**: featured image, title, publish date, author, and full content, followed by other recent posts. The author name links to their author page.
-- **Author page**: everything one writer has published, at an address built from that person's URL handle (set on their [user](/users) record). Writers with no published posts don't get a page.
+- **Author page**: everything one writer has published, at an address built from that person's URL handle (set on their [staff](/staff) record). Writers with no published posts don't get a page.
 - **Homepage**: add a **Blog Posts** section in the Storefront Builder and it pulls in real posts automatically.
 
 Posts per page, how more posts load, and whether related posts appear are all configured under **Blog list** and **Blog detail** in the [Storefront Builder](/storefront). Drafts and scheduled posts stay hidden everywhere until they go live.

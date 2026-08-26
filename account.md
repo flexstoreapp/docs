@@ -5,7 +5,7 @@ description: Manage your own admin profile, password, and security settings incl
 
 # Account
 
-The Account area is for your own admin login, as opposed to [Users](/users), which is for managing everyone else. Open it by clicking your name at the bottom of the sidebar and choosing **Account**. It has three tabs: **Profile**, **Password**, and **Security**.
+The Account area is for your own admin login, as opposed to [Staff](/staff), which is for managing everyone else. Open it by clicking your name at the bottom of the sidebar and choosing **Account**. It has three tabs: **Profile**, **Password**, and **Security**.
 
 ## Profile
 

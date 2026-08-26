@@ -5,7 +5,7 @@ description: Define roles, assign permissions, and control what each staff membe
 
 # Roles
 
-A role is a named group of permissions that you assign to [users](/users). Permissions always live on roles and can never be set on an individual user.
+A role is a named group of permissions that you assign to [staff](/staff). Permissions always live on roles and can never be set on an individual user.
 
 ## Viewing the Role List
 
@@ -46,7 +46,7 @@ Most groups follow a **View**, **Manage**, **Delete** pattern: View shows the li
 | **Flash Sales** | View, Manage, Delete | Flash sale campaigns |
 | **Customers** | View, Manage, Delete | Customer accounts, addresses, and order history |
 | **Reviews** | View, Manage, Delete | Moderating product reviews |
-| **Users** | View, Manage, Delete | Admin staff accounts |
+| **Staff** | View, Manage, Delete | Admin staff accounts |
 | **Roles** | View, Manage, Delete | Roles and their permissions |
 | **Regions** | View, Manage, Delete | Regions used by shipping, tax, and payments |
 | **Reports** | View | Sales, order, product, customer, and marketing analytics |
@@ -88,4 +88,4 @@ Some forms reference other resources: attaching a customer or products to an ord
 
 ### The Super Admin Role
 
-The Super Admin is the account created when the app is first installed. It has unrestricted access and bypasses permissions entirely. There is exactly one, no more can be created, and it doesn't appear in the Users list.
+The Super Admin is the account created when the app is first installed. It has unrestricted access and bypasses permissions entirely. There is exactly one, no more can be created, and it doesn't appear in the Staff list.
