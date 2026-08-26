@@ -9,7 +9,11 @@ Reports show how your store is performing, grouped into Sales, Orders, Products,
 
 ## Selecting a Date Range
 
-Every report has a date range selector at the top: **Last 7 days**, **Last 30 days** (the default), **Last 90 days**, **Last 12 months**, or **Custom**, where you pick a start and end date that must both be today or earlier. Changing the range refreshes the data straight away.
+Every report has a date range selector at the top showing the range currently in use. Open it to pick a preset from the list on the left: **Today**, **Yesterday**, **Last 7 days**, **Last 30 days** (the default), **This month**, **Last month**, **This quarter**, **Last quarter**, **This year**, or **Lifetime**, which runs from your earliest recorded order to today.
+
+For anything else, click a start date and then an end date on the calendar. Neither can be later than today. Nothing changes until you click **Apply**, so you can preview a preset or adjust a range before committing to it.
+
+Dates are read in your store's timezone, shown at the bottom of the panel. If your browser is in a different timezone, the calendar still follows the store.
 
 ## How Reports Are Structured
 

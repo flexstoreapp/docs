@@ -7,6 +7,12 @@ description: A quick overview of your store's performance with key metrics, sale
 
 The Dashboard is the first screen you see after logging in. It summarises how your store is doing right now so you can spot trends and act on recent orders without digging through reports.
 
+## Selecting a Date Range
+
+The selector at the top right drives every figure on the page. It shows the range in use; open it to pick a preset such as **Today**, **Last 30 days** (the default), **This month**, **Last quarter**, or **Lifetime**, which starts from your earliest recorded order. For a specific window, click a start date and then an end date on the calendar. Neither can be later than today, and nothing changes until you click **Apply**.
+
+Dates follow your store's timezone, shown at the bottom of the panel.
+
 ## Summary Stats
 
 Four cards sit at the top of the page:
@@ -18,7 +24,7 @@ Four cards sit at the top of the page:
 
 ## Sales Overview
 
-An area chart below the cards plots daily net sales (sales after refunds) for the past 30 days. Hover any point to see that day's exact figure.
+An area chart below the cards plots daily net sales (sales after refunds) across the selected date range. Hover any point to see that day's exact figure.
 
 ## Recent Orders
 
