@@ -115,6 +115,17 @@ Files are stored securely and reachable only through the private links given to 
 
 Delivery is automatic once payment goes through, so there is nothing to fulfill by hand. Links are emailed and also appear in the customer's storefront account under **Downloads** and on the order page. A cart containing only digital products skips the shipping step at checkout and asks for a billing address only.
 
+### Recommendations
+
+Two hand-picked lists, one per tab. Nothing shows unless you pick it, and shoppers see the products in your order.
+
+- **Cross-sells**: complementary products, such as a case for a phone. Shown as "Pairs well with" on the cart page and in the cart drawer, once the shopper has committed. Products already in the cart are never suggested.
+- **Up-sells**: higher-end alternatives you'd rather sell. Shown as "You might also consider" on the product page, while the shopper is still deciding.
+
+Pick a tab and click **Add products** to search and tick products. Each pick becomes a row with its image and price; drag the handle to reorder, hover for the remove icon. The tab label shows the count. A product cannot recommend itself, and inactive products are skipped.
+
+Each list can be hidden storefront-wide without losing your picks: up-sells under [Storefront > Product detail](/storefront#up-sells), cross-sells under [Storefront > Cart](/storefront#cart-page). Both are separate from the automatic [related products](/storefront#related-products) row, which FlexStore picks by category, brand, and price.
+
 ### Shopping
 
 These fields are for Google Shopping and Facebook or Instagram Shop. They do not appear on your storefront.
@@ -155,7 +166,7 @@ While editing, click **Duplicate** near the top right. The dialog lets you:
 
 1. **Set a title**, defaulting to the original with "(copy)" appended.
 2. **Set the initial status**, active or inactive.
-3. **Choose what to copy**: category, brand, media, pricing, tax settings, inventory, SKUs, barcodes, shipping, SEO, and digital files. SKUs and barcodes are unchecked by default to avoid conflicts.
+3. **Choose what to copy**: category, brand, media, pricing, tax settings, inventory, SKUs, barcodes, shipping, SEO, digital files, and recommendations. SKUs and barcodes are unchecked by default to avoid conflicts.
 
 Only sections the original actually has can be copied. Clicking **Duplicate** creates the product and opens its edit page.
 
@@ -169,7 +180,7 @@ Click **Import** on the Products page. If you don't have a file ready, **Downloa
 
 Drag your `.csv` file onto the upload area or click to browse, then click **Upload and preview**. FlexStore reads the headers and tries to match them to product fields.
 
-A CSV can set the product type and the download limit and expiry, but not the digital files themselves. Upload those on the product page after importing.
+A CSV can set the product type and the download limit and expiry, but not the digital files or recommendations. Add those on the product page after importing.
 
 ### Mapping Columns
 
@@ -203,3 +214,5 @@ Click **Export** on the Products page and choose a scope:
 - **Filtered products**: only those matching your current search and filters.
 
 Click **Export** in the dialog to download immediately. The filename includes the scope and a timestamp.
+
+Recommendations are not exported.

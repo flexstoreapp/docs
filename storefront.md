@@ -190,11 +190,21 @@ A row of up to 3 icons with titles and subtitles on every product page, good for
 
 Toggle approved customer reviews on or off, and set **Reviews per page** to 5, 10, 15, or 20.
 
+### Up-sells
+
+**Show up-sells** toggles the "You might also consider" row built from each product's [recommendations](/products#recommendations). Turning it off hides the row without touching your picks. Cross-sells live in the cart; their switch is on the [Cart](#cart-page) screen.
+
 ### Related Products
 
 Toggle the suggestion row at the bottom of each product page, and set **Number of products** to 5, 10, 15, or 20.
 
 Related products are picked by relevance score. Sharing the same **category** is the strongest signal, followed by the same **brand** and a **similar price** (within 30%), with in-stock products first. Only active products qualify. When there aren't enough strong matches, the row is topped up from a broader parent category, then from your newest products as a last resort.
+
+## Cart Page
+
+Click **Cart** in the sidebar.
+
+**Show cross-sells** toggles the "Pairs well with" row built from each product's [recommendations](/products#recommendations), both on the cart page under the line items and in the cart drawer. Products already in the cart are never suggested. Turning it off hides both without touching your picks.
 
 ## Blog List Page
 
