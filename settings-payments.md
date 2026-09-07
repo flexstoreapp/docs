@@ -79,7 +79,7 @@ Every gateway, Cash on Delivery included, has these two tabs controlling when it
 - **Excluded products**: a cart containing any of these doesn't get the gateway.
 - **Excluded categories**: same, for whole categories.
 - **Excluded brands**: same, for whole brands.
-- **Allowed regions**: limit the gateway to specific regions, matched against the customer's shipping address. Empty means everywhere.
+- **Allowed regions**: limit the gateway to specific [regions](/regions), matched against the customer's shipping address. Empty means everywhere.
 - **Supported currencies**: only gateways supporting the customer's active currency appear at checkout. New gateways come with their provider's usual currencies pre-selected. Empty means all currencies.
 
 ## Webhooks

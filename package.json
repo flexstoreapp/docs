@@ -1,17 +1,21 @@
 {
-	"name": "flexstore-docs",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "vitepress dev",
-		"build": "vitepress build",
-		"preview": "vitepress preview"
-	},
-	"devDependencies": {
-		"vitepress": "^1.6.3"
-	},
-	"overrides": {
-		"vite": "^6.4.2",
-		"esbuild": "^0.25.0"
-	}
+  "name": "flexstore-docs",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "lint": "redocly lint && node scripts/check-endpoint-links.mjs"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.51.2",
+    "openapi-to-postmanv2": "^6.3.3",
+    "vitepress": "^1.6.3",
+    "vitepress-openapi": "^0.2.4"
+  },
+  "overrides": {
+    "vite": "^6.4.2",
+    "esbuild": "^0.25.0"
+  }
 }

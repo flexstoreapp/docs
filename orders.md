@@ -1,6 +1,6 @@
 ---
 title: Orders
-description: View, manage, and fulfill customer orders, process refunds, and track every activity on an order from a single page.
+description: View, fulfill, and refund customer orders, and track every activity on an order.
 ---
 
 # Orders

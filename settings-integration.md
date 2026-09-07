@@ -1,9 +1,9 @@
 ---
-title: Integration
+title: Integration Settings
 description: Connect third-party analytics, advertising, product catalogs, and social login services to your store.
 ---
 
-# Integration
+# Integration Settings
 
 Connect third-party services to your store, under **Settings > Integration**. Analytics and social login use a **Connect** button that becomes **Connected** once set up. Product catalogs use **Enable** and **Enabled**. Click a row any time to edit or remove its details.
 

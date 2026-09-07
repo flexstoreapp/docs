@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: Welcome to the FlexStore documentation. Learn how to manage your online store, configure settings, and make the most of every feature.
+description: Learn how to manage your online store, configure settings, and make the most of every feature.
 ---
 
 # Introduction

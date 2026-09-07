@@ -21,7 +21,7 @@ Your store caches data to stay fast. If changes aren't taking effect, click **Re
 
 ## Software Update
 
-Update your FlexStore installation from the admin panel without shell access. Your current version is shown at the top of the section.
+Update your FlexStore installation from the admin panel without shell access. Your current version is shown at the top of the section. See [Updates & Upgrades](/updates-and-upgrades) for how releases and licence upgrades work.
 
 ::: warning
 Back up your database and files before applying an update.

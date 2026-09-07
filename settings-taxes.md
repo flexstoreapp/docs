@@ -38,7 +38,7 @@ Tax rates set precise percentages for a combination of region and product tax ca
 
 Click **Add tax rate** and provide:
 
-- **Region**: the geographic region it applies to.
+- **Region**: the [geographic region](/regions) it applies to.
 - **Tax category**: the product category it applies to, picked from the built-in list, such as Standard, Clothing & apparel, or Digital services.
 - **Rate**: the percentage.
 - **Active**: whether it's currently in use.

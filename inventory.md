@@ -11,7 +11,7 @@ Inventory is where you monitor stock across all products and variants, make manu
 
 Open **Products > Inventory** from the sidebar to see every product and variant with stock tracking enabled. Each row shows the product title and thumbnail (with a "Low stock" or "Out of stock" badge where relevant), the SKU, and the current quantity on hand. Products with variants list the parent first with each trackable variant indented beneath.
 
-The filter bar narrows the list by search (product title or SKU), stock status (In stock or Out of stock), and **Low stock only**, which shows just the items at or below their low stock threshold. Search combines with either dropdown, and the reset button clears everything.
+The filter bar narrows the list by search (product title or SKU), stock status (In stock or Out of stock), and **Low stock only**, which shows just the items at or below their [low stock threshold](/settings-general#default-low-stock-threshold). Search combines with either dropdown, and the reset button clears everything.
 
 ## Adjusting Stock
 

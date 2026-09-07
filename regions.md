@@ -1,6 +1,6 @@
 ---
 title: Regions
-description: Create and manage regions in FlexStore to control shipping rates, tax rates, and payment gateway availability.
+description: Group countries into regions that control shipping rates, tax rates, and payment gateway availability.
 ---
 
 # Regions

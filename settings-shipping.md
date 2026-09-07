@@ -1,6 +1,6 @@
 ---
 title: Shipping Settings
-description: Configure your store's shipping carriers, default country of origin, packages, and shipping rates with conditions and regional restrictions.
+description: Configure carriers, packages, country of origin, and shipping rates with conditions and regional limits.
 ---
 
 # Shipping Settings

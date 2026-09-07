@@ -1,6 +1,6 @@
 ---
 title: Policy Settings
-description: Write and manage your store's refund policy, privacy policy, and terms of service, and configure customer returns.
+description: Write your refund, privacy, and terms pages, and configure customer returns.
 ---
 
 # Policy Settings

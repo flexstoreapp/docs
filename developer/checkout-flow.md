@@ -23,8 +23,8 @@ The recovery email uses the built-in heading and body. When an admin applied the
 
 As the customer fills in the form, the React page writes their selections back to the same session so the snapshot stays current:
 
-- **Address, billing toggle, and notes** go through a debounced PATCH to `/checkout/{cartId}/draft`, handled by `CheckoutDraftController` and `UpdatePendingCheckoutSessionAction`.
-- **Shipping rate and payment gateway selection** POST to `/checkout/{cartId}/options/select`, where `CheckoutOptionController::store` updates the cart and the session in one `DB::transaction`.
+- **Address, billing toggle, and notes** go through a debounced PATCH to `/checkout/draft`, handled by `CheckoutDraftController` and `UpdatePendingCheckoutSessionAction`.
+- **Shipping rate and payment gateway selection** POST to `/checkout/options`, where `CheckoutOptionController::store` updates the cart and the session in one `DB::transaction`.
 
 `UpdatePendingCheckoutSessionAction` self-heals: with no pending session yet but a customer email or id passed by the controller (a logged-in customer, for instance), it calls `InitiateCheckoutSessionAction` first. That avoids a race where progressive saves arrive before the initial session creation finishes.
 

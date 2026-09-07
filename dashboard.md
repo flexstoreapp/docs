@@ -5,7 +5,7 @@ description: A quick overview of your store's performance with key metrics, sale
 
 # Dashboard
 
-The Dashboard is the first screen you see after logging in. It summarises how your store is doing right now so you can spot trends and act on recent orders without digging through reports.
+The Dashboard is the first screen you see after logging in. It summarises how your store is doing right now so you can spot trends and act on recent orders without digging through [reports](/reports).
 
 ## Selecting a Date Range
 

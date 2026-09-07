@@ -1,6 +1,6 @@
 ---
 title: Blog
-description: Write, schedule, and publish blog posts in FlexStore, and see how they appear on your storefront.
+description: Write, schedule, and publish blog posts, and see how they appear on your storefront.
 ---
 
 # Blog

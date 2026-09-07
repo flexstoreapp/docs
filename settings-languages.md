@@ -21,4 +21,4 @@ Click **Save changes** to apply.
 
 ## Translating Content
 
-Enabling a language makes it selectable, but it doesn't translate anything for you. Products, categories, pages, and other content each need translations entered in the admin panel. Anything without a translation falls back to the default language version.
+Enabling a language makes it selectable, but it doesn't translate anything for you. Products, categories, pages, and other content each need translations entered in the admin panel. See [Translating Content](/translating-content) for what can be translated, and [Translating the Interface](/translating-interface) for the buttons and labels themselves. Anything without a translation falls back to the default language version.

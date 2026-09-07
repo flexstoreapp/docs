@@ -9,11 +9,11 @@ How shoppers are allowed to pay, and how long the store waits for them. Find the
 
 ## Guest Checkout
 
-On, and a shopper can place an order without creating an account: they only need an email address. Off, and anyone reaching checkout is asked to sign in or register first, and is returned to checkout once they do.
+On, and a shopper can place an order without creating an account: they only need an email address. Off, and anyone reaching checkout is asked to log in or register first, and is returned to checkout once they do.
 
 Turning this off means every order is tied to a customer account, which makes order history and repeat purchases easier to follow. It also loses the sales from shoppers who would rather not register, so leave it on unless you have a reason.
 
-Customers who are already signed in are never affected by this setting.
+Customers who are already logged in are never affected by this setting.
 
 ## Checkout Sharing
 

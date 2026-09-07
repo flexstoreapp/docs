@@ -1,0 +1,7 @@
+# Lints the storefront API description. Run with `npm run lint`.
+apis:
+  storefront:
+    root: .vitepress/openapi.json
+
+extends:
+  - recommended

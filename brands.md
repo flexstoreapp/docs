@@ -1,11 +1,11 @@
 ---
 title: Brands
-description: Create and manage product brands in FlexStore, and see how they appear on your storefront.
+description: Create and manage product brands, and see how they appear on your storefront.
 ---
 
 # Brands
 
-Brands link products to the companies or labels that make them, so shoppers can browse everything from one manufacturer on a dedicated page.
+Brands link [products](/products) to the companies or labels that make them, so shoppers can browse everything from one manufacturer on a dedicated page.
 
 ## Brand List
 

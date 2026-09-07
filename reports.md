@@ -1,6 +1,6 @@
 ---
 title: Reports
-description: Use FlexStore's built-in reports to track sales, orders, customers, products, and marketing performance.
+description: Track sales, orders, customers, products, and marketing performance.
 ---
 
 # Reports
@@ -130,7 +130,7 @@ Lots of views with a low conversion rate means the page attracts interest but do
 
 ### Top searches
 
-What customers search for on your storefront and how often.
+What customers search for and how often. Counts searches from the storefront search box, searches typed into the shop page filters, and searches made in a mobile app through the API.
 
 **Stats**: total searches, unique queries, queries that returned nothing.
 **Chart**: the 10 most-searched queries by volume.

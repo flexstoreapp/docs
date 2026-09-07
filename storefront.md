@@ -1,6 +1,6 @@
 ---
 title: Storefront Builder
-description: Customize your store's homepage, navigation, appearance, and every visible page using the visual Storefront Builder.
+description: Customize your homepage, navigation, appearance, and every visible page with the visual builder.
 ---
 
 # Storefront Builder

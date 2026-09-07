@@ -1,6 +1,6 @@
 ---
 title: Returns
-description: Let customers request returns for delivered items, review and approve requests, generate prepaid return labels, receive and restock items, and refund the customer.
+description: Review return requests, generate prepaid labels, restock received items, and refund the customer.
 ---
 
 # Returns
@@ -13,7 +13,7 @@ The order also needs to have collected at least part of its payment, since a ret
 
 ## Turning Returns On
 
-Self-service returns are configured in **Settings > Policy**:
+Self-service returns are configured in [**Settings > Policy**](/settings-policy):
 
 - **Customer returns**: turn self-service on or off. With it off, customers see no return option and requests are rejected, though your staff can still create returns manually from an order.
 - **Return window**: how many days after delivery a customer may request a return, measured from the delivery date or the ship date when delivery isn't tracked. Set `0` to allow returns at any time.

@@ -1,6 +1,6 @@
 ---
 title: Products
-description: Add, manage, and organize your product catalog in FlexStore.
+description: Add, manage, and organize your product catalog.
 ---
 
 # Products

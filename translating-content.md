@@ -16,7 +16,7 @@ With multiple languages enabled, you can translate your content so customers see
 Customers browsing in that language see the translated content. Anything you haven't translated falls back to the default language version.
 
 ::: tip
-The language switcher only appears once you have two or more languages enabled. Add them under **Settings > Language**.
+The language switcher only appears once you have two or more languages enabled. Add them under [**Settings > Language**](/settings-languages).
 :::
 
 ## What Can Be Translated

@@ -37,7 +37,7 @@ Saved addresses appear during checkout and live on the customer's profile, below
 
 ## Viewing Order History
 
-The **Total orders** and **Lifetime value** columns give you the quick picture. For the full history, go to **Orders** and search or filter by the customer's name or email.
+The **Total orders** and **Lifetime value** columns give you the quick picture. For the full history, go to [**Orders**](/orders) and search or filter by the customer's name or email.
 
 ## Deleting Customers
 

@@ -35,7 +35,7 @@ Manually added reviews start as Pending and need approving before they show on t
 
 ## Auto-Approve Setting
 
-New reviews are held as Pending by default. To publish them straight away, go to **Settings > General** and check **Auto-approve reviews**. Uncheck it whenever you want to go back to manual moderation.
+New reviews are held as Pending by default. To publish them straight away, go to [**Settings > General**](/settings-general#auto-approve-reviews) and check **Auto-approve reviews**. Uncheck it whenever you want to go back to manual moderation.
 
 ## How Reviews Appear on Product Pages
 

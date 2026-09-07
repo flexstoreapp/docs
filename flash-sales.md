@@ -1,11 +1,11 @@
 ---
 title: Flash Sales
-description: Create and manage time-limited flash sale promotions in your FlexStore admin panel.
+description: Create and manage time-limited flash sale promotions.
 ---
 
 # Flash Sales
 
-Flash sales discount selected products for a set period. A live countdown creates urgency, which makes them useful for boosting sales, clearing stock, or rewarding shoppers with a short-lived deal.
+Flash sales discount selected [products](/products) for a set period. A live countdown creates urgency, which makes them useful for boosting sales, clearing stock, or rewarding shoppers with a short-lived deal.
 
 Open **Flash sales** from the sidebar.
 

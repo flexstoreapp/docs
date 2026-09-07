@@ -1,4 +1,86 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import converter from 'openapi-to-postmanv2';
 import { defineConfig } from 'vitepress';
+
+const openapiPath = join(import.meta.dirname, 'openapi.json');
+
+async function postmanCollection(): Promise<string> {
+    const collection = await new Promise<any>((resolve, reject) => {
+        converter.convert(
+            { type: 'string', data: readFileSync(openapiPath, 'utf-8') },
+            { folderStrategy: 'Tags', requestParametersResolution: 'Example' },
+            (error: { message: string } | null, result: any) => {
+                if (error || !result?.result) {
+                    reject(new Error(error?.message ?? result?.reason ?? 'conversion failed'));
+
+                    return;
+                }
+
+                resolve(result.output[0].data);
+            },
+        );
+    });
+
+    collection.info.description =
+        'Set baseUrl to your store, for example https://your-store.com/api/v1.\n\n' +
+        'Run Authentication > Log in first, then paste the returned token into the bearerToken variable. ' +
+        'Cart and checkout requests share the cartToken variable: copy the token from the first cart response into it.';
+
+    collection.variable = [
+        { key: 'baseUrl', value: 'https://your-store.com/api/v1' },
+        { key: 'bearerToken', value: '' },
+        { key: 'cartToken', value: '' },
+        { key: 'visitorId', value: '8f1d3b2a-5c4e-4f6a-9b7c-1d2e3f4a5b6c' },
+    ];
+
+    const useCartVariable = (items: any[]): void => {
+        for (const item of items) {
+            if (item.item) {
+                useCartVariable(item.item);
+
+                continue;
+            }
+
+            for (const header of item.request?.header ?? []) {
+                if (header.key === 'X-Cart-Token') {
+                    header.value = '{{cartToken}}';
+                }
+
+                if (header.key === 'X-Visitor-Id') {
+                    header.value = '{{visitorId}}';
+                }
+            }
+        }
+    };
+
+    useCartVariable(collection.item);
+
+    return JSON.stringify(collection, null, 2);
+}
+
+const downloads: Record<string, () => Promise<string>> = {
+    '/openapi.json': async () => readFileSync(openapiPath, 'utf-8'),
+    '/flexstore.postman_collection.json': postmanCollection,
+};
+
+// The spec is imported by the theme, so it cannot live in public/. Both files are
+// still published at the URLs below.
+const serveDownloads = {
+    name: 'flexstore-downloads',
+    configureServer(server: {
+        middlewares: { use: (path: string, handler: (req: unknown, res: any) => void) => void };
+    }) {
+        for (const [path, build] of Object.entries(downloads)) {
+            server.middlewares.use(path, (_req, res) => {
+                build().then((body) => {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(body);
+                });
+            });
+        }
+    },
+};
 
 const gaId = 'G-YEEGM3QNR0';
 
@@ -21,6 +103,12 @@ if (!window.__gaLocal) {
 ];
 
 export default defineConfig({
+    vite: { plugins: [serveDownloads] },
+    async buildEnd(siteConfig) {
+        for (const [path, build] of Object.entries(downloads)) {
+            writeFileSync(join(siteConfig.outDir, path.slice(1)), await build());
+        }
+    },
     title: 'FlexStore',
     description: 'FlexStore Documentation',
     srcExclude: ['README.md'],
@@ -114,6 +202,50 @@ export default defineConfig({
                     { text: 'Payment Drivers', link: '/developer/payment-drivers' },
                     { text: 'Newsletter Drivers', link: '/developer/newsletter-drivers' },
                     { text: 'Storefront Sections', link: '/developer/storefront-sections' },
+                    {
+                        text: 'Storefront API',
+                        link: '/developer/api/',
+                        collapsed: true,
+                        items: [
+                            { text: 'Authentication', link: '/developer/api/authentication' },
+                            { text: 'Conventions', link: '/developer/api/conventions' },
+                            { text: 'Cart & Checkout', link: '/developer/api/cart-and-checkout' },
+                            {
+                                text: 'Reference',
+                                collapsed: true,
+                                items: [
+                                    { text: 'Configuration', link: '/developer/api/reference/configuration' },
+                                    { text: 'Homepage', link: '/developer/api/reference/homepage' },
+                                    { text: 'Address Rules', link: '/developer/api/reference/address-rules' },
+                                    { text: 'Policies', link: '/developer/api/reference/policies' },
+                                    { text: 'Newsletter', link: '/developer/api/reference/newsletter' },
+                                    { text: 'Products', link: '/developer/api/reference/products' },
+                                    { text: 'Categories', link: '/developer/api/reference/categories' },
+                                    { text: 'Brands', link: '/developer/api/reference/brands' },
+                                    { text: 'Reviews', link: '/developer/api/reference/reviews' },
+                                    { text: 'Flash Sales', link: '/developer/api/reference/flash-sales' },
+                                    { text: 'Blog', link: '/developer/api/reference/blog' },
+                                    { text: 'Cart', link: '/developer/api/reference/cart' },
+                                    { text: 'Checkout', link: '/developer/api/reference/checkout' },
+                                    { text: 'Payment Links', link: '/developer/api/reference/payment-links' },
+                                    {
+                                        text: 'Account',
+                                        collapsed: true,
+                                        items: [
+                                            { text: 'Authentication', link: '/developer/api/reference/authentication' },
+                                            { text: 'Profile', link: '/developer/api/reference/profile' },
+                                            { text: 'Orders', link: '/developer/api/reference/orders' },
+                                            { text: 'Returns', link: '/developer/api/reference/returns' },
+                                            { text: 'Downloads', link: '/developer/api/reference/downloads' },
+                                            { text: 'Addresses', link: '/developer/api/reference/addresses' },
+                                            { text: 'Wishlist', link: '/developer/api/reference/wishlist' },
+                                            { text: 'Compare', link: '/developer/api/reference/compare' },
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
                 ],
             },
         ],

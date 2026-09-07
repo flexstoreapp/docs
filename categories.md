@@ -1,11 +1,11 @@
 ---
 title: Categories
-description: Create, organize, and manage product categories in your FlexStore admin panel.
+description: Create, organize, and manage your product categories.
 ---
 
 # Categories
 
-Categories organize your products so customers can browse and find things. You can nest them as deeply as you like: a top-level "Clothing" with "Men's", "Women's", and "Kids'" beneath it, each with their own subcategories.
+Categories organize your [products](/products) so customers can browse and find things. You can nest them as deeply as you like: a top-level "Clothing" with "Men's", "Women's", and "Kids'" beneath it, each with their own subcategories.
 
 Open **Categories** from the sidebar.
 

@@ -1,0 +1,17 @@
+# Accepted lint exceptions, so `npm run lint` stays silent about known cases and
+# loud about new ones. Every entry below is an endpoint that takes no input and
+# binds no model, so it has no 4xx to document. A new endpoint that can fail will
+# still be reported.
+# See https://redocly.com/docs/cli/ for more information.
+.vitepress/openapi.json:
+  operation-4xx-response:
+    - '#/paths/~1address-field-rules~1{country}/get/responses'
+    - '#/paths/~1blog/get/responses'
+    - '#/paths/~1brands/get/responses'
+    - '#/paths/~1cart/get/responses'
+    - '#/paths/~1cart/delete/responses'
+    - '#/paths/~1cart~1cross-sells/get/responses'
+    - '#/paths/~1categories/get/responses'
+    - '#/paths/~1checkout~1coupons/delete/responses'
+    - '#/paths/~1flash-sales/get/responses'
+    - '#/paths/~1homepage/get/responses'

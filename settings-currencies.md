@@ -5,7 +5,7 @@ description: Set your store's base currency and configure multi-currency support
 
 # Currency Settings
 
-Define which currency your store uses and, optionally, which others international shoppers can pick. Find it under **Settings > Currency**.
+Define which currency your store uses and, optionally, which others international shoppers can pick. Find it under **Settings > Currency**. For how conversion works on the storefront, see [Multi-Currency](/multi-currency).
 
 ## Base Currency
 
