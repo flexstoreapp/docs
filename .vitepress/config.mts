@@ -5,10 +5,82 @@ import { defineConfig } from 'vitepress';
 
 const openapiPath = join(import.meta.dirname, 'openapi.json');
 
-async function postmanCollection(): Promise<string> {
+/** Keeps only the paths a half of the API owns, then drops the components nothing reaches. */
+function specForAudience(admin: boolean): string {
+    const spec = JSON.parse(readFileSync(openapiPath, 'utf-8'));
+
+    spec.paths = Object.fromEntries(Object.entries(spec.paths).filter(([path]) => path.startsWith('/admin') === admin));
+
+    const reached = new Set<string>();
+    const visit = (node: unknown): void => {
+        if (Array.isArray(node)) {
+            node.forEach(visit);
+
+            return;
+        }
+
+        if (!node || typeof node !== 'object') {
+            return;
+        }
+
+        for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
+            if (key === '$ref' && typeof value === 'string') {
+                const [, group, name] = value.split('/').slice(1);
+
+                if (reached.has(`${group}/${name}`)) {
+                    continue;
+                }
+
+                reached.add(`${group}/${name}`);
+                visit(spec.components?.[group]?.[name]);
+
+                continue;
+            }
+
+            visit(value);
+        }
+    };
+
+    // Postman saves one example per response, and the shared 4xx refs alone outnumber
+    // everything else, which pushes the converter into a shallower faking depth.
+    for (const operations of Object.values(spec.paths) as Record<string, any>[]) {
+        for (const operation of Object.values(operations)) {
+            if (!operation?.responses) {
+                continue;
+            }
+
+            operation.responses = Object.fromEntries(
+                Object.entries(operation.responses).filter(([status]) => status.startsWith('2')),
+            );
+        }
+    }
+
+    visit(spec.paths);
+
+    // Security schemes are named by `security`, never by $ref, so the walk above never reaches them.
+    for (const operations of Object.values(spec.paths) as Record<string, any>[]) {
+        for (const operation of Object.values(operations)) {
+            for (const requirement of operation?.security ?? []) {
+                Object.keys(requirement).forEach((name) => reached.add(`securitySchemes/${name}`));
+            }
+        }
+    }
+
+    for (const group of Object.keys(spec.components ?? {})) {
+        spec.components[group] = Object.fromEntries(
+            Object.entries(spec.components[group]).filter(([name]) => reached.has(`${group}/${name}`)),
+        );
+    }
+
+    spec.tags = (spec.tags ?? []).filter((tag: { name: string }) => tag.name.startsWith('Admin ') === admin);
+
+    return JSON.stringify(spec);
+}
+
+async function postmanCollection(admin: boolean): Promise<string> {
     const collection = await new Promise<any>((resolve, reject) => {
         converter.convert(
-            { type: 'string', data: readFileSync(openapiPath, 'utf-8') },
+            { type: 'string', data: specForAudience(admin) },
             { folderStrategy: 'Tags', requestParametersResolution: 'Example' },
             (error: { message: string } | null, result: any) => {
                 if (error || !result?.result) {
@@ -22,22 +94,30 @@ async function postmanCollection(): Promise<string> {
         );
     });
 
-    collection.info.description =
-        'Set baseUrl to your store, for example https://your-store.com/api/v1.\n\n' +
-        'Run Authentication > Log in first, then paste the returned token into the bearerToken variable. ' +
-        'Cart and checkout requests share the cartToken variable: copy the token from the first cart response into it.';
+    collection.info.name = admin ? 'FlexStore Admin API' : 'FlexStore Storefront API';
+    collection.info.description = admin
+        ? 'Set baseUrl to your store, for example https://your-store.com/api/v1.\n\n' +
+          'Run Admin Authentication > Log in as staff first, then paste the returned token into the bearerToken variable. ' +
+          'Every endpoint is gated by the same permission as the matching admin screen.'
+        : 'Set baseUrl to your store, for example https://your-store.com/api/v1.\n\n' +
+          'Run Authentication > Log in first, then paste the returned token into the bearerToken variable. ' +
+          'Cart and checkout requests share the cartToken variable: copy the token from the first cart response into it.';
 
     collection.variable = [
         { key: 'baseUrl', value: 'https://your-store.com/api/v1' },
         { key: 'bearerToken', value: '' },
-        { key: 'cartToken', value: '' },
-        { key: 'visitorId', value: '8f1d3b2a-5c4e-4f6a-9b7c-1d2e3f4a5b6c' },
+        ...(admin
+            ? []
+            : [
+                  { key: 'cartToken', value: '' },
+                  { key: 'visitorId', value: '8f1d3b2a-5c4e-4f6a-9b7c-1d2e3f4a5b6c' },
+              ]),
     ];
 
-    const useCartVariable = (items: any[]): void => {
+    const useVariables = (items: any[]): void => {
         for (const item of items) {
             if (item.item) {
-                useCartVariable(item.item);
+                useVariables(item.item);
 
                 continue;
             }
@@ -54,14 +134,15 @@ async function postmanCollection(): Promise<string> {
         }
     };
 
-    useCartVariable(collection.item);
+    useVariables(collection.item);
 
     return JSON.stringify(collection, null, 2);
 }
 
 const downloads: Record<string, () => Promise<string>> = {
     '/openapi.json': async () => readFileSync(openapiPath, 'utf-8'),
-    '/flexstore.postman_collection.json': postmanCollection,
+    '/flexstore.postman_collection.json': () => postmanCollection(false),
+    '/flexstore-admin.postman_collection.json': () => postmanCollection(true),
 };
 
 // The spec is imported by the theme, so it cannot live in public/. Both files are
@@ -134,6 +215,7 @@ export default defineConfig({
                     {
                         text: 'Orders',
                         link: '/orders',
+                        collapsed: true,
                         items: [
                             { text: 'Returns', link: '/returns' },
                             { text: 'Abandoned Checkouts', link: '/abandoned-checkouts' },
@@ -142,6 +224,7 @@ export default defineConfig({
                     {
                         text: 'Products',
                         link: '/products',
+                        collapsed: true,
                         items: [
                             { text: 'Inventory', link: '/inventory' },
                             { text: 'Search Synonyms', link: '/search-synonyms' },
@@ -191,7 +274,7 @@ export default defineConfig({
             },
             {
                 text: 'Developer',
-                collapsed: false,
+                collapsed: true,
                 items: [
                     { text: 'Installation', link: '/developer/installation' },
                     { text: 'SSR', link: '/developer/ssr' },
@@ -202,48 +285,87 @@ export default defineConfig({
                     { text: 'Payment Drivers', link: '/developer/payment-drivers' },
                     { text: 'Newsletter Drivers', link: '/developer/newsletter-drivers' },
                     { text: 'Storefront Sections', link: '/developer/storefront-sections' },
+                ],
+            },
+            {
+                text: 'API',
+                link: '/developer/api/',
+                collapsed: true,
+                items: [
+                    { text: 'Conventions', link: '/developer/api/conventions' },
                     {
-                        text: 'Storefront API',
-                        link: '/developer/api/',
+                        text: 'Storefront',
+                        link: '/developer/api/storefront',
                         collapsed: true,
                         items: [
-                            { text: 'Authentication', link: '/developer/api/authentication' },
-                            { text: 'Conventions', link: '/developer/api/conventions' },
-                            { text: 'Cart & Checkout', link: '/developer/api/cart-and-checkout' },
+                            { text: 'Authentication', link: '/developer/api/reference/authentication' },
+                            { text: 'Configuration', link: '/developer/api/reference/configuration' },
+                            { text: 'Homepage', link: '/developer/api/reference/homepage' },
+                            { text: 'Address Rules', link: '/developer/api/reference/address-rules' },
+                            { text: 'Policies', link: '/developer/api/reference/policies' },
+                            { text: 'Newsletter', link: '/developer/api/reference/newsletter' },
+                            { text: 'Products', link: '/developer/api/reference/products' },
+                            { text: 'Categories', link: '/developer/api/reference/categories' },
+                            { text: 'Brands', link: '/developer/api/reference/brands' },
+                            { text: 'Reviews', link: '/developer/api/reference/reviews' },
+                            { text: 'Flash Sales', link: '/developer/api/reference/flash-sales' },
+                            { text: 'Blog', link: '/developer/api/reference/blog' },
+                            { text: 'Cart', link: '/developer/api/reference/cart' },
+                            { text: 'Checkout', link: '/developer/api/reference/checkout' },
+                            { text: 'Payment Links', link: '/developer/api/reference/payment-links' },
                             {
-                                text: 'Reference',
+                                text: 'Account',
                                 collapsed: true,
                                 items: [
-                                    { text: 'Configuration', link: '/developer/api/reference/configuration' },
-                                    { text: 'Homepage', link: '/developer/api/reference/homepage' },
-                                    { text: 'Address Rules', link: '/developer/api/reference/address-rules' },
-                                    { text: 'Policies', link: '/developer/api/reference/policies' },
-                                    { text: 'Newsletter', link: '/developer/api/reference/newsletter' },
-                                    { text: 'Products', link: '/developer/api/reference/products' },
-                                    { text: 'Categories', link: '/developer/api/reference/categories' },
-                                    { text: 'Brands', link: '/developer/api/reference/brands' },
-                                    { text: 'Reviews', link: '/developer/api/reference/reviews' },
-                                    { text: 'Flash Sales', link: '/developer/api/reference/flash-sales' },
-                                    { text: 'Blog', link: '/developer/api/reference/blog' },
-                                    { text: 'Cart', link: '/developer/api/reference/cart' },
-                                    { text: 'Checkout', link: '/developer/api/reference/checkout' },
-                                    { text: 'Payment Links', link: '/developer/api/reference/payment-links' },
+                                    { text: 'Profile', link: '/developer/api/reference/profile' },
+                                    { text: 'Orders', link: '/developer/api/reference/orders' },
+                                    { text: 'Returns', link: '/developer/api/reference/returns' },
+                                    { text: 'Downloads', link: '/developer/api/reference/downloads' },
+                                    { text: 'Addresses', link: '/developer/api/reference/addresses' },
+                                    { text: 'Wishlist', link: '/developer/api/reference/wishlist' },
+                                    { text: 'Compare', link: '/developer/api/reference/compare' },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        text: 'Admin',
+                        link: '/developer/api/admin',
+                        collapsed: true,
+                        items: [
+                            { text: 'Authentication', link: '/developer/api/reference/admin/authentication' },
+                            { text: 'Configuration', link: '/developer/api/reference/admin/configuration' },
+                            { text: 'Dashboard', link: '/developer/api/reference/admin/dashboard' },
+                            {
+                                text: 'Orders',
+                                link: '/developer/api/reference/admin/orders',
+                                collapsed: true,
+                                items: [
+                                    { text: 'Returns', link: '/developer/api/reference/admin/returns' },
                                     {
-                                        text: 'Account',
-                                        collapsed: true,
-                                        items: [
-                                            { text: 'Authentication', link: '/developer/api/reference/authentication' },
-                                            { text: 'Profile', link: '/developer/api/reference/profile' },
-                                            { text: 'Orders', link: '/developer/api/reference/orders' },
-                                            { text: 'Returns', link: '/developer/api/reference/returns' },
-                                            { text: 'Downloads', link: '/developer/api/reference/downloads' },
-                                            { text: 'Addresses', link: '/developer/api/reference/addresses' },
-                                            { text: 'Wishlist', link: '/developer/api/reference/wishlist' },
-                                            { text: 'Compare', link: '/developer/api/reference/compare' },
-                                        ],
+                                        text: 'Abandoned Checkouts',
+                                        link: '/developer/api/reference/admin/abandoned-checkouts',
                                     },
                                 ],
                             },
+                            {
+                                text: 'Products',
+                                link: '/developer/api/reference/admin/products',
+                                collapsed: true,
+                                items: [
+                                    { text: 'Inventory', link: '/developer/api/reference/admin/inventory' },
+                                    { text: 'Search Synonyms', link: '/developer/api/reference/admin/search-synonyms' },
+                                ],
+                            },
+                            { text: 'Categories', link: '/developer/api/reference/admin/categories' },
+                            { text: 'Brands', link: '/developer/api/reference/admin/brands' },
+                            { text: 'Blog Posts', link: '/developer/api/reference/admin/blog-posts' },
+                            { text: 'Coupons', link: '/developer/api/reference/admin/coupons' },
+                            { text: 'Flash Sales', link: '/developer/api/reference/admin/flash-sales' },
+                            { text: 'Customers', link: '/developer/api/reference/admin/customers' },
+                            { text: 'Reviews', link: '/developer/api/reference/admin/reviews' },
+                            { text: 'Reports', link: '/developer/api/reference/admin/reports' },
+                            { text: 'Media', link: '/developer/api/reference/admin/media' },
                         ],
                     },
                 ],

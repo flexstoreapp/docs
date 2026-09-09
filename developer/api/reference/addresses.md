@@ -8,6 +8,10 @@ outline: 2
 
 The customer address book.
 
+Which fields an address needs depends on its country, and these endpoints validate against the same rules checkout does. Build the form from the [address rules](/developer/api/reference/address-rules) for the chosen country rather than a fixed set of inputs.
+
+## Endpoints
+
 <OAOperation operation-id="listAddresses" />
 
 <OAOperation operation-id="createAddress" />

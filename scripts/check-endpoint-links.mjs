@@ -14,13 +14,27 @@ const slug = (summary) =>
 
 const pageForTag = new Map();
 
-for (const file of readdirSync(referenceDir).filter((name) => name.endsWith('.md'))) {
-    const title = readFileSync(join(referenceDir, file), 'utf-8').match(/^title: (.+)$/m);
+// Reference pages carry prose headings as well as operations, and both are linkable.
+const headingAnchors = new Set();
 
-    if (title) {
-        pageForTag.set(title[1], `/developer/api/reference/${file.slice(0, -3)}`);
+const registerPages = (dir, urlPrefix, tagPrefix) => {
+    for (const file of readdirSync(dir).filter((name) => name.endsWith('.md'))) {
+        const contents = readFileSync(join(dir, file), 'utf-8');
+        const page = `${urlPrefix}/${file.slice(0, -3)}`;
+        const title = contents.match(/^title: (.+)$/m);
+
+        if (title) {
+            pageForTag.set(tagPrefix + title[1], page);
+        }
+
+        for (const [, heading] of contents.matchAll(/^#{2,3} (.+)$/gm)) {
+            headingAnchors.add(`${page}#${slug(heading)}`);
+        }
     }
-}
+};
+
+registerPages(referenceDir, '/developer/api/reference', '');
+registerPages(`${referenceDir}/admin`, '/developer/api/reference/admin', 'Admin ');
 
 const anchors = new Set();
 
@@ -43,17 +57,21 @@ for (const [path, operations] of Object.entries(spec.paths)) {
     }
 }
 
+let links = 0;
+
 for (const file of readdirSync('developer/api').filter((name) => name.endsWith('.md'))) {
     const contents = readFileSync(join('developer/api', file), 'utf-8');
 
     for (const [, link] of contents.matchAll(/\]\((\/developer\/api\/reference\/[a-z-]+#[a-z0-9-]+)\)/g)) {
-        if (!anchors.has(link)) {
-            console.error(`developer/api/${file} links to ${link}, which no operation generates.`);
+        links++;
+
+        if (!anchors.has(link) && !headingAnchors.has(link)) {
+            console.error(`developer/api/${file} links to ${link}, which is neither an operation nor a heading there.`);
             process.exitCode = 1;
         }
     }
 }
 
 if (!process.exitCode) {
-    console.log('Endpoint links resolve to operations.');
+    console.log(`Every operation has a reference page. ${links} endpoint links checked.`);
 }

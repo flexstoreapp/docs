@@ -51,3 +51,42 @@
 .VPFeature:hover .icon {
     color: var(--vp-c-brand-1);
 }
+
+/*
+ * Request samples render last in the operation template, after Responses, and the
+ * slot config only toggles visibility rather than order. The operation is a grid of
+ * two children: the content column and the samples column. Promoting the content
+ * column's children into that grid lets the samples sit between the request and the
+ * response, which is the order you read them in. Responses is always the content
+ * column's last child. Assumes the single-column layout (operation.cols: 1).
+ */
+.OAPathContentStart {
+    display: contents;
+}
+
+.OAPathContentStart > :last-child {
+    order: 3;
+}
+
+.OAPathContentStart ~ div {
+    order: 2;
+}
+
+/*
+ * Operation sub-headings ship with no bottom margin, so "Header Parameters" and
+ * friends sit flush against the box beneath them. Scoped to .OAPath so the page's
+ * own prose headings, which live directly under .vp-doc, keep VitePress spacing.
+ * The Responses heading shares a flex row with its status tabs and is unaffected.
+ */
+.OAPath h3 {
+    margin-bottom: 12px;
+}
+
+/*
+ * The code-sample generator reads its request body from the Playground's state, so
+ * hiding that slot leaves every POST and PATCH sample sending Content-Type with no
+ * --data. The slot stays mounted to keep the body, and is hidden here instead.
+ */
+.OAPathContentEnd > *:not(:last-child) {
+    display: none;
+}

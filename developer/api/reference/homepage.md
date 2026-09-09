@@ -38,7 +38,7 @@ Switch on `type` and render the sections you support. Skipping one is fine; the 
 | `blog_posts` | `posts` |
 | `info_strip` | `items`, each with an `icon_name` |
 | `testimonials` | `testimonials` |
-| `newsletter` | Copy only; post to [`/newsletter/subscribe`](/developer/api/reference/newsletter#subscribe-to-the-newsletter) |
+| `newsletter` | Copy only; post to `/newsletter/subscribe` |
 
 ## What the API resolves for you
 
@@ -65,7 +65,7 @@ Switch on `target.type` to navigate natively:
 | `categories`, `brands`, `flash_sales`, `blog` | | The matching index |
 | `category`, `brand`, `product`, `flash_sale`, `post` | `handle` | That record |
 | `cart`, `checkout`, `account` | | The matching screen |
-| `policy` | `policy` | The matching page from [`/policies/{policy}`](/developer/api/reference/policies#get-a-policy) |
+| `policy` | `policy` | The matching page from `/policies/{policy}` |
 | `external` | `url` | An absolute URL, open it outside the app |
 | `url` | `url` | An unrecognised storefront path, open it in a web view |
 
