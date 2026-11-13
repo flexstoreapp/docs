@@ -106,11 +106,11 @@ Searching through `query` is recorded in the merchant's search reports, the same
 | [Returns](/developer/api/reference/returns) | Return eligibility, requests, and cancellation. |
 | [Downloads](/developer/api/reference/downloads) | Digital files from paid orders. |
 | [Addresses](/developer/api/reference/addresses) | The customer address book. |
-| [Wishlist](/developer/api/reference/wishlist) | Products the customer saved for later. |
+| [Wishlist](/developer/api/reference/wishlist) | Products saved for later, for guests and signed-in customers. |
 | [Compare](/developer/api/reference/compare) | Products the customer is comparing side by side. |
 
 ## Not included
 
-- **Guest wishlists and comparison lists.** Both require an account here; the web keeps them in a cookie.
+- **Guest comparison lists.** Comparison requires an account here; the web keeps it in a cookie.
 
 Staff endpoints live in the [Admin API](/developer/api/admin).

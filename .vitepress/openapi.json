@@ -4346,6 +4346,129 @@
         "security": []
       }
     },
+    "/wishlist": {
+      "get": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get the wishlist",
+        "operationId": "getVisitorWishlist",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WishlistToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "The wishlist of this device, which works without an account. Creates one when `X-Wishlist-Token` is missing or unknown, so the first call always succeeds. Store the returned `token`. `products` holds at most 100 catalog cards; `product_ids` lists every saved product so a client can mark saved products on any screen. When a signed-in customer sends a guest token, that guest wishlist is merged into their account wishlist and the account's token is returned.",
+        "responses": {
+          "200": {
+            "description": "The wishlist. A new one is created when no token is sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wishlist"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/wishlist/items/{product}": {
+      "put": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Add a product to the wishlist",
+        "operationId": "addVisitorWishlistItem",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 118
+            },
+            "description": "The product id."
+          },
+          {
+            "$ref": "#/components/parameters/WishlistToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Saves a product. Saving one already on the list is a no-op. Creates the wishlist when no token is sent. The response lists the saved product ids without the product cards.",
+        "responses": {
+          "200": {
+            "description": "The wishlist after the change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wishlist"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Remove a product from the wishlist",
+        "operationId": "removeVisitorWishlistItem",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 118
+            },
+            "description": "The product id."
+          },
+          {
+            "$ref": "#/components/parameters/WishlistToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Removes a product. Removing one that is not saved is a no-op. The response lists the saved product ids without the product cards.",
+        "responses": {
+          "200": {
+            "description": "The wishlist after the change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wishlist"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
     "/checkout/shipping-options": {
       "post": {
         "tags": [
@@ -16131,6 +16254,16 @@
           "type": "string"
         },
         "description": "The product `url_handle`."
+      },
+      "WishlistToken": {
+        "name": "X-Wishlist-Token",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "The guest wishlist this device owns. Omit on the first request and store the `token` returned in the wishlist payload. Signed-in customers can send it too, to merge a guest wishlist into their account."
       }
     },
     "responses": {
@@ -17353,6 +17486,39 @@
             "type": "string",
             "description": "Decimal amount as a string, in the active currency.",
             "example": "99.9800"
+          }
+        }
+      },
+      "Wishlist": {
+        "type": "object",
+        "required": [
+          "token",
+          "product_ids"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Persist this and send it as the `X-Wishlist-Token` header on every later wishlist request.",
+            "example": "019826f6-2b7a-73c1-9c4e-7f2d1a5b8e10"
+          },
+          "product_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Every saved product id.",
+            "example": [
+              118,
+              204
+            ]
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCard"
+            },
+            "description": "Catalog cards for the saved products, at most 100. Only returned when reading the wishlist."
           }
         }
       },
