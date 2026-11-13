@@ -18549,20 +18549,6 @@
               }
             }
           },
-          "switchers": {
-            "type": "object",
-            "description": "Which switchers the merchant shows in the storefront header. A client can hide its own language and currency pickers when these are false.",
-            "properties": {
-              "language": {
-                "type": "boolean",
-                "example": true
-              },
-              "currency": {
-                "type": "boolean",
-                "example": true
-              }
-            }
-          },
           "checkout": {
             "type": "object",
             "properties": {
