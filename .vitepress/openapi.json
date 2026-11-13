@@ -17236,6 +17236,33 @@
               "$ref": "#/components/schemas/ProductVariant"
             }
           },
+          "info_strip": {
+            "type": "array",
+            "description": "Reassurance items shown under the buy box. Empty when the store turns the strip off.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "icon_name": {
+                  "type": "string",
+                  "example": "truck"
+                },
+                "title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "example": "Free shipping"
+                },
+                "subtitle": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "example": "On orders over $50"
+                }
+              }
+            }
+          },
           "seo_title": {
             "type": [
               "string",
