@@ -17263,6 +17263,21 @@
               }
             }
           },
+          "reviews_enabled": {
+            "type": "boolean",
+            "description": "False when the store has turned product reviews off; the reviews endpoints then refuse requests.",
+            "example": true
+          },
+          "related_products_enabled": {
+            "type": "boolean",
+            "description": "False when the store has turned related products off.",
+            "example": true
+          },
+          "up_sells_enabled": {
+            "type": "boolean",
+            "description": "False when the store has turned up-sells off.",
+            "example": true
+          },
           "seo_title": {
             "type": [
               "string",
