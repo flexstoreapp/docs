@@ -4566,8 +4566,20 @@
         ],
         "summary": "Get the homepage sections",
         "operationId": "getHomepage",
-        "description": "The merchandising sections the merchant configured, in display order, so an app home screen can mirror the storefront. Presentation hints such as `text_align`, `autoplay` and `grayscale` may be ignored by a native client, and `icon_name` is a stable identifier to map to your own icon set. Send `X-Visitor-Id` so a recently viewed section can show this device's history.",
+        "description": "The merchandising sections the merchant configured, in display order, so an app home screen can mirror the storefront. Presentation hints such as `text_align`, `autoplay` and `grayscale` may be ignored by a native client, and `icon_name` is a stable identifier to map to your own icon set. Send `X-Visitor-Id` so a recently viewed section can show this device's history. Send `product_limit` to cap how many products each product section returns, so a client can fetch exactly what its grid shows.",
         "parameters": [
+          {
+            "name": "product_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "example": 6
+            },
+            "description": "Maximum products per product section, tab or column. The limit the merchant configured still applies, so the lower of the two wins."
+          },
           {
             "$ref": "#/components/parameters/VisitorId"
           },
