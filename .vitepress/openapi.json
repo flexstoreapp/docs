@@ -18438,6 +18438,52 @@
                   "null"
                 ],
                 "example": "https://your-store.com/storage/store/logo.png"
+              },
+              "logo_dark_url": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "The logo to show on a dark background. Null when the merchant has not uploaded one, so fall back to `logo_url`.",
+                "example": "https://your-store.com/storage/store/logo-dark.png"
+              }
+            }
+          },
+          "theme": {
+            "type": "object",
+            "description": "The storefront accent color the merchant picked, so a client can match the store.",
+            "properties": {
+              "accent": {
+                "type": "string",
+                "enum": [
+                  "blue",
+                  "green",
+                  "rose",
+                  "gold",
+                  "teal",
+                  "magenta",
+                  "brown",
+                  "orange",
+                  "red",
+                  "pink",
+                  "terracotta",
+                  "violet"
+                ],
+                "example": "blue"
+              },
+              "primary": {
+                "type": "object",
+                "description": "The accent as hex colors, for a light and a dark interface.",
+                "properties": {
+                  "light": {
+                    "type": "string",
+                    "example": "#005eb3"
+                  },
+                  "dark": {
+                    "type": "string",
+                    "example": "#1a83db"
+                  }
+                }
               }
             }
           },
