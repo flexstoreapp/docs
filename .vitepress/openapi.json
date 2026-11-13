@@ -4469,6 +4469,161 @@
         "security": []
       }
     },
+    "/compare": {
+      "get": {
+        "tags": [
+          "Compare"
+        ],
+        "summary": "Get the comparison list",
+        "operationId": "getVisitorCompare",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CompareToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "The comparison list of this device, which works without an account. Creates one when `X-Compare-Token` is missing or unknown, so the first call always succeeds. Store the returned `token`. `products` holds the comparison rows; `product_ids` lists every product on the list so a client can mark compared products on any screen. When a signed-in customer sends a guest token, that guest list is merged into their account list and the account's token is returned.",
+        "responses": {
+          "200": {
+            "description": "The comparison list. A new one is created when no token is sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Compare"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "tags": [
+          "Compare"
+        ],
+        "summary": "Clear the comparison list",
+        "operationId": "clearVisitorCompare",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CompareToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Removes every product from the list and returns it empty.",
+        "responses": {
+          "200": {
+            "description": "The empty comparison list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Compare"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/compare/items/{product}": {
+      "put": {
+        "tags": [
+          "Compare"
+        ],
+        "summary": "Add a product to the comparison",
+        "operationId": "addVisitorCompareItem",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 118
+            },
+            "description": "The product id."
+          },
+          {
+            "$ref": "#/components/parameters/CompareToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Adds a product. Adding one already on the list is a no-op. Creates the list when no token is sent. The response lists the product ids without the comparison rows.",
+        "responses": {
+          "200": {
+            "description": "The comparison list after the change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Compare"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "tags": [
+          "Compare"
+        ],
+        "summary": "Remove a product from the comparison",
+        "operationId": "removeVisitorCompareItem",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 118
+            },
+            "description": "The product id."
+          },
+          {
+            "$ref": "#/components/parameters/CompareToken"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Removes a product. Removing one that is not on the list is a no-op. The response lists the product ids without the comparison rows.",
+        "responses": {
+          "200": {
+            "description": "The comparison list after the change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Compare"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
     "/checkout/shipping-options": {
       "post": {
         "tags": [
@@ -16286,6 +16441,16 @@
           "format": "uuid"
         },
         "description": "The guest wishlist this device owns. Omit on the first request and store the `token` returned in the wishlist payload. Signed-in customers can send it too, to merge a guest wishlist into their account."
+      },
+      "CompareToken": {
+        "name": "X-Compare-Token",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "The guest comparison list this device owns. Omit on the first request and store the `token` returned in the comparison payload. Signed-in customers can send it too, to merge a guest list into their account."
       }
     },
     "responses": {
@@ -17544,6 +17709,39 @@
               "$ref": "#/components/schemas/ProductCard"
             },
             "description": "Catalog cards for the saved products, at most 100. Only returned when reading the wishlist."
+          }
+        }
+      },
+      "Compare": {
+        "type": "object",
+        "required": [
+          "token",
+          "product_ids"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Persist this and send it as the `X-Compare-Token` header on every later comparison request.",
+            "example": "019826f6-2b7a-73c1-9c4e-7f2d1a5b8e10"
+          },
+          "product_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Every product on the list.",
+            "example": [
+              118,
+              204
+            ]
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompareProduct"
+            },
+            "description": "The comparison rows. Only returned when reading the list."
           }
         }
       },
