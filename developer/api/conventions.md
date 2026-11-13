@@ -25,7 +25,7 @@ Both halves publish what a client needs before its first screen: store identity,
 
 | Half | Endpoint | Also carries |
 | --- | --- | --- |
-| Storefront | `GET /config` | Checkout switches, the storefront accent color and the policies the merchant has written. Public, no token |
+| Storefront | `GET /config` | Checkout switches, the storefront accent color, the announcements and the policies the merchant has written. Public, no token |
 | Admin | `GET /admin/config` | Inactive currencies as well as active ones. Needs a staff token |
 
 The two are not interchangeable. `GET /config` sits behind the storefront maintenance gate and returns `503` while maintenance is on, so a staff client must read `GET /admin/config` instead.

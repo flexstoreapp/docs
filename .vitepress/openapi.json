@@ -18549,6 +18549,44 @@
               }
             }
           },
+          "announcements": {
+            "type": "array",
+            "description": "The store's announcements, in display order, already in the requested language. Show them in a bar at the top of the app; `target` says where the link goes.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 7
+                },
+                "content": {
+                  "type": "string",
+                  "example": "Free shipping on orders over $50"
+                },
+                "url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "example": "/shop"
+                },
+                "target": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/LinkTarget"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "content"
+              ]
+            }
+          },
           "checkout": {
             "type": "object",
             "properties": {
