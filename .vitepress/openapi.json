@@ -4585,7 +4585,7 @@
             "$ref": "#/components/parameters/Currency"
           }
         ],
-        "description": "Everything a client needs at start-up: store identity, available locales and currencies, and checkout switches. `policies` names the policies the merchant has written; fetch the text itself from `/policies/{policy}`.",
+        "description": "Everything a client needs at start-up: store identity, available locales and currencies, and checkout switches. `policies` names the policies the merchant has written; fetch the text itself from `/policies/{policy}`. Responses carry an `ETag`; send it back as `If-None-Match` to receive `304 Not Modified` when nothing changed.",
         "responses": {
           "200": {
             "description": "Store configuration.",
@@ -4595,10 +4595,21 @@
                   "$ref": "#/components/schemas/StoreConfig"
                 }
               }
+            },
+            "headers": {
+              "ETag": {
+                "description": "A fingerprint of this exact response. Send it back as `If-None-Match` on the next request and an unchanged response costs a `304` with no body. It differs per language and currency.",
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           },
           "429": {
             "$ref": "#/components/responses/TooManyRequests"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         },
         "security": []
@@ -4689,7 +4700,7 @@
         ],
         "summary": "Get the homepage sections",
         "operationId": "getHomepage",
-        "description": "The merchandising sections the merchant configured, in display order, so an app home screen can mirror the storefront. Presentation hints such as `text_align`, `autoplay` and `grayscale` may be ignored by a native client, and `icon_name` is a stable identifier to map to your own icon set. Send `X-Visitor-Id` so a recently viewed section can show this device's history.",
+        "description": "The merchandising sections the merchant configured, in display order, so an app home screen can mirror the storefront. Presentation hints such as `text_align`, `autoplay` and `grayscale` may be ignored by a native client, and `icon_name` is a stable identifier to map to your own icon set. Send `X-Visitor-Id` so a recently viewed section can show this device's history. Responses carry an `ETag`; send it back as `If-None-Match` to receive `304 Not Modified` when nothing changed.",
         "parameters": [
           {
             "$ref": "#/components/parameters/VisitorId"
@@ -4713,7 +4724,18 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "ETag": {
+                "description": "A fingerprint of this exact response. Send it back as `If-None-Match` on the next request and an unchanged response costs a `304` with no body. It differs per language and currency.",
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         },
         "security": []
@@ -16361,6 +16383,9 @@
             }
           }
         }
+      },
+      "NotModified": {
+        "description": "The content has not changed since the `ETag` the client sent in `If-None-Match`. There is no body, so keep using the copy you already have."
       }
     },
     "schemas": {
