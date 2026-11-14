@@ -3692,7 +3692,7 @@
             }
           }
         },
-        "description": "Applies a discount code and returns the cart with recalculated totals. An invalid or ineligible code fails validation.",
+        "description": "Applies a discount code and returns the cart with recalculated totals. An invalid or ineligible code fails validation. A code limited per customer also fails for a guest until `customer_email` is sent; the shopper can then enter it at checkout.",
         "security": []
       },
       "delete": {
