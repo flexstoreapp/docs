@@ -16337,6 +16337,203 @@
           }
         ]
       }
+    },
+    "/account/downloads/{download}/link": {
+      "post": {
+        "tags": [
+          "Downloads"
+        ],
+        "summary": "Get a temporary download link",
+        "operationId": "createDownloadLink",
+        "parameters": [
+          {
+            "name": "download",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "019826f6-2b7a-73c1-9c4e-7f2d1a5b8e10"
+            },
+            "description": "The download `token`."
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A link that stays valid for five minutes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "example": "https://shop.example.com/api/v1/downloads/019826f6/file?expires=1760000000&signature=abc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "The file belongs to someone else."
+          }
+        },
+        "security": [
+          {
+            "customerToken": []
+          }
+        ],
+        "description": "Returns a signed link that downloads the file without the bearer token, so a phone can hand it to its browser. The link expires after five minutes and counts as one download when opened."
+      }
+    },
+    "/downloads/{download}/file": {
+      "get": {
+        "tags": [
+          "Downloads"
+        ],
+        "summary": "Download a file from a temporary link",
+        "operationId": "downloadSignedFile",
+        "parameters": [
+          {
+            "name": "download",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "019826f6-2b7a-73c1-9c4e-7f2d1a5b8e10"
+            },
+            "description": "The download `token`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file itself.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The signature is missing or invalid, the file was revoked, or the download limit was reached."
+          },
+          "410": {
+            "description": "The download has expired."
+          }
+        },
+        "security": [],
+        "description": "Only the signed links from `createDownloadLink` work here."
+      }
+    },
+    "/account/orders/{order}/invoice-link": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get a temporary invoice link",
+        "operationId": "createInvoiceLink",
+        "parameters": [
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1042
+            }
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A link that stays valid for five minutes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "example": "https://shop.example.com/api/v1/downloads/019826f6/file?expires=1760000000&signature=abc"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "customerToken": []
+          }
+        ],
+        "description": "Returns a signed link to the invoice PDF that works without the bearer token. It expires after five minutes."
+      }
+    },
+    "/orders/{order}/invoice-file": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Open an invoice from a temporary link",
+        "operationId": "getSignedInvoice",
+        "parameters": [
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1042
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The invoice PDF.",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The signature is missing or invalid."
+          }
+        },
+        "security": [],
+        "description": "Only the signed links from `createInvoiceLink` work here."
+      }
     }
   },
   "components": {
@@ -18135,6 +18332,11 @@
                 }
               }
             }
+          },
+          "can_return": {
+            "type": "boolean",
+            "description": "Whether a return can be requested for the order right now.",
+            "example": false
           }
         }
       },
@@ -19064,6 +19266,14 @@
                 "terms"
               ],
               "example": "refund"
+            }
+          },
+          "selling_countries": {
+            "type": "array",
+            "description": "ISO country codes the store ships to, for address forms.",
+            "items": {
+              "type": "string",
+              "example": "US"
             }
           }
         }

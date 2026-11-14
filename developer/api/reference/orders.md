@@ -17,3 +17,7 @@ Past orders, invoices, reordering, and guest tracking.
 <OAOperation operation-id="getOrderInvoice" />
 
 <OAOperation operation-id="trackOrder" />
+
+<OAOperation operation-id="createInvoiceLink" />
+
+<OAOperation operation-id="getSignedInvoice" />
