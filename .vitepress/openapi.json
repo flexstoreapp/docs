@@ -17683,6 +17683,14 @@
             "type": "integer",
             "example": 3
           },
+          "share_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A link that opens this cart's items on the website, or null while the cart is empty.",
+            "example": "https://shop.example.com/cart/share/019826f6:2"
+          },
           "coupon_code": {
             "type": [
               "string",
