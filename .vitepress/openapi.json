@@ -19043,6 +19043,16 @@
               }
             }
           },
+          "social_login": {
+            "type": "object",
+            "description": "Which social log in providers the store has set up. A provider that is off answers 404.",
+            "properties": {
+              "google": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          },
           "policies": {
             "type": "array",
             "description": "The policies the merchant has written, ready to fetch from `/policies/{policy}`.",
