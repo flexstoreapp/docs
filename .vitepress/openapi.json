@@ -19785,6 +19785,37 @@
             "type": "string",
             "example": "129.9800"
           },
+          "payment_status": {
+            "type": "string",
+            "enum": ["unpaid", "partially_paid", "paid", "refunded", "partially_refunded", "failed", "canceled"],
+            "example": "paid"
+          },
+          "fulfillment_status": {
+            "type": "string",
+            "enum": ["unfulfilled", "in_progress", "fulfilled", "on_hold"],
+            "example": "fulfilled"
+          },
+          "canceled_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "example": "2026-01-16T11:05:00+00:00"
+          },
+          "payment_method": {
+            "type": ["string", "null"],
+            "example": "Card"
+          },
+          "shipping_method": {
+            "type": ["string", "null"],
+            "example": "Standard"
+          },
+          "coupon_code": {
+            "type": ["string", "null"],
+            "example": "WINTER10"
+          },
+          "notes": {
+            "type": ["string", "null"],
+            "example": "Please leave with a neighbour."
+          },
           "groups": {
             "type": "array",
             "items": {
