@@ -17,6 +17,7 @@ Click **Add category** in the top-right corner. The dialog has two tabs.
 
 - **Category name**: what customers see on your storefront.
 - **Description**: optional, and may appear on the storefront category page.
+- **Category image**: an optional image for the category. It appears on the Categories page, in the Category grid section on your home page, and in the mobile app. A landscape photo works best.
 - **Google product category**: optional. Search Google's product taxonomy and pick the closest match. Products in this category, and in subcategories that do not set their own value, use it in Google Shopping and Meta catalogs.
 - **Active**: uncheck to hide the category from customers without deleting it.
 

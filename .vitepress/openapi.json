@@ -17506,6 +17506,16 @@
             "type": "string",
             "example": "Knitwear"
           },
+          "image": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "product_count": {
             "type": "integer",
             "example": 48
@@ -22149,6 +22159,16 @@
             ],
             "example": "Merino and lambswool knitwear, knitted in Portugal."
           },
+          "image": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Media"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "parent_id": {
             "type": [
               "integer",
@@ -22268,6 +22288,14 @@
             "description": "Id of an existing category, or null for a root category.",
             "example": 3
           },
+          "image_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Id of an uploaded media record of type `image`.",
+            "example": 42
+          },
           "is_active": {
             "type": "boolean",
             "example": true
@@ -22330,6 +22358,14 @@
             ],
             "description": "Id of an existing category that is neither this category nor one of its descendants.",
             "example": 3
+          },
+          "image_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Id of an uploaded media record of type `image`.",
+            "example": 42
           },
           "is_active": {
             "type": "boolean",

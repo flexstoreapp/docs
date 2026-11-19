@@ -53,7 +53,7 @@ A row of up to 4 selling points, each with an icon, title, and subtitle. Good fo
 
 ### Category Grid
 
-A visual grid of up to 12 categories. Each tile takes its own image, with the category name shown over it.
+A visual grid of up to 12 categories. Pick the categories to show; each tile uses the image you set on the category itself (see [Categories](/categories)), with the category name shown over it. A category without an image shows a neutral placeholder.
 
 ### Featured Products
 

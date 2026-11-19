@@ -201,7 +201,7 @@ export default defineConfig({
         sidebar: [
             { text: 'Introduction', link: '/introduction' },
             { text: 'Installation', link: '/installation' },
-            { text: 'Updates & Upgrades', link: '/updates-and-upgrades' },
+            { text: 'Updates', link: '/updates-and-upgrades' },
             { text: 'Security', link: '/security' },
             { text: 'Translating Content', link: '/translating-content' },
             { text: 'Translating the Interface', link: '/translating-interface' },

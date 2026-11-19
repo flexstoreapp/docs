@@ -31,7 +31,7 @@ Switch on `type` and render the sections you support. Skipping one is fine; the 
 | --- | --- |
 | `hero_slider` | `slides`, plus optional `side_tiles` |
 | `promo_banners` | `banners` |
-| `category_grid` | `categories`, each resolved with its name and handle |
+| `category_grid` | `categories`, each resolved with its name, handle and image |
 | `brand_strip` | `brands` |
 | `featured_products`, `product_carousel`, `deal_of_the_day` | `products`, plus `end_date` and `show_countdown` for the deal |
 | `product_tabs`, `product_columns` | `tabs` or `columns`, each with its own `products` |
