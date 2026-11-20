@@ -216,7 +216,7 @@ An order can be canceled until any of its items has shipped. Once a fulfillment 
 3. Choose the options you want: **Refund payment** (a full refund, disabled on unpaid orders), **Restock items** (on by default), and **Notify customer** (on by default).
 4. Click **Cancel order**.
 
-Cancellation is tracked separately from fulfillment. The order keeps the fulfillment status it had, so already-shipped items stay shipped, and a **Canceled** badge is added to the header. A requested refund goes through the original gateway; an unpaid order moves to a **Canceled** payment status. Restocked quantities return to inventory, any coupon usage count is decremented, and the reason and note land in the timeline.
+Cancellation is tracked separately from fulfillment. The order keeps the fulfillment status it had, so already-shipped items stay shipped, and the status badge on the fulfillment card shows **Canceled** in place of the fulfillment status. A requested refund goes through the original gateway; an unpaid order moves to a **Canceled** payment status. Restocked quantities return to inventory, any coupon usage count is decremented, and the reason and note land in the timeline.
 
 Cancellation is permanent.
 
