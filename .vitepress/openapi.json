@@ -5854,7 +5854,7 @@
               "type": "integer",
               "example": 7
             },
-            "description": "Category id. Counts are computed inside this category."
+            "description": "Category id, active categories only. Counts are computed inside this category and its descendants, and the `categories` list is omitted."
           },
           {
             "name": "brand",
@@ -5863,7 +5863,7 @@
               "type": "integer",
               "example": 4
             },
-            "description": "Brand id. Counts are computed inside this brand."
+            "description": "Brand id, active brands only. Counts are computed inside this brand, and the `brands` list is omitted."
           },
           {
             "name": "query",

@@ -64,7 +64,7 @@ The same filters work on `/shop`, `/categories/{category}/products` and `/brands
 
 Searching through `query` is recorded in the merchant's search reports, the same as a storefront search, so terms that return nothing show up there. Only the first page counts, so paging does not inflate the numbers.
 
-`GET /shop/facets` returns the counts behind a filter sheet. It takes `category`, `brand` and `query`, which set the context the counts are computed in; the other filters above do not narrow it.
+`GET /shop/facets` returns the counts behind a filter sheet. It takes `category`, `brand` and `query`, which set the context the counts are computed in; the other filters above do not narrow it. Inside a category context the `categories` list is `null`, and inside a brand context the `brands` list is `null`, since that filter is already fixed.
 
 ## Reference
 
