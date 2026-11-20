@@ -9642,7 +9642,7 @@
             "$ref": "#/components/responses/NotFound"
           },
           "409": {
-            "description": "The order is already canceled or has been fully fulfilled.",
+            "description": "The order is already canceled, has been fully fulfilled, or has any shipment.",
             "content": {
               "application/json": {
                 "schema": {

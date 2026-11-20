@@ -209,7 +209,7 @@ If the same refund gets recorded from both the admin panel and the gateway, the 
 
 ## Cancelling an Order
 
-Any order that isn't already fulfilled or canceled can be canceled.
+An order can be canceled until any of its items has shipped. Once a fulfillment exists, including one that is only partly shipped, the **Cancel order** option is hidden. Cancel the fulfillment first if it was created by mistake, or create a [return](/returns) for the shipped items instead.
 
 1. Click **More actions > Cancel order**.
 2. Pick a **reason**: Customer request, Fraudulent order, Inventory issue, or Other, plus an optional note.
