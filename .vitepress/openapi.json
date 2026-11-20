@@ -17576,6 +17576,14 @@
             "type": "string",
             "example": "Knitwear"
           },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Short text about the category in the requested language, or null when it has none.",
+            "example": "Warm layers for cold days."
+          },
           "image": {
             "anyOf": [
               {
