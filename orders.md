@@ -245,6 +245,8 @@ Resends go out even when the matching automatic notification is turned off in [N
 
 Click **Edit order** to change items, quantities, customer details, addresses, shipping method, payment method, or coupon. Check **Notify customer** to email the customer about the change, then click **Update order**.
 
+Canceled orders can't be edited, and the **Edit order** option is hidden for them. To send a corrected order, use **Duplicate** instead.
+
 Orders placed with a connected carrier show the carrier rate set at checkout, locked while you edit so the price the customer paid is preserved even as items change. Use **Change shipping method** to swap it for one of your own rates; otherwise leave it alone and the carrier rate stays untouched.
 
 Shipped items are protected. Any item with shipped units carries a **shipped** badge with the quantity sent, can't be deleted, and can't be lowered below what went out, so you can never edit away something the customer already has. Increasing a shipped item's quantity and editing unshipped items both work normally. Adding items to a fulfilled order moves it back to **In Progress** so the new items can be fulfilled.
