@@ -4829,7 +4829,7 @@
             "$ref": "#/components/parameters/Currency"
           }
         ],
-        "description": "One running sale with its products and the time it ends. A sale that has not started or has ended returns 404. At most 60 products are returned; `products_count` reports how many the sale covers.",
+        "description": "One running sale with its products and the time it ends. A sale that has not started or has ended returns 404. Every product in the sale is returned, and `products_count` reports how many the sale covers.",
         "responses": {
           "200": {
             "description": "The sale with all of its products.",
