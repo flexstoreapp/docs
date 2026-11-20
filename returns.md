@@ -9,7 +9,7 @@ Returns add a full return merchandise authorization (RMA) workflow on top of ref
 
 Only physical items that have already shipped can be returned. Digital products and unshipped items cannot.
 
-The order also needs to have collected at least part of its payment, since a return ends in a refund. On an order where nothing has been paid, such as a Cash on Delivery order that was never collected, neither the customer nor your staff can start a return. Cancel the order instead.
+The order also needs to have collected at least part of its payment, since a return ends in a refund. On an order where nothing has been paid, such as a Cash on Delivery order that was never collected, neither the customer nor your staff can start a return. Cancel the order instead. A canceled order can't start a return either, because cancellation already settles the order, including any refund.
 
 ## Turning Returns On
 
