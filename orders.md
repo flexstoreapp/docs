@@ -61,7 +61,7 @@ Shows the payment status and a financial breakdown. Lines only appear when they 
 - **Balance due**: what the customer still owes, highlighted in amber.
 - **Credit owed**: what you owe the customer back, highlighted in red.
 
-**Balance due** shows when the order total is higher than what has been collected so far. That happens on an order that has not been paid yet, such as a Cash on Delivery order before you record the payment, and on an already paid order after you edit it in a way that increases the total, such as adding items, increasing a quantity, switching to a more expensive shipping method, or removing the coupon. To collect it, use **Record payment** when the customer pays you directly, or **Request payment** to email them a link to pay the rest online. Payments always cover the whole outstanding amount, so the line goes away as soon as one is collected.
+**Balance due** shows when the order total is higher than what has been collected so far. That happens on an order that has not been paid yet, such as a Cash on Delivery order before you record the payment, and on an already paid order after you edit it in a way that increases the total, such as adding items, increasing a quantity, switching to a more expensive shipping method, or removing the coupon. To collect it, use **Record payment** when the customer pays you directly, or **Request payment** to email them a link to pay the rest online. Payments always cover the whole outstanding amount, so the line goes away as soon as one is collected. Neither **Record payment** nor **Request payment** is available on a canceled order.
 
 **Credit owed** shows when what has been collected is more than the order total, which happens after you edit a paid order in a way that lowers the total, such as removing items, reducing a quantity, choosing a cheaper shipping method, or applying a coupon. Use **Refund credit** to give the difference back, and the line goes away.
 
@@ -216,7 +216,7 @@ An order can be canceled until any of its items has shipped. Once a fulfillment 
 3. Choose the options you want: **Refund payment** (a full refund, disabled on unpaid orders), **Restock items** (on by default), and **Notify customer** (on by default).
 4. Click **Cancel order**.
 
-Cancellation is tracked separately from fulfillment. The order keeps the fulfillment status it had, so already-shipped items stay shipped, and the status badge on the fulfillment card shows **Canceled** in place of the fulfillment status. A requested refund goes through the original gateway; an unpaid order moves to a **Canceled** payment status. Restocked quantities return to inventory, any coupon usage count is decremented, and the reason and note land in the timeline.
+Cancellation is tracked separately from fulfillment. The order keeps the fulfillment status it had, so already-shipped items stay shipped, and the status badge on the fulfillment card shows **Canceled** in place of the fulfillment status. A requested refund goes through the original gateway. The payment status doesn't change when an order is canceled, so an unpaid order still shows **Unpaid**, and no payment can be recorded or requested on a canceled order. Restocked quantities return to inventory, any coupon usage count is decremented, and the reason and note land in the timeline.
 
 Cancellation is permanent.
 
