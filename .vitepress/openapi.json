@@ -11114,6 +11114,76 @@
         ]
       }
     },
+    "/admin/returns/{orderReturn}/complete": {
+      "post": {
+        "tags": [
+          "Admin Returns"
+        ],
+        "summary": "Complete a return without a refund",
+        "operationId": "adminCompleteReturnWithoutRefund",
+        "description": "Requires the `returns.manage` permission. Only for a received return on an order where nothing was collected (`is_completable_without_refund` is true). Takes no body. Values the received items, less the return's restocking fee, saves that amount as the return's unpaid adjustment and takes it off the order total, so the balance due falls by the same amount. Nothing is refunded, and shipping stays owed.",
+        "parameters": [
+          {
+            "name": "orderReturn",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 19
+            },
+            "description": "The return id."
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return completed without a refund.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOrderReturn"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "description": "The return is not received, or the order has collected payment, so it cannot be completed without a refund.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This return cannot be completed without a refund."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "This return cannot be completed without a refund."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
     "/admin/returns/{orderReturn}/cancel": {
       "post": {
         "tags": [

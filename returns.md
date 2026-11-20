@@ -9,7 +9,7 @@ Returns add a full return merchandise authorization (RMA) workflow on top of ref
 
 Only physical items that have already shipped can be returned. Digital products and unshipped items cannot.
 
-The order also needs to have collected at least part of its payment, since a return ends in a refund. On an order where nothing has been paid, such as a Cash on Delivery order that was never collected, neither the customer nor your staff can start a return. Cancel the order instead. A canceled order can't start a return either, because cancellation already settles the order, including any refund.
+An order with collected payment can be returned, since the return ends in a refund. An order where nothing was collected can also be returned, as long as its items have shipped, for example a Cash on Delivery order the customer refused to pay for. See [Returns on Unpaid Orders](#returns-on-unpaid-orders). An order that hasn't shipped and hasn't been paid can't start a return, so cancel it instead. A canceled order can't start a return either, because cancellation already settles the order, including any refund.
 
 ## Turning Returns On
 
@@ -63,3 +63,11 @@ When the items arrive, click **Mark received** and confirm how many units of eac
 Click **Refund and close** on a received return. The usual refund screen opens pre-filled with the returned items, where you confirm the amount and the refund method (through the gateway or recorded manually). Since the items were already restocked at the receiving step, the refund doesn't restock them twice.
 
 Completing the refund closes the return, links it to the refund for your records, and emails the customer. The whole sequence from requested to completed is captured on the order's activity timeline.
+
+## Returns on Unpaid Orders
+
+When an order was never paid, there is no refund to issue. Instead, once the returned items are received, click **Complete return** on the return. Nothing is refunded and no money moves. The order's balance falls by the value of the returned items, including their tax and minus any discount, less the restocking fee. The restocking fee stays owed, so the customer still pays it.
+
+Shipping stays on the order, so the customer still pays for delivery. Items the customer kept stay on the order and remain owed. If every item came back, the balance drops to whatever shipping and restocking fee remain, and the order stays marked **Unpaid**.
+
+The balance reduction stays in place when the order is edited later, so it doesn't reappear when shipping or items change.

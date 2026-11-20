@@ -18,6 +18,8 @@ The return workflow: approve or decline, label, receive, and follow the carrier.
 
 <OAOperation operation-id="adminReceiveReturn" />
 
+<OAOperation operation-id="adminCompleteReturnWithoutRefund" />
+
 <OAOperation operation-id="adminCancelReturn" />
 
 <OAOperation operation-id="adminGenerateReturnLabel" />
