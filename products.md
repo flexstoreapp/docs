@@ -127,7 +127,7 @@ The product IDs are used when the digital products option for an app is set to *
 
 A product with variants has no ID fields on this card. Its variants get an **In-app purchase** tab in the variants area, with a row for each variant, because each variant is a separate product in the stores with its own price. Customers who buy a variant receive the files assigned to that variant.
 
-Use **Sell with the store checkout** for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require their own billing for digital goods, so an app that sells a digital product through an outside payment page can be rejected.
+Use **Sell with the store checkout** for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require digital goods to be sold with in-app purchase, so an app that sells a digital product through an outside payment page can be rejected.
 
 ### Recommendations
 

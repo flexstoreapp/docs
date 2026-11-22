@@ -97,7 +97,7 @@ Add your App Store Connect app ID and the path to the Google key to the `submit`
 
 ## Digital products
 
-Both stores require their own in-app billing for digital goods and content used in the app. Apple's rule is guideline 3.1.1, and Google's is the Play payments policy. A store that sells only physical goods or services is not affected.
+Both stores require digital goods and content used in the app to be sold with in-app purchase. Apple's rule is guideline 3.1.1, and Google's is the Play payments policy. A store that sells only physical goods or services is not affected.
 
 The app sends an `X-App-Platform` header, and the store decides what it shows from the **Digital products in the iOS app** and **Digital products in the Android app** options under **Settings > Checkout**, one for each store:
 

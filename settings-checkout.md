@@ -29,7 +29,7 @@ Controls how your apps treat digital products, with one option for the **iOS app
 - **Sell with in-app purchase**: the app shows a digital product only when it has a product ID for that platform, set under [Mobile Apps](/products#mobile-apps) on the product or on each of its variants. Customers buy it with **Buy now** on the product page, using the App Store or Google Play payment sheet, and it never goes in the cart. FlexStore creates a paid order at the product's price and the downloads appear straight away. Customers must be logged in to buy. This needs the store accounts connected under [Integration settings](/settings-integration#in-app-purchases).
 - **Sell with the store checkout**: the app sells digital products through your normal checkout, like any other product. App Store and Google Play usually do not allow this, so pick it only if you have cleared it with them.
 
-This exists because the App Store and Google Play require their own in-app billing for digital goods, and an app that sends buyers to an outside payment page for them can be rejected.
+This exists because the App Store and Google Play require digital goods to be sold with in-app purchase, and an app that sends buyers to an outside payment page for them can be rejected.
 
 To sell a single product through your own checkout while the rest follow these options, use **Sell with the store checkout** under [Mobile Apps](/products#mobile-apps) on that product. It suits gift cards that are spent on physical goods, which the stores treat differently from digital goods.
 
