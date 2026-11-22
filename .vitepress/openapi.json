@@ -18400,7 +18400,7 @@
                   "integration_apple_iap_bundle_id": {
                     "type": ["string", "null"],
                     "example": null,
-                    "description": "The iOS app\u2019s bundle identifier for App Store purchases. It is separate from the Sign in with Apple bundle identifier."
+                    "description": "The iOS app\u2019s bundle identifier for App Store purchases."
                   },
                   "integration_google_play_package_name": {
                     "type": ["string", "null"],
@@ -33528,7 +33528,7 @@
           "integration_apple_iap_bundle_id": {
             "type": ["string", "null"],
             "example": null,
-            "description": "The iOS app\u2019s bundle identifier for App Store purchases. It is separate from the Sign in with Apple bundle identifier."
+            "description": "The iOS app\u2019s bundle identifier for App Store purchases."
           },
           "integration_google_play_package_name": {
             "type": ["string", "null"],
