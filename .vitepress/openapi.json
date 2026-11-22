@@ -670,7 +670,7 @@
                 "type": "object",
                 "required": [
                   "platform",
-                  "product_id"
+                  "store_product_id"
                 ],
                 "properties": {
                   "platform": {
@@ -681,10 +681,10 @@
                     ],
                     "example": "ios"
                   },
-                  "product_id": {
-                    "type": "integer",
-                    "example": 42,
-                    "description": "The FlexStore product that was bought."
+                  "store_product_id": {
+                    "type": "string",
+                    "example": "com.example.pattern_pack",
+                    "description": "The App Store Connect or Google Play Console product ID that was bought, as returned by the product\u2019s `in_app_purchase.store_product_id`."
                   },
                   "signed_transaction": {
                     "type": "string",
