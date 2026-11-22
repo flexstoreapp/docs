@@ -18368,6 +18368,11 @@
                     ],
                     "example": null
                   },
+                  "integration_google_play_service_account": {
+                    "type": ["string", "null"],
+                    "example": null,
+                    "description": "The JSON key file of the Google service account used to verify Google Play purchases. It is stored encrypted and never returned."
+                  },
                   "integration_apple_login_client_id": {
                     "type": [
                       "string",
@@ -18381,6 +18386,16 @@
                       "null"
                     ],
                     "example": null
+                  },
+                  "integration_apple_iap_bundle_id": {
+                    "type": ["string", "null"],
+                    "example": null,
+                    "description": "The iOS app\u2019s bundle identifier for App Store purchases. Falls back to the Sign in with Apple bundle identifier when empty."
+                  },
+                  "integration_google_play_package_name": {
+                    "type": ["string", "null"],
+                    "example": null,
+                    "description": "The Android app\u2019s package name, used for Google Play purchases."
                   },
                   "integration_google_merchant_enabled": {
                     "type": "boolean",
@@ -33437,6 +33452,16 @@
             "example": "com.your-store.web",
             "description": "The Services ID Apple issued for the storefront, used for Sign in with Apple on the website."
           },
+          "integration_apple_iap_bundle_id": {
+            "type": ["string", "null"],
+            "example": null,
+            "description": "The iOS app\u2019s bundle identifier for App Store purchases. Falls back to the Sign in with Apple bundle identifier when empty."
+          },
+          "integration_google_play_package_name": {
+            "type": ["string", "null"],
+            "example": null,
+            "description": "The Android app\u2019s package name, used for Google Play purchases."
+          },
           "integration_google_merchant_enabled": {
             "type": "boolean",
             "example": false
@@ -33450,6 +33475,16 @@
             "example": false
           },
           "integration_google_login_client_secret_set": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether a value is stored. The value itself is never returned."
+          },
+          "integration_google_play_service_account_set": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether a value is stored. The value itself is never returned."
+          },
+          "integration_google_play_notification_secret_set": {
             "type": "boolean",
             "example": false,
             "description": "Whether a value is stored. The value itself is never returned."
