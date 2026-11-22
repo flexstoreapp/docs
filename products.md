@@ -125,6 +125,8 @@ This card appears for digital products and controls how your iOS and Android app
 
 The product IDs are used when the digital products option for an app is set to **Sell with in-app purchase**. Fill in the ones for the platforms you publish on. A product is shown in an app only when it has the ID for that platform, so leave one empty to keep the product out of that app. An ID can belong to one product or variant only. See [Integration Settings](/settings-integration#in-app-purchases) for connecting the stores.
 
+The store charges the price you set on the product ID in App Store Connect or Play Console, not the price in FlexStore. A sale price, a flash sale or a discount in FlexStore does not change what the customer pays in the app, and coupons do not apply. To run a sale in the app, change the price in the store as well and set it back afterwards. Until you do, the customer pays the store price while the FlexStore order is recorded at the sale price. For Apple purchases, the amount the store charged is saved with the purchase.
+
 A product with variants has no ID fields on this card. Its variants get an **In-app purchase** tab in the variants area, with a row for each variant, because each variant is a separate product in the stores with its own price. Customers who buy a variant receive the files assigned to that variant.
 
 Use **Sell with your own checkout** for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require digital goods to be sold with in-app purchase, so an app that sells a digital product through an outside payment page can be rejected.
