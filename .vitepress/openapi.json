@@ -17225,10 +17225,15 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "mobile_app_digital_products_enabled": {
-                    "type": "boolean",
-                    "description": "Whether digital products are sold in the iOS and Android apps. When false, the apps do not show them.",
-                    "example": false
+                  "mobile_app_digital_products": {
+                    "type": "string",
+                    "enum": [
+                      "hidden",
+                      "in_app_purchase",
+                      "external_checkout"
+                    ],
+                    "description": "How digital products appear in the iOS and Android apps. `hidden` leaves them out, `in_app_purchase` sells them with Apple In-App Purchase and Google Play Billing, and `external_checkout` sells them through the store checkout.",
+                    "example": "hidden"
                   },
                   "checkout_reservation_minutes": {
                     "type": "integer",
@@ -24441,6 +24446,14 @@
             ],
             "example": "5012345678900"
           },
+          "apple_product_id": {
+            "type": ["string", "null"],
+            "example": "com.example.pattern_pack"
+          },
+          "google_product_id": {
+            "type": ["string", "null"],
+            "example": "pattern_pack"
+          },
           "track_stock": {
             "type": [
               "boolean",
@@ -25336,6 +25349,18 @@
             "example": "5012345678900",
             "maxLength": 100,
             "description": "Must be unique across products and variants."
+          },
+          "apple_product_id": {
+            "type": ["string", "null"],
+            "maxLength": 255,
+            "example": "com.example.pattern_pack",
+            "description": "The App Store Connect product ID for in-app purchase. Digital products without variants only. Must be unique across products."
+          },
+          "google_product_id": {
+            "type": ["string", "null"],
+            "maxLength": 255,
+            "example": "pattern_pack",
+            "description": "The Google Play Console product ID for in-app purchase. Digital products without variants only. Must be unique across products."
           },
           "track_stock": {
             "type": [
@@ -32946,10 +32971,15 @@
             "type": "boolean",
             "example": true
           },
-          "mobile_app_digital_products_enabled": {
-            "type": "boolean",
-            "description": "Whether digital products are sold in the iOS and Android apps. When false, the apps do not show them.",
-            "example": false
+          "mobile_app_digital_products": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "in_app_purchase",
+              "external_checkout"
+            ],
+            "description": "How digital products appear in the iOS and Android apps. `hidden` leaves them out, `in_app_purchase` sells them with Apple In-App Purchase and Google Play Billing, and `external_checkout` sells them through the store checkout.",
+            "example": "hidden"
           },
           "checkout_shared_payment_hours": {
             "type": "integer",
