@@ -115,22 +115,19 @@ Files are stored securely and reachable only through the private links given to 
 
 Delivery is automatic once payment goes through, so there is nothing to fulfill by hand. Links are emailed and also appear in the customer's storefront account under **Downloads** and on the order page. A cart containing only digital products skips the shipping step at checkout and asks for a billing address only.
 
-### In-App Purchase
+### Mobile Apps
 
-This section holds the product IDs your mobile apps use to sell a digital product with in-app purchase. A product without variants gets this card. A product with variants gets an **In-app purchase** tab in the variants area, with a row for each variant, because each variant is a separate product in the stores with its own price.
+This card appears for digital products and controls how your iOS and Android apps sell the product.
 
 - **Apple product ID**: the Product ID of the matching consumable in App Store Connect.
 - **Google product ID**: the product ID of the matching in-app product in Play Console.
+- **Sell with the store checkout**: when on, the apps show this product and sell it through your normal checkout, whatever the digital products options under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps) say. Customers add it to the cart like any physical product.
 
-Fill in the ones for the platforms you publish on. A product is shown in an app only when it has the ID for that platform, so leave one empty to keep the product out of that app. An ID can belong to one product or variant only. Customers who buy a variant receive the files assigned to that variant.
+The product IDs are used when the digital products option for an app is set to **Sell with in-app purchase**. Fill in the ones for the platforms you publish on. A product is shown in an app only when it has the ID for that platform, so leave one empty to keep the product out of that app. An ID can belong to one product or variant only. See [Integration Settings](/settings-integration#in-app-purchases) for connecting the stores.
 
-The IDs matter only when **Digital products in mobile apps** is set to **Sell with in-app purchase** under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps). See [Integration Settings](/settings-integration#in-app-purchases) for connecting the stores.
+A product with variants has no ID fields on this card. Its variants get an **In-app purchase** tab in the variants area, with a row for each variant, because each variant is a separate product in the stores with its own price. Customers who buy a variant receive the files assigned to that variant.
 
-### Mobile Apps
-
-This card appears for digital products and has one option, **Sell with the store checkout**. When it is on, the iOS and Android apps show this product and sell it through your normal checkout, whatever the digital products options under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps) say. Customers add it to the cart like any physical product.
-
-Use it for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require their own billing for digital goods, so an app that sells a digital product through an outside payment page can be rejected.
+Use **Sell with the store checkout** for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require their own billing for digital goods, so an app that sells a digital product through an outside payment page can be rejected.
 
 ### Recommendations
 

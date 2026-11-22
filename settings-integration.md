@@ -135,7 +135,7 @@ The order records the price you set on the product in FlexStore. What the custom
 2. In your store, open **Settings > Integration** and click **Connect** on the **App Store** row under In-app purchases.
 3. Enter the **Bundle ID** of your iOS app. Leave it empty to use the Bundle ID from [Sign in with Apple](#apple).
 4. Copy the **Server notification URL** into App Store Connect as the production and sandbox server URL, using version 2 notifications. Apple then tells your store when it refunds a purchase.
-5. On each product, or each variant of a product, paste the Product ID into **Apple product ID**. See [In-App Purchase](/products#in-app-purchase).
+5. On each product, or each variant of a product, paste the Product ID into **Apple product ID**. See [Mobile Apps](/products#mobile-apps).
 
 ### Google Play
 
