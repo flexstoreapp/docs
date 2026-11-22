@@ -21,6 +21,14 @@ On, and the **Ask someone else to pay** button appears at checkout, so a shopper
 
 Off, and the button disappears. Links that were already created keep working until they expire or are paid.
 
+## Digital Products in Mobile Apps
+
+Off by default. With it off, your iOS and Android apps do not show digital products: they are left out of the shop, search, categories, the homepage, wishlists and comparisons, and nobody can add one to the cart from the app. Your website is not affected, and everything physical sells as usual.
+
+This exists because the App Store and Google Play require their own in-app billing for digital goods, and an app that sends buyers to an outside payment page for them can be rejected. A store that sells only physical products can leave it off and publish without setting up in-app purchases.
+
+Turn it on only if you have cleared selling digital products in the app with the stores. Customers who already bought a download on your website can still find their files in the app under their account.
+
 ## Shared Payment Link Lifetime (hours)
 
 How long a shared payment link stays valid after it is created. Once the time is up, anyone opening the link is told it has expired and the shopper needs to send a new one. Defaults to 48 hours, and accepts anything from 1 hour to 30 days (720 hours).

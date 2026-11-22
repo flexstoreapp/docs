@@ -16,6 +16,7 @@ These hold for both the [Storefront API](/developer/api/storefront) and the [Adm
 | `X-Currency` | Currency for prices | Both |
 | `X-Cart-Token` | [The cart this device owns](/developer/api/reference/cart#the-cart-token) | Storefront |
 | `X-Visitor-Id` | A uuid the app generates once and sends on every request, so product views count once per device | Storefront |
+| `X-App-Platform` | `ios` or `android`, sent by a store-distributed app so the catalog can follow the store's payment rules. Digital products are left out unless the store allows them in apps | Storefront |
 
 Locale and currency are resolved per request. An unavailable locale falls back to the store default, an unavailable currency to the base currency. Nothing is stored server side, so switching language in an app needs no round trip.
 

@@ -99,12 +99,9 @@ Add your App Store Connect app ID and the path to the Google key to the `submit`
 
 The app sends customers to an external payment page for checkout. Both stores require their own in-app billing for digital goods and content used in the app. Apple's rule is guideline 3.1.1, and Google's is the Play payments policy. A store that sells only physical goods or services is not affected.
 
-Before you submit, choose one of these for each store:
+The app sends an `X-App-Platform` header, and the store hides digital products from it by default. This covers the shop, search, categories, the homepage, wishlists and comparisons, and a digital product cannot be added to the cart or checked out from the app. A store that sells only physical products needs nothing else and does not set up in-app purchases.
 
-- **Hide digital products in the app.** Customers can still buy physical goods and services. This needs changes in the app so digital products are not shown or sold on that platform.
-- **Sell digital products through the store's billing.** Apple In-App Purchase on iOS, and Google Play Billing on Android. This needs new code for store products, purchases, and order checks. It is not in the bundle.
-
-Read Apple's [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google's [payments policy](https://support.google.com/googleplay/android-developer/answer/9858738) before you decide.
+To sell digital products in the app, turn on **Digital products in mobile apps** under **Settings > Checkout**. Do this only after you have cleared it with the stores, and read Apple's [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google's [payments policy](https://support.google.com/googleplay/android-developer/answer/9858738) first.
 
 ## 5. Build and submit for Android
 

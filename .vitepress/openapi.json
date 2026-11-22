@@ -2331,6 +2331,9 @@
         "operationId": "listBrandProducts",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "name": "brand",
             "in": "path",
             "required": true,
@@ -2595,6 +2598,9 @@
         "operationId": "listCartCrossSells",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/CartToken"
           },
           {
@@ -2631,6 +2637,9 @@
         "summary": "Add an item to the cart",
         "operationId": "addCartItem",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "$ref": "#/components/parameters/CartToken"
           },
@@ -2959,6 +2968,9 @@
         "operationId": "listCategories",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/AcceptLanguage"
           },
           {
@@ -2992,6 +3004,9 @@
         "summary": "List products in a category",
         "operationId": "listCategoryProducts",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "category",
             "in": "path",
@@ -3190,6 +3205,9 @@
         "summary": "Submit the checkout",
         "operationId": "createCheckout",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "$ref": "#/components/parameters/CartToken"
           },
@@ -4011,6 +4029,9 @@
         "operationId": "getVisitorWishlist",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/WishlistToken"
           },
           {
@@ -4044,6 +4065,9 @@
         "summary": "Add a product to the wishlist",
         "operationId": "addVisitorWishlistItem",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "product",
             "in": "path",
@@ -4134,6 +4158,9 @@
         "operationId": "getVisitorCompare",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/CompareToken"
           },
           {
@@ -4199,6 +4226,9 @@
         "summary": "Add a product to the comparison",
         "operationId": "addVisitorCompareItem",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "product",
             "in": "path",
@@ -4435,6 +4465,9 @@
         "operationId": "listFlashSales",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/AcceptLanguage"
           },
           {
@@ -4468,6 +4501,9 @@
         "summary": "Get a flash sale",
         "operationId": "getFlashSale",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "flashSale",
             "in": "path",
@@ -4513,6 +4549,9 @@
         "operationId": "getHomepage",
         "description": "The merchandising sections the merchant configured, in display order, so an app home screen can mirror the storefront. Presentation hints such as `text_align`, `autoplay` and `grayscale` may be ignored by a native client, and `icon_name` is a stable identifier to map to your own icon set. Send `X-Visitor-Id` so a recently viewed section can show this device's history. Responses carry an `ETag`; send it back as `If-None-Match` to receive `304 Not Modified` when nothing changed.",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "$ref": "#/components/parameters/VisitorId"
           },
@@ -4949,6 +4988,9 @@
         "operationId": "getProduct",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/ProductHandle"
           },
           {
@@ -4988,6 +5030,9 @@
         "summary": "List related products",
         "operationId": "listRelatedProducts",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "$ref": "#/components/parameters/ProductHandle"
           },
@@ -5228,6 +5273,9 @@
         "operationId": "listUpSells",
         "parameters": [
           {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
             "$ref": "#/components/parameters/ProductHandle"
           },
           {
@@ -5267,6 +5315,9 @@
         "summary": "Get search suggestions",
         "operationId": "getSearchSuggestions",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "query",
             "in": "query",
@@ -5408,6 +5459,9 @@
         "summary": "List products",
         "operationId": "listProducts",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "query",
             "in": "query",
@@ -5593,6 +5647,9 @@
         "summary": "List filter facets",
         "operationId": "getProductFacets",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
           {
             "name": "category",
             "in": "query",
@@ -17168,6 +17225,11 @@
                     "type": "boolean",
                     "example": true
                   },
+                  "mobile_app_digital_products_enabled": {
+                    "type": "boolean",
+                    "description": "Whether digital products are sold in the iOS and Android apps. When false, the apps do not show them.",
+                    "example": false
+                  },
                   "checkout_reservation_minutes": {
                     "type": "integer",
                     "example": 10
@@ -19972,6 +20034,19 @@
           "example": "8f1d3b2a-5c4e-4f6a-9b7c-1d2e3f4a5b6c"
         },
         "description": "A uuid the app generates once on first launch and sends on every request. It stands in for the browser session when counting product views and building recently viewed lists. Values that are not a uuid are ignored."
+      },
+      "AppPlatform": {
+        "name": "X-App-Platform",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "ios",
+            "android"
+          ]
+        },
+        "description": "Send `ios` or `android` from a store-distributed app. When the store has digital products in mobile apps turned off, digital products are left out of listings, search, recommendations and the homepage, a digital product page returns `404`, and digital products cannot be added to the cart or checked out. Web and other clients omit it and see the full catalog. Unknown values are ignored."
       },
       "AcceptLanguage": {
         "name": "Accept-Language",
@@ -32870,6 +32945,11 @@
           "checkout_sharing_enabled": {
             "type": "boolean",
             "example": true
+          },
+          "mobile_app_digital_products_enabled": {
+            "type": "boolean",
+            "description": "Whether digital products are sold in the iOS and Android apps. When false, the apps do not show them.",
+            "example": false
           },
           "checkout_shared_payment_hours": {
             "type": "integer",
