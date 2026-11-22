@@ -9,7 +9,7 @@ Set up the payment methods customers see at checkout, under **Settings > Payment
 
 Each gateway is a card. Click one to open its configuration dialog, where you enter credentials, set conditions, and apply restrictions. Click **Test connection** before saving: it calls the provider with the keys you entered and reports back. A failure usually means a mistyped key or the wrong set entirely (live versus test). Cash on Delivery has no credentials, so no test button.
 
-Every gateway offers a **Checkout mode**, which is the same choice everywhere: **Embedded checkout** keeps the payment form on your checkout page, and **Hosted checkout** redirects the customer to the provider's own page.
+Every gateway offers a **Checkout mode**, which is the same choice everywhere: **Embedded checkout** keeps the payment form on your checkout page, and **Hosted checkout** redirects the customer to the provider's own page. The mobile app always uses hosted checkout, so the embedded setting only applies on your website.
 
 ## Available Payment Gateways
 
