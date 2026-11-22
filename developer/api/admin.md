@@ -40,6 +40,7 @@ Every endpoint is gated by the same permission as the matching admin screen, and
 | Section | Contents |
 | --- | --- |
 | [Authentication](/developer/api/reference/admin/authentication) | Admin tokens and the two-factor challenge |
+| [Account](/developer/api/reference/admin/account) | Your own profile, password, two factor and passkeys |
 | [Configuration](/developer/api/reference/admin/configuration) | Store settings a client reads at start-up |
 | [Dashboard](/developer/api/reference/admin/dashboard) | Headline figures for the home screen |
 | [Orders](/developer/api/reference/admin/orders) | Orders, statuses, timeline, fulfilment, payments, refunds |
@@ -57,7 +58,8 @@ Every endpoint is gated by the same permission as the matching admin screen, and
 | [Reviews](/developer/api/reference/admin/reviews) | Review moderation |
 | [Reports](/developer/api/reference/admin/reports) | Read-only reporting |
 | [Media](/developer/api/reference/admin/media) | Uploads other endpoints reference |
+| [Settings](/developer/api/reference/admin/settings) | Store configuration, one section per settings screen |
 
 ## Not included yet
 
-Settings, the storefront builder, staff and roles, regions, shipping, taxes, payment gateways, system tooling, and product import and export. Those screens have no API equivalent yet, so a client still needs the admin panel for them.
+The storefront builder, staff and roles, regions, shipping rates, tax rates, payment gateway credentials, software updates, and product import and export. Those screens have no API equivalent yet, so a client still needs the admin panel for them.

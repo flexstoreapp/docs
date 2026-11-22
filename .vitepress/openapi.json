@@ -109,6 +109,10 @@
       "description": "Admin tokens for staff, including the two-factor challenge."
     },
     {
+      "name": "Admin Account",
+      "description": "A staff member's own profile, password, two factor and passkeys."
+    },
+    {
       "name": "Admin Configuration",
       "description": "Store settings a staff client reads at start-up."
     },
@@ -175,6 +179,10 @@
     {
       "name": "Admin Media",
       "description": "Image and file uploads other endpoints reference by id."
+    },
+    {
+      "name": "Admin Settings",
+      "description": "Store configuration, one section per settings screen."
     }
   ],
   "paths": {
@@ -499,202 +507,6 @@
           }
         ],
         "description": "Makes this the address preselected at checkout. Any previous default is cleared."
-      }
-    },
-    "/account/compare": {
-      "get": {
-        "tags": [
-          "Compare"
-        ],
-        "summary": "Get the comparison list",
-        "operationId": "getCompare",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CompareProduct"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Products the customer is comparing, as catalog cards."
-      },
-      "delete": {
-        "tags": [
-          "Compare"
-        ],
-        "summary": "Clear the comparison list",
-        "operationId": "clearCompare",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The now empty list.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CompareProduct"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Empties the comparison list and returns it."
-      }
-    },
-    "/account/compare/items/{product}": {
-      "put": {
-        "tags": [
-          "Compare"
-        ],
-        "summary": "Add a product to the comparison list",
-        "operationId": "addCompareItem",
-        "parameters": [
-          {
-            "name": "product",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 118
-            },
-            "description": "The product id."
-          },
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Adds a product. Adding one already on the list is a no-op."
-      },
-      "delete": {
-        "tags": [
-          "Compare"
-        ],
-        "summary": "Remove a product from the comparison list",
-        "operationId": "removeCompareItem",
-        "parameters": [
-          {
-            "name": "product",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 118
-            },
-            "description": "The product id."
-          },
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "description": "No such product.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Not found."
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Not found."
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Removes a product. Removing one that is absent is a no-op."
       }
     },
     "/account/downloads": {
@@ -1610,163 +1422,6 @@
           }
         ],
         "description": "Withdraws a return the merchant has not acted on yet."
-      }
-    },
-    "/account/wishlist": {
-      "get": {
-        "tags": [
-          "Wishlist"
-        ],
-        "summary": "Get the wishlist",
-        "operationId": "getWishlist",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductCard"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Saved products, as catalog cards. At most 100 products are returned."
-      }
-    },
-    "/account/wishlist/items/{product}": {
-      "put": {
-        "tags": [
-          "Wishlist"
-        ],
-        "summary": "Add a product to the wishlist",
-        "operationId": "addWishlistItem",
-        "parameters": [
-          {
-            "name": "product",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 118
-            },
-            "description": "The product id."
-          },
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Saves a product. Saving one already on the list is a no-op."
-      },
-      "delete": {
-        "tags": [
-          "Wishlist"
-        ],
-        "summary": "Remove a product from the wishlist",
-        "operationId": "removeWishlistItem",
-        "parameters": [
-          {
-            "name": "product",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 118
-            },
-            "description": "The product id."
-          },
-          {
-            "$ref": "#/components/parameters/AcceptLanguage"
-          },
-          {
-            "$ref": "#/components/parameters/Currency"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "description": "No such product.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Not found."
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Not found."
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "customerToken": []
-          }
-        ],
-        "description": "Removes a product. Removing one that is absent is a no-op."
       }
     },
     "/address-field-rules/{country}": {
@@ -4019,7 +3674,7 @@
             "$ref": "#/components/parameters/Currency"
           }
         ],
-        "description": "Open this from a recovery email deep link, then store the returned `token` as the device's cart.",
+        "description": "Open this from a recovery email deep link, then store the returned `token` as the device's cart. The link must be the signed URL from the email, unchanged. Requests without a valid signature are rejected with 403.",
         "responses": {
           "200": {
             "description": "The abandoned cart, ready to adopt.",
@@ -5509,6 +5164,60 @@
         ]
       }
     },
+    "/products/{product}/review": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get your review of a product",
+        "operationId": "showProductReview",
+        "description": "Returns the signed-in customer's own review of the product with its moderation status, or `null` when they have not written one. `can_review` says whether they may write one: they bought the product and have not reviewed it yet.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProductHandle"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The customer's review, if any.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/CustomerReview"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "can_review": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "customerToken": []
+          }
+        ]
+      }
+    },
     "/products/{product}/up-sells": {
       "get": {
         "tags": [
@@ -5565,7 +5274,31 @@
               "maxLength": 100,
               "example": "merino"
             },
-            "description": "Fewer than 2 characters returns an empty list."
+            "description": "Fewer than 2 characters returns an empty list. Matches product titles, descriptions, SKUs, category names and brand names."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20,
+              "default": 5,
+              "example": 8
+            },
+            "description": "How many product suggestions to return."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 1,
+              "example": 2
+            },
+            "description": "Which page of product suggestions to return. Matching categories and brands come back on the first page only."
           },
           {
             "$ref": "#/components/parameters/AcceptLanguage"
@@ -5574,10 +5307,10 @@
             "$ref": "#/components/parameters/Currency"
           }
         ],
-        "description": "Product matches for a partial search term, sized for a search-as-you-type field. `meta.has_more` tells you whether a full search would return more.",
+        "description": "Product matches for a partial search term, sized for a search-as-you-type field, plus up to three matching categories and brands. `meta.has_more` tells you whether a full search would return more.",
         "responses": {
           "200": {
-            "description": "Up to five suggestions.",
+            "description": "Product suggestions (five unless `limit` says otherwise) with matching categories and brands.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5587,6 +5320,18 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/SearchSuggestion"
+                      }
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SearchSuggestionTaxonomy"
+                      }
+                    },
+                    "brands": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SearchSuggestionTaxonomy"
                       }
                     },
                     "meta": {
@@ -16408,6 +16153,3573 @@
         ]
       }
     },
+    "/admin/settings/general": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get general settings",
+        "operationId": "adminGetGeneralSettings",
+        "description": "Requires the `settings.general.configure` permission. Store-wide defaults that do not belong to any one screen: the stock level a product is considered low at, and whether a new review is published without moderation.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The general settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminGeneralSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update general settings",
+        "operationId": "adminUpdateGeneralSettings",
+        "description": "Requires the `settings.general.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_low_stock_threshold": {
+                    "type": "integer",
+                    "example": 10
+                  },
+                  "auto_approve_reviews": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated general settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminGeneralSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The default low stock threshold field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "default_low_stock_threshold": [
+                          "The default low stock threshold field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "default_low_stock_threshold"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The default low stock threshold field is required.",
+                  "errors": {
+                    "default_low_stock_threshold": [
+                      "The default low stock threshold field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/store": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get store settings",
+        "operationId": "adminGetStoreSettings",
+        "description": "Requires the `settings.store.configure` permission. The store identity used across the storefront, invoices and emails: name, contact details, postal address, logos and social links, plus the countries the store will sell to.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The store settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStoreSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update store settings",
+        "operationId": "adminUpdateStoreSettings",
+        "description": "Requires the `settings.store.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "store_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_email": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_phone": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_street_address": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_city": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_state": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_postal_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_country_code": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "selling_countries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "US",
+                      "CA",
+                      "GB"
+                    ]
+                  },
+                  "store_logo": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_logo_dark": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_favicon": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_facebook": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_instagram": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_x": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_tiktok": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_pinterest": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "store_social_youtube": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated store settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminStoreSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The store name field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "store_name": [
+                          "The store name field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "store_name"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The store name field is required.",
+                  "errors": {
+                    "store_name": [
+                      "The store name field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/language": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get language settings",
+        "operationId": "adminGetLanguageSettings",
+        "description": "Requires the `settings.language.configure` permission. The storefront and admin language. `default_locale` is what a request falls back to, and `available_locales` is the set a client may switch between. Both fields are required on every write, so a PATCH replaces the locale configuration rather than merging into it.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The language settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminLanguageSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update language settings",
+        "operationId": "adminUpdateLanguageSettings",
+        "description": "Requires the `settings.language.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET. Both fields are required on every write, so a PATCH replaces the locale configuration rather than merging into it.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "default_locale",
+                  "available_locales"
+                ],
+                "properties": {
+                  "default_locale": {
+                    "type": "string",
+                    "example": "en"
+                  },
+                  "available_locales": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "en",
+                      "ar"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated language settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminLanguageSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The default locale field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "default_locale": [
+                          "The default locale field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "default_locale"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The default locale field is required.",
+                  "errors": {
+                    "default_locale": [
+                      "The default locale field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/currency": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get currency settings",
+        "operationId": "adminGetCurrencySettings",
+        "description": "Requires the `settings.currency.configure` permission. The currency every price is stored and quoted in, plus the symbol and separator rules used when formatting an amount. Only an active currency may be the base. The one writable field is `base_currency`; the formatting keys are returned for display and are set per currency.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The currency settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminCurrencySettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update currency settings",
+        "operationId": "adminUpdateCurrencySettings",
+        "description": "Requires the `settings.currency.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET. The one writable field is `base_currency`; the formatting keys are returned for display and are set per currency.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "base_currency"
+                ],
+                "properties": {
+                  "base_currency": {
+                    "type": "string",
+                    "example": "USD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated currency settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminCurrencySettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The base currency field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "base_currency": [
+                          "The base currency field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "base_currency"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The base currency field is required.",
+                  "errors": {
+                    "base_currency": [
+                      "The base currency field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/shipping": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get shipping settings",
+        "operationId": "adminGetShippingSettings",
+        "description": "Requires the `settings.shipping.configure` permission. Shipping defaults. `default_country_of_origin` is used for customs paperwork when a product does not set its own.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The shipping settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminShippingSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update shipping settings",
+        "operationId": "adminUpdateShippingSettings",
+        "description": "Requires the `settings.shipping.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_country_of_origin": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated shipping settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminShippingSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The default country of origin field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "default_country_of_origin": [
+                          "The default country of origin field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "default_country_of_origin"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The default country of origin field is required.",
+                  "errors": {
+                    "default_country_of_origin": [
+                      "The default country of origin field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/tax": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get tax settings",
+        "operationId": "adminGetTaxSettings",
+        "description": "Requires the `settings.tax.configure` permission. How tax is calculated and shown. Note that an order captures `prices_include_tax` when it is placed, so render a historical order from the order itself rather than from this group.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tax settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update tax settings",
+        "operationId": "adminUpdateTaxSettings",
+        "description": "Requires the `settings.tax.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_tax_rate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "tax_based_on": {
+                    "type": "string",
+                    "example": "shipping"
+                  },
+                  "prices_include_tax": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "shipping_is_taxable": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "display_tax_totals": {
+                    "type": "string",
+                    "example": "itemized"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated tax settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminTaxSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The default tax rate field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "default_tax_rate": [
+                          "The default tax rate field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "default_tax_rate"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The default tax rate field is required.",
+                  "errors": {
+                    "default_tax_rate": [
+                      "The default tax rate field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/checkout": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get checkout settings",
+        "operationId": "adminGetCheckoutSettings",
+        "description": "Requires the `settings.checkout.configure` permission. Checkout behaviour: whether a guest may buy without an account, how long stock stays reserved, and the lifetimes behind shared payment and abandoned checkout recovery links.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The checkout settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminCheckoutSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update checkout settings",
+        "operationId": "adminUpdateCheckoutSettings",
+        "description": "Requires the `settings.checkout.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "guest_checkout_enabled": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "checkout_sharing_enabled": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "checkout_reservation_minutes": {
+                    "type": "integer",
+                    "example": 10
+                  },
+                  "checkout_shared_payment_hours": {
+                    "type": "integer",
+                    "example": 48
+                  },
+                  "abandoned_checkout_delay_minutes": {
+                    "type": "integer",
+                    "example": 60
+                  },
+                  "abandoned_checkout_recovery_link_lifetime_days": {
+                    "type": "integer",
+                    "example": 7
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated checkout settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminCheckoutSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The guest checkout enabled field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "guest_checkout_enabled": [
+                          "The guest checkout enabled field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "guest_checkout_enabled"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The guest checkout enabled field is required.",
+                  "errors": {
+                    "guest_checkout_enabled": [
+                      "The guest checkout enabled field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/payment": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get the payment gateways",
+        "operationId": "adminGetPaymentSettings",
+        "description": "Requires the `settings.payment.configure` permission. Read only. Lists every configured payment gateway with its constraints and whether it holds credentials. Gateway credentials are never returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The payment settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminPaymentSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/newsletter": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get newsletter settings",
+        "operationId": "adminGetNewsletterSettings",
+        "description": "Requires the `settings.newsletter.configure` permission. The newsletter provider the storefront signup form posts to, alongside every configured provider. Provider credentials are never returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newsletter settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminNewsletterSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update newsletter settings",
+        "operationId": "adminUpdateNewsletterSettings",
+        "description": "Requires the `settings.newsletter.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "active_newsletter_provider_id"
+                ],
+                "properties": {
+                  "active_newsletter_provider_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated newsletter settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminNewsletterSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The active newsletter provider id field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "active_newsletter_provider_id": [
+                          "The active newsletter provider id field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "active_newsletter_provider_id"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The active newsletter provider id field is required.",
+                  "errors": {
+                    "active_newsletter_provider_id": [
+                      "The active newsletter provider id field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/mail": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get mail settings",
+        "operationId": "adminGetMailSettings",
+        "description": "Requires the `settings.mail.configure` permission. The SMTP account outgoing mail is sent through, and the sender it appears from. The password is write only. `mail_password` may be written but is never returned. `mail_password_set` says whether one is stored.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The mail settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminMailSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update mail settings",
+        "operationId": "adminUpdateMailSettings",
+        "description": "Requires the `settings.mail.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET. `mail_password` may be written but is never returned. `mail_password_set` says whether one is stored.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "mail_host",
+                  "mail_port",
+                  "mail_encryption",
+                  "mail_username",
+                  "mail_password",
+                  "mail_from_address",
+                  "mail_from_name"
+                ],
+                "properties": {
+                  "mail_host": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_port": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_encryption": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_username": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_from_address": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "mail_from_name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated mail settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminMailSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The mail host field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "mail_host": [
+                          "The mail host field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "mail_host"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The mail host field is required.",
+                  "errors": {
+                    "mail_host": [
+                      "The mail host field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/notification": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get notification settings",
+        "operationId": "adminGetNotificationSettings",
+        "description": "Requires the `settings.notification.configure` permission. Which emails are sent, split between notifications to staff and notifications to the customer.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The notification settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminNotificationSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update notification settings",
+        "operationId": "adminUpdateNotificationSettings",
+        "description": "Requires the `settings.notification.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "notification_admin_new_order": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "notification_admin_order_canceled": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "notification_admin_low_stock": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "notification_admin_new_customer": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "notification_admin_new_review": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "notification_customer_order_confirmed": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "notification_customer_abandoned_checkout": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated notification settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminNotificationSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The notification admin new order field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "notification_admin_new_order": [
+                          "The notification admin new order field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "notification_admin_new_order"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The notification admin new order field is required.",
+                  "errors": {
+                    "notification_admin_new_order": [
+                      "The notification admin new order field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/policy": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get policy settings",
+        "operationId": "adminGetPolicySettings",
+        "description": "Requires the `settings.policy.configure` permission. The legal pages the storefront serves at `/policies/{policy}`, plus the return window and restocking fee the returns flow applies.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The policy settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminPolicySettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update policy settings",
+        "operationId": "adminUpdatePolicySettings",
+        "description": "Requires the `settings.policy.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "returns_enabled": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "return_window_days": {
+                    "type": "integer",
+                    "example": 30
+                  },
+                  "restocking_fee_percent": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "refund_policy": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "privacy_policy": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "terms_of_service": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated policy settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminPolicySettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The returns enabled field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "returns_enabled": [
+                          "The returns enabled field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "returns_enabled"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The returns enabled field is required.",
+                  "errors": {
+                    "returns_enabled": [
+                      "The returns enabled field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/seo": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get seo settings",
+        "operationId": "adminGetSeoSettings",
+        "description": "Requires the `settings.seo.configure` permission. Meta titles and descriptions for the homepage and shop listing, and whether search engines may index the storefront at all.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The seo settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSeoSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update seo settings",
+        "operationId": "adminUpdateSeoSettings",
+        "description": "Requires the `settings.seo.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "seo_homepage_meta_title": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "seo_homepage_meta_description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "seo_shop_meta_title": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "seo_shop_meta_description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "seo_robots_indexing": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated seo settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSeoSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The seo homepage meta title field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "seo_homepage_meta_title": [
+                          "The seo homepage meta title field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "seo_homepage_meta_title"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The seo homepage meta title field is required.",
+                  "errors": {
+                    "seo_homepage_meta_title": [
+                      "The seo homepage meta title field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/integration": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get integration settings",
+        "operationId": "adminGetIntegrationSettings",
+        "description": "Requires the `settings.integration.configure` permission. Analytics pixels, the Google login client, and the catalog feed connections. Every credential in the group is write only and reported as a `_set` boolean. `integration_google_merchant_token` and `integration_meta_catalog_token` are not writable here; they are issued by their own connection flows.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The integration settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminIntegrationSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update integration settings",
+        "operationId": "adminUpdateIntegrationSettings",
+        "description": "Requires the `settings.integration.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET. `integration_google_merchant_token` and `integration_meta_catalog_token` are not writable here; they are issued by their own connection flows.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "integration_google_analytics_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_google_tag_manager_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_meta_pixel_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_tiktok_pixel_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_pinterest_tag_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_google_login_client_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_google_login_client_secret": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_google_merchant_enabled": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "integration_google_merchant_include_digital": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "integration_meta_catalog_enabled": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated integration settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminIntegrationSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The integration google analytics id field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "integration_google_analytics_id": [
+                          "The integration google analytics id field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "integration_google_analytics_id"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The integration google analytics id field is required.",
+                  "errors": {
+                    "integration_google_analytics_id": [
+                      "The integration google analytics id field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/system": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Get system settings",
+        "operationId": "adminGetSystemSettings",
+        "description": "Requires the `settings.system.configure` permission. Maintenance mode and the IPs allowed through it, plus the running version. Turning maintenance on makes the storefront API return `503`; the admin API stays reachable. `system_checksum` and `system_registry` are licensing internals and are never returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The system settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSystemSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Update system settings",
+        "operationId": "adminUpdateSystemSettings",
+        "description": "Requires the `settings.system.configure` permission. Only the fields you send are changed, and the whole group comes back in the same shape as the GET. `system_checksum` and `system_registry` are licensing internals and are never returned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "maintenance_mode": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "maintenance_allowed_ips": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "203.0.113.10"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated system settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSystemSettings"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The maintenance mode field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "maintenance_mode": [
+                          "The maintenance mode field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "maintenance_mode"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The maintenance mode field is required.",
+                  "errors": {
+                    "maintenance_mode": [
+                      "The maintenance mode field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings": {
+      "get": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "List the settings sections",
+        "operationId": "adminListSettingSections",
+        "description": "Requires any one `settings.*` permission. Returns only the sections this staff member may open, in the order the admin panel shows them, each with the endpoint that serves it. Build a settings menu from this rather than hardcoding the sections or their permissions. A staff member with no settings permission at all gets a `403` rather than an empty list.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The sections this staff member may open.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdminSettingSection"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/mail/test": {
+      "post": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Send a test email",
+        "operationId": "adminSendTestMail",
+        "description": "Sends a test message through the stored SMTP settings so you can check them before saving a change. Requires the `settings.mail.configure` permission. A delivery failure comes back as a `422` on `recipient` carrying the mail server's own error.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "recipient"
+                ],
+                "properties": {
+                  "recipient": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Where to send the test message.",
+                    "example": "ada@your-store.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The test email was sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Test email sent"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Test email sent"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed, or the mail server refused the message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The recipient field is required."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "recipient": [
+                          "The recipient field is required."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "recipient"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The recipient field is required.",
+                  "errors": {
+                    "recipient": [
+                      "The recipient field is required."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/settings/system/cache": {
+      "post": {
+        "tags": [
+          "Admin Settings"
+        ],
+        "summary": "Rebuild the cache",
+        "operationId": "adminRebuildCache",
+        "description": "Clears and rebuilds the application caches, the same action as the Rebuild cache button in the admin panel. Requires the `settings.system.configure` permission. Use it after changing something on the server that the cache would otherwise hold stale.",
+        "responses": {
+          "200": {
+            "description": "The cache was rebuilt.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Cache rebuilt"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Cache rebuilt"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/profile": {
+      "get": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Get your profile",
+        "operationId": "adminGetOwnProfile",
+        "description": "The staff member behind the token, with their roles and resolved permissions. No permission of its own: any staff token may read its own profile.",
+        "responses": {
+          "200": {
+            "description": "Your profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Update your profile",
+        "operationId": "adminUpdateOwnProfile",
+        "description": "Changes your own name or email. Only the fields you send are changed. Roles and password are deliberately not accepted here: roles are managed by staff administration, and the password has its own endpoint so the current one can be checked.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Ada Lovelace"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "ada@your-store.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your updated profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The email address has already been taken."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "email": [
+                          "The email address has already been taken."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "email"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The email address has already been taken.",
+                  "errors": {
+                    "email": [
+                      "The email address has already been taken."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/password": {
+      "put": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Change your password",
+        "operationId": "adminUpdateOwnPassword",
+        "description": "Proves it is you with either `current_password` or a passkey assertion, then sets a new password. A staff member who only ever signs in with a passkey can use the passkey route rather than a password they may not know. Throttled to six attempts a minute.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password"
+                ],
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "a-much-better-password"
+                  },
+                  "password_confirmation": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "a-much-better-password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The password was changed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/appearance": {
+      "patch": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Update your appearance preference",
+        "operationId": "adminUpdateOwnAppearance",
+        "description": "Stores the theme and accent a client should render your admin session with, so the choice follows you between devices.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "appearance": {
+                    "type": "string",
+                    "enum": [
+                      "light",
+                      "dark",
+                      "system"
+                    ],
+                    "example": "dark"
+                  },
+                  "admin_theme_color": {
+                    "type": "string",
+                    "example": "blue"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your updated profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The selected appearance is invalid."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "appearance": [
+                          "The selected appearance is invalid."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "appearance"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The selected appearance is invalid.",
+                  "errors": {
+                    "appearance": [
+                      "The selected appearance is invalid."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/security": {
+      "get": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Get your security settings",
+        "operationId": "adminGetOwnSecurity",
+        "description": "Your two factor state and registered passkeys in one call. Build the security screen from this.",
+        "responses": {
+          "200": {
+            "description": "Your security settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/reauth/options": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Start a passkey re-authentication",
+        "operationId": "adminCreateReauthChallenge",
+        "description": "Issues a WebAuthn assertion challenge so a passkey can stand in for `current_password` on the endpoints below. The challenge is stored against your access token, is single use, and expires after five minutes. Throttled to ten a minute.",
+        "responses": {
+          "200": {
+            "description": "The assertion options.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminWebAuthnOptions"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/two-factor": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Start two factor setup",
+        "operationId": "adminEnableOwnTwoFactor",
+        "description": "Generates a secret and puts your account into a pending state. Fetch the QR code next, then confirm with a code from your authenticator. Two factor is not active until it is confirmed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Prove it is you with either the current password or a passkey assertion.",
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your security settings, with a confirmation now pending.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Turn off two factor",
+        "operationId": "adminDisableOwnTwoFactor",
+        "description": "Removes the secret and recovery codes from your account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Prove it is you with either the current password or a passkey assertion.",
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your security settings, with two factor off.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/two-factor/qr-code": {
+      "get": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Get the two factor QR code",
+        "operationId": "adminGetOwnTwoFactorQrCode",
+        "description": "The QR code to scan and the same secret as text, for an authenticator that cannot scan. Only available while a confirmation is pending, so start setup first; otherwise it returns `403`.",
+        "responses": {
+          "200": {
+            "description": "The QR code and manual entry key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "svg": {
+                      "type": "string",
+                      "description": "An inline SVG.",
+                      "example": "<svg xmlns=\"http://www.w3.org/2000/svg\" ..."
+                    },
+                    "secret_key": {
+                      "type": "string",
+                      "description": "The same secret, grouped for manual entry.",
+                      "example": "7UL6 CDBM BP3D MIEM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/two-factor/confirm": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Confirm two factor setup",
+        "operationId": "adminConfirmOwnTwoFactor",
+        "description": "Completes setup by proving you can generate a code. Two factor becomes active and your recovery codes are returned once, in the response. Throttled to six attempts a minute.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "code"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "The six digit code from your authenticator.",
+                    "example": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your security settings, with two factor on and recovery codes populated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The code field must be 6 digits."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "code": [
+                          "The code field must be 6 digits."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "code"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The code field must be 6 digits.",
+                  "errors": {
+                    "code": [
+                      "The code field must be 6 digits."
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/two-factor/recovery-codes": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Regenerate your recovery codes",
+        "operationId": "adminRegenerateOwnRecoveryCodes",
+        "description": "Replaces every recovery code with a fresh set, invalidating the old ones. The new codes are in the response.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Prove it is you with either the current password or a passkey assertion.",
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your security settings, with new recovery codes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/passkeys/options": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Start passkey registration",
+        "operationId": "adminCreatePasskeyChallenge",
+        "description": "Issues a WebAuthn creation challenge. Pass the options to the platform API, then send what it returns to `POST /admin/account/passkeys`. The challenge is stored against your access token, is single use, and expires after five minutes.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Prove it is you with either the current password or a passkey assertion.",
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The creation options.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminWebAuthnOptions"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/passkeys": {
+      "post": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Register a passkey",
+        "operationId": "adminStoreOwnPasskey",
+        "description": "Completes registration against the challenge issued above. A challenge that has expired or already been used comes back as a `422` on `credential`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "credential"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "What to call this passkey in your list.",
+                    "example": "My phone"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Your security settings, with the new passkey listed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The passkey challenge has expired. Request a new one and try again."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "credential": [
+                          "The passkey challenge has expired. Request a new one and try again."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "credential"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The passkey challenge has expired. Request a new one and try again.",
+                  "errors": {
+                    "credential": [
+                      "The passkey challenge has expired. Request a new one and try again."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ]
+      }
+    },
+    "/admin/account/passkeys/{passkey}": {
+      "delete": {
+        "tags": [
+          "Admin Account"
+        ],
+        "summary": "Delete a passkey",
+        "operationId": "adminDeleteOwnPasskey",
+        "description": "Removes one of your own passkeys. A passkey belonging to another staff member returns `404` rather than disclosing that it exists.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Prove it is you with either the current password or a passkey assertion.",
+                "properties": {
+                  "current_password": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Required unless `credential` is sent.",
+                    "example": "correct-horse-battery"
+                  },
+                  "credential": {
+                    "$ref": "#/components/schemas/AdminPasskeyAssertion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Your security settings, without that passkey.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountSecurity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The current password field is required when credential is not present."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "current_password": [
+                          "The current password field is required when credential is not present."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "current_password"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "The current password field is required when credential is not present.",
+                  "errors": {
+                    "current_password": [
+                      "The current password field is required when credential is not present."
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "staffToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "passkey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 7
+            }
+          }
+        ]
+      }
+    },
     "/account/downloads/{download}/link": {
       "post": {
         "tags": [
@@ -17048,22 +20360,6 @@
           "title": {
             "type": "string",
             "example": "Merino crew knit"
-          },
-          "brand": {
-            "type": [
-              "object",
-              "null"
-            ],
-            "properties": {
-              "name": {
-                "type": "string",
-                "example": "Standard"
-              },
-              "url_handle": {
-                "type": "string",
-                "example": "merino-crew-knit"
-              }
-            }
           },
           "price": {
             "type": [
@@ -17725,6 +21021,23 @@
           }
         }
       },
+      "SearchSuggestionTaxonomy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 7
+          },
+          "url_handle": {
+            "type": "string",
+            "example": "knitwear"
+          },
+          "name": {
+            "type": "string",
+            "example": "Knitwear"
+          }
+        }
+      },
       "SearchSuggestion": {
         "type": "object",
         "properties": {
@@ -17746,6 +21059,13 @@
               "null"
             ],
             "example": "Knitwear"
+          },
+          "brand": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Northwind"
           },
           "price": {
             "type": [
@@ -17986,6 +21306,30 @@
           "requires_shipping": {
             "type": "boolean",
             "example": true
+          },
+          "shipping_rate_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The shipping rate the buyer chose, or null when none is chosen yet.",
+            "example": 12
+          },
+          "shipping_quote_reference": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The quote the chosen live shipping rate came from, or null.",
+            "example": "9f3c1a2b"
+          },
+          "payment_gateway_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "The payment method the buyer chose, or null when none is chosen yet.",
+            "example": 3
           },
           "subtotal": {
             "type": "string",
@@ -18465,6 +21809,24 @@
             "format": "date-time",
             "example": "2026-01-17T10:02:00+00:00"
           },
+          "delivery_status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "pending",
+              "picked_up",
+              "in_transit",
+              "out_for_delivery",
+              "delivered",
+              "failed",
+              "returned",
+              null
+            ],
+            "description": "The carrier's latest word on the parcel. Null until a carrier reports.",
+            "example": "in_transit"
+          },
           "items": {
             "type": "array",
             "items": {
@@ -18861,10 +22223,46 @@
             ],
             "example": "USPS"
           },
+          "shipping_provider": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The carrier integration that fulfils the order, when there is one. Prefer it over `shipping_carrier` as the carrier label on a shipment.",
+            "example": "shippo"
+          },
           "items": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "item_breakdown": {
+            "type": "array",
+            "description": "How many of each line are still to ship and how many were refunded, so a client can group lines into shipments the way the storefront does.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "order_item_id": {
+                  "type": "integer",
+                  "example": 2087
+                },
+                "unfulfilled": {
+                  "type": "integer",
+                  "description": "Quantity not yet shipped or refunded.",
+                  "example": 1
+                },
+                "refunded": {
+                  "type": "integer",
+                  "description": "Quantity refunded before it shipped.",
+                  "example": 0
+                },
+                "total_refunded": {
+                  "type": "integer",
+                  "description": "Quantity refunded in all, shipped or not.",
+                  "example": 0
+                }
+              }
             }
           },
           "shipping_address": {
@@ -19321,6 +22719,11 @@
             "properties": {
               "guest_checkout_enabled": {
                 "type": "boolean",
+                "example": true
+              },
+              "sharing_enabled": {
+                "type": "boolean",
+                "description": "Whether a buyer can send the payment to someone else. When false, `shared_payment` on the checkout request is rejected.",
                 "example": true
               },
               "prices_include_tax": {
@@ -20300,6 +23703,22 @@
             "type": "object",
             "description": "A product card plus the attributes a comparison table lines up side by side.",
             "properties": {
+              "brand": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Standard"
+                  },
+                  "url_handle": {
+                    "type": "string",
+                    "example": "standard"
+                  }
+                }
+              },
               "weight": {
                 "type": [
                   "string",
@@ -28027,6 +31446,11 @@
             "type": "boolean",
             "description": "Create a shared payment link instead of paying now. The response's `redirect_url` is the link to hand to the payer. Rejected when the merchant has checkout sharing switched off.",
             "example": false
+          },
+          "hosted_checkout": {
+            "type": "boolean",
+            "description": "Send the buyer to the gateway's hosted payment page, even when the gateway is set to embedded checkout. The response then has a `redirect_url` and no native payment details in `payload`. Native apps send `true`.",
+            "example": false
           }
         },
         "required": [
@@ -28937,6 +32361,1007 @@
           "is_active": {
             "type": "boolean",
             "example": true
+          }
+        }
+      },
+      "AdminSettingsCurrency": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "code": {
+            "type": "string",
+            "example": "USD"
+          },
+          "symbol": {
+            "type": "string",
+            "example": "$"
+          },
+          "exchange_rate": {
+            "type": "string",
+            "example": "1.0000"
+          },
+          "symbol_position": {
+            "type": "string",
+            "example": "before"
+          },
+          "thousands_separator": {
+            "type": "string",
+            "example": ","
+          },
+          "decimal_separator": {
+            "type": "string",
+            "example": "."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "example": 2
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "AdminSettingsLanguage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "ar"
+          },
+          "name": {
+            "type": "string",
+            "example": "العربية"
+          }
+        }
+      },
+      "AdminSettingsNewsletterProvider": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 2
+          },
+          "driver": {
+            "type": "string",
+            "example": "mailchimp"
+          },
+          "is_configured": {
+            "type": "boolean",
+            "description": "Whether credentials are stored. The credentials themselves are never returned.",
+            "example": true
+          }
+        }
+      },
+      "AdminSettingsPaymentGateway": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Stripe"
+          },
+          "driver": {
+            "type": "string",
+            "example": "stripe"
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          },
+          "is_configured": {
+            "type": "boolean",
+            "description": "Whether credentials are stored. The credentials themselves are never returned.",
+            "example": true
+          },
+          "sync_external_refunds": {
+            "type": "boolean",
+            "example": false
+          },
+          "min_order_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "5.0000"
+          },
+          "max_order_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "min_weight": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "min_weight_unit": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "max_weight": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "max_weight_unit": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "supported_currencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "excluded_products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "excluded_categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "excluded_brands": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "allowed_regions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AdminGeneralSettings": {
+        "type": "object",
+        "description": "Store-wide defaults that do not belong to any one screen: the stock level a product is considered low at, and whether a new review is published without moderation.",
+        "properties": {
+          "default_low_stock_threshold": {
+            "type": "integer",
+            "example": 10
+          },
+          "auto_approve_reviews": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "AdminStoreSettings": {
+        "type": "object",
+        "description": "The store identity used across the storefront, invoices and emails: name, contact details, postal address, logos and social links, plus the countries the store will sell to.",
+        "properties": {
+          "store_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_email": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_phone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_street_address": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_city": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_state": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_postal_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_country_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "selling_countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "US",
+              "CA",
+              "GB"
+            ]
+          },
+          "store_logo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_logo_dark": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_favicon": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_facebook": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_instagram": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_x": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_tiktok": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_pinterest": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "store_social_youtube": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          }
+        }
+      },
+      "AdminLanguageSettings": {
+        "type": "object",
+        "description": "The storefront and admin language. `default_locale` is what a request falls back to, and `available_locales` is the set a client may switch between. Both fields are required on every write, so a PATCH replaces the locale configuration rather than merging into it.",
+        "properties": {
+          "default_locale": {
+            "type": "string",
+            "example": "en"
+          },
+          "available_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "en",
+              "ar"
+            ]
+          },
+          "available_languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminSettingsLanguage"
+            }
+          }
+        }
+      },
+      "AdminCurrencySettings": {
+        "type": "object",
+        "description": "The currency every price is stored and quoted in, plus the symbol and separator rules used when formatting an amount. Only an active currency may be the base. The one writable field is `base_currency`; the formatting keys are returned for display and are set per currency.",
+        "properties": {
+          "base_currency": {
+            "type": "string",
+            "example": "USD"
+          },
+          "currency_symbol_position": {
+            "type": "string",
+            "example": "before"
+          },
+          "thousands_separator": {
+            "type": "string",
+            "example": ","
+          },
+          "decimal_separator": {
+            "type": "string",
+            "example": "."
+          },
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminSettingsCurrency"
+            }
+          }
+        }
+      },
+      "AdminShippingSettings": {
+        "type": "object",
+        "description": "Shipping defaults. `default_country_of_origin` is used for customs paperwork when a product does not set its own.",
+        "properties": {
+          "default_country_of_origin": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          }
+        }
+      },
+      "AdminTaxSettings": {
+        "type": "object",
+        "description": "How tax is calculated and shown. Note that an order captures `prices_include_tax` when it is placed, so render a historical order from the order itself rather than from this group.",
+        "properties": {
+          "default_tax_rate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "tax_based_on": {
+            "type": "string",
+            "example": "shipping"
+          },
+          "prices_include_tax": {
+            "type": "boolean",
+            "example": false
+          },
+          "shipping_is_taxable": {
+            "type": "boolean",
+            "example": false
+          },
+          "display_tax_totals": {
+            "type": "string",
+            "example": "itemized"
+          }
+        }
+      },
+      "AdminCheckoutSettings": {
+        "type": "object",
+        "description": "Checkout behaviour: whether a guest may buy without an account, how long stock stays reserved, and the lifetimes behind shared payment and abandoned checkout recovery links.",
+        "properties": {
+          "guest_checkout_enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "checkout_reservation_minutes": {
+            "type": "integer",
+            "example": 10
+          },
+          "checkout_sharing_enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "checkout_shared_payment_hours": {
+            "type": "integer",
+            "example": 48
+          },
+          "abandoned_checkout_delay_minutes": {
+            "type": "integer",
+            "example": 60
+          },
+          "abandoned_checkout_recovery_link_lifetime_days": {
+            "type": "integer",
+            "example": 7
+          }
+        }
+      },
+      "AdminPaymentSettings": {
+        "type": "object",
+        "description": "Read only. Lists every configured payment gateway with its constraints and whether it holds credentials. Gateway credentials are never returned.",
+        "properties": {
+          "payment_gateways": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminSettingsPaymentGateway"
+            }
+          }
+        }
+      },
+      "AdminNewsletterSettings": {
+        "type": "object",
+        "description": "The newsletter provider the storefront signup form posts to, alongside every configured provider. Provider credentials are never returned.",
+        "properties": {
+          "active_newsletter_provider_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "newsletter_providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminSettingsNewsletterProvider"
+            }
+          }
+        }
+      },
+      "AdminMailSettings": {
+        "type": "object",
+        "description": "The SMTP account outgoing mail is sent through, and the sender it appears from. The password is write only. `mail_password` may be written but is never returned. `mail_password_set` says whether one is stored.",
+        "properties": {
+          "mail_host": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_port": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_encryption": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_username": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_from_address": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_from_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "mail_password_set": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether a value is stored. The value itself is never returned."
+          }
+        }
+      },
+      "AdminNotificationSettings": {
+        "type": "object",
+        "description": "Which emails are sent, split between notifications to staff and notifications to the customer.",
+        "properties": {
+          "notification_admin_new_order": {
+            "type": "boolean",
+            "example": true
+          },
+          "notification_admin_order_canceled": {
+            "type": "boolean",
+            "example": true
+          },
+          "notification_admin_low_stock": {
+            "type": "boolean",
+            "example": true
+          },
+          "notification_admin_new_customer": {
+            "type": "boolean",
+            "example": false
+          },
+          "notification_admin_new_review": {
+            "type": "boolean",
+            "example": true
+          },
+          "notification_customer_order_confirmed": {
+            "type": "boolean",
+            "example": true
+          },
+          "notification_customer_abandoned_checkout": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "AdminPolicySettings": {
+        "type": "object",
+        "description": "The legal pages the storefront serves at `/policies/{policy}`, plus the return window and restocking fee the returns flow applies.",
+        "properties": {
+          "refund_policy": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "privacy_policy": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "terms_of_service": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "returns_enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "return_window_days": {
+            "type": "integer",
+            "example": 30
+          },
+          "restocking_fee_percent": {
+            "type": "string",
+            "example": "0"
+          }
+        }
+      },
+      "AdminSeoSettings": {
+        "type": "object",
+        "description": "Meta titles and descriptions for the homepage and shop listing, and whether search engines may index the storefront at all.",
+        "properties": {
+          "seo_homepage_meta_title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "seo_homepage_meta_description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "seo_shop_meta_title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "seo_shop_meta_description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "seo_robots_indexing": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "AdminIntegrationSettings": {
+        "type": "object",
+        "description": "Analytics pixels, the Google login client, and the catalog feed connections. Every credential in the group is write only and reported as a `_set` boolean. `integration_google_merchant_token` and `integration_meta_catalog_token` are not writable here; they are issued by their own connection flows.",
+        "properties": {
+          "integration_google_analytics_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_google_tag_manager_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_meta_pixel_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_tiktok_pixel_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_pinterest_tag_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_google_login_client_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": null
+          },
+          "integration_google_merchant_enabled": {
+            "type": "boolean",
+            "example": false
+          },
+          "integration_google_merchant_include_digital": {
+            "type": "boolean",
+            "example": false
+          },
+          "integration_meta_catalog_enabled": {
+            "type": "boolean",
+            "example": false
+          },
+          "integration_google_login_client_secret_set": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether a value is stored. The value itself is never returned."
+          },
+          "integration_google_merchant_token_set": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether a value is stored. The value itself is never returned."
+          },
+          "integration_meta_catalog_token_set": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether a value is stored. The value itself is never returned."
+          }
+        }
+      },
+      "AdminSystemSettings": {
+        "type": "object",
+        "description": "Maintenance mode and the IPs allowed through it, plus the running version. Turning maintenance on makes the storefront API return `503`; the admin API stays reachable. `system_checksum` and `system_registry` are licensing internals and are never returned.",
+        "properties": {
+          "maintenance_mode": {
+            "type": "boolean",
+            "example": false
+          },
+          "maintenance_allowed_ips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "203.0.113.10"
+            ]
+          },
+          "flexstore_version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "AdminSettingSection": {
+        "type": "object",
+        "description": "One settings section the signed-in staff member may open.",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "general",
+              "store",
+              "language",
+              "currency",
+              "shipping",
+              "tax",
+              "checkout",
+              "payment",
+              "newsletter",
+              "mail",
+              "notification",
+              "policy",
+              "seo",
+              "integration",
+              "system"
+            ],
+            "example": "mail"
+          },
+          "title": {
+            "type": "string",
+            "description": "Translated for the request locale.",
+            "example": "Mail"
+          },
+          "description": {
+            "type": "string",
+            "description": "Translated for the request locale.",
+            "example": "Email delivery settings"
+          },
+          "permission": {
+            "type": "string",
+            "enum": [
+              "settings.general.configure",
+              "settings.store.configure",
+              "settings.language.configure",
+              "settings.currency.configure",
+              "settings.shipping.configure",
+              "settings.tax.configure",
+              "settings.checkout.configure",
+              "settings.payment.configure",
+              "settings.newsletter.configure",
+              "settings.mail.configure",
+              "settings.notification.configure",
+              "settings.policy.configure",
+              "settings.seo.configure",
+              "settings.integration.configure",
+              "settings.system.configure"
+            ],
+            "example": "settings.mail.configure"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://your-store.com/api/v1/admin/settings/mail"
+          }
+        }
+      },
+      "AdminPasskeyAssertion": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "A WebAuthn assertion proving possession of a registered passkey, used instead of `current_password`. Obtain the challenge from `POST /admin/account/reauth/options` first; it is single use and expires after five minutes.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "AX8s..."
+          },
+          "rawId": {
+            "type": "string",
+            "example": "AX8s..."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "public-key"
+            ],
+            "example": "public-key"
+          },
+          "response": {
+            "type": "object",
+            "description": "The authenticator response, passed through from the platform API."
+          }
+        }
+      },
+      "AdminAccountPasskey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 7
+          },
+          "name": {
+            "type": "string",
+            "example": "My phone"
+          },
+          "authenticator": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "iCloud Keychain"
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "example": "2026-10-28T09:12:00+00:00"
+          },
+          "last_used_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "example": "2026-10-30T07:45:11+00:00"
+          }
+        }
+      },
+      "AdminAccountSecurity": {
+        "type": "object",
+        "description": "The signed-in staff member's own security state. Returned by every endpoint that changes it, so a client never has to re-read.",
+        "properties": {
+          "two_factor_enabled": {
+            "type": "boolean",
+            "description": "True once a pending setup has been confirmed with a code.",
+            "example": false
+          },
+          "two_factor_confirmation_pending": {
+            "type": "boolean",
+            "description": "A secret has been issued but not yet confirmed. The QR code endpoint only works while this is true.",
+            "example": true
+          },
+          "recovery_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Only populated once two factor is confirmed, or after regenerating.",
+            "example": [
+              "VH81PYSHAF-ZPIDROFUNR"
+            ]
+          },
+          "passkeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminAccountPasskey"
+            }
+          }
+        }
+      },
+      "AdminWebAuthnOptions": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "object",
+            "description": "Pass straight to the platform WebAuthn API. The matching challenge is held server side against your access token."
+          }
+        }
+      },
+      "CustomerReview": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 42
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "example": 5
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Warm and light"
+          },
+          "content": {
+            "type": "string",
+            "example": "Wore it all through January and it still looks new."
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Ada Lovelace"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-01-14T09:30:00+00:00"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "example": "pending"
           }
         }
       }

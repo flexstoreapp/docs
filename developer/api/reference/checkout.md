@@ -34,6 +34,8 @@ Build the address form itself from the [address rules](/developer/api/reference/
 
 Gateways that run in-app rather than in a hosted page expose their public key on the payment option. Collect the card in the SDK and pass the resulting `card_token` to `POST /checkout`.
 
+To skip the native form and send the buyer to the gateway's hosted page instead, send `hosted_checkout: true` on `POST /checkout`, even when the gateway is set to embedded. The response then carries a `redirect_url` and no native payment details. The Expo app sends this on every checkout, so it never shows a native payment form.
+
 ### Asking someone else to pay
 
 Send `shared_payment: true` on `POST /checkout` and no gateway is charged. The returned `redirect_url` is a link to hand to whoever is paying, and it stays valid for the window the merchant configured. The endpoints behind it are on the [payment links](/developer/api/reference/payment-links) page.
@@ -51,7 +53,7 @@ Two calls keep the pending checkout session current while the buyer fills the fo
 
 The merchant's abandoned checkout list and recovery emails are built from that session. Checkout still works without these calls, but abandoned carts from the app are invisible to recovery.
 
-When a buyer opens a recovery email, `GET /checkout/recover/{session}` returns the abandoned cart. Store its `token` as the device's cart.
+When a buyer opens a recovery email, `GET /checkout/recover/{session}` returns the abandoned cart. Pass the full signed link from the email unchanged, since requests without a valid signature are rejected. Store the returned `token` as the device's cart.
 
 ## Endpoints
 

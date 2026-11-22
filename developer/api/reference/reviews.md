@@ -10,4 +10,6 @@ Reading and writing product reviews.
 
 <OAOperation operation-id="listProductReviews" />
 
+<OAOperation operation-id="showProductReview" />
+
 <OAOperation operation-id="createProductReview" />

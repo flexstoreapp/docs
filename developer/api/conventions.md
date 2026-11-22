@@ -48,7 +48,7 @@ An envelope appears only when there is something to sit beside the payload. Pagi
 }
 ```
 
-A handful of endpoints wrap for the same reason without paginating, because they return a sibling alongside the record: `GET /search/suggestions` adds `meta`, and the abandoned checkout endpoints add `customer_stats` and `sent`. Every other response is unwrapped, including unpaginated lists, which arrive as a plain array.
+A handful of endpoints wrap for the same reason without paginating, because they return a sibling alongside the record: `GET /search/suggestions` adds `meta` plus the matching `categories` and `brands`, and the abandoned checkout endpoints add `customer_stats` and `sent`. Every other response is unwrapped, including unpaginated lists, which arrive as a plain array.
 
 `per_page` is capped differently on each half. Storefront listings accept 24, 36, 48 or 60, and fall back to the store default rather than erroring. Admin listings accept any number from 1 to 100, and reject anything larger.
 
@@ -97,6 +97,17 @@ Messages honour `Accept-Language`.
 
 Exceeding a limit returns `429` with a `Retry-After` header.
 
-On the storefront, authentication, password reset, order tracking, newsletter signup and file downloads are throttled. Log in attempts are throttled per email and IP together.
+Each throttled endpoint counts on its own, per caller: a signed-in client is counted by account, an anonymous one by address. Spending one endpoint's budget never affects another, so a client does not have to spread unrelated calls out to stay under a shared ceiling.
 
-On the admin half, `POST /admin/auth/login` allows 10 attempts a minute and the two factor challenge allows 6. Nothing else is throttled, since every other admin endpoint already needs a token.
+Limits are grouped into tiers:
+
+| Per minute | Applies to |
+| --- | --- |
+| 5 | Password reset requests and confirmations, email verification sends, newsletter signup, the two factor challenge, passkey sign in, and anything that changes a credential |
+| 10 | Log in, registration, social sign in, order tracking lookups, cart permalinks, email verification, requesting a passkey challenge |
+| 30 | File downloads, order tracking reads, product feeds |
+| 60 | Checkout draft autosave, which writes once per field the shopper changes |
+
+On the storefront, log in attempts are throttled per email and address together, in addition to the tier above.
+
+On the admin half the same tiers apply. Working through the two factor setup steps never uses up another endpoint's budget, and reading data is not throttled, since those endpoints already need a token.

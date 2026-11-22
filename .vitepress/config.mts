@@ -334,6 +334,7 @@ export default defineConfig({
                         collapsed: true,
                         items: [
                             { text: 'Authentication', link: '/developer/api/reference/admin/authentication' },
+                            { text: 'Account', link: '/developer/api/reference/admin/account' },
                             { text: 'Configuration', link: '/developer/api/reference/admin/configuration' },
                             { text: 'Dashboard', link: '/developer/api/reference/admin/dashboard' },
                             {
@@ -366,6 +367,7 @@ export default defineConfig({
                             { text: 'Reviews', link: '/developer/api/reference/admin/reviews' },
                             { text: 'Reports', link: '/developer/api/reference/admin/reports' },
                             { text: 'Media', link: '/developer/api/reference/admin/media' },
+                            { text: 'Settings', link: '/developer/api/reference/admin/settings' },
                         ],
                     },
                 ],
