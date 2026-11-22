@@ -117,12 +117,12 @@ Delivery is automatic once payment goes through, so there is nothing to fulfill 
 
 ### In-App Purchase
 
-This section appears for digital products without variants. It holds the product IDs your mobile apps use to sell the product with in-app purchase.
+This section holds the product IDs your mobile apps use to sell a digital product with in-app purchase. A product without variants gets this card. A product with variants gets an **In-app purchase** tab in the variants area, with a row for each variant, because each variant is a separate product in the stores with its own price.
 
 - **Apple product ID**: the Product ID of the matching consumable in App Store Connect.
 - **Google product ID**: the product ID of the matching in-app product in Play Console.
 
-Fill in the ones for the platforms you publish on. A product is shown in an app only when it has the ID for that platform, so leave one empty to keep the product out of that app. An ID can belong to one product only.
+Fill in the ones for the platforms you publish on. A product is shown in an app only when it has the ID for that platform, so leave one empty to keep the product out of that app. An ID can belong to one product or variant only. Customers who buy a variant receive the files assigned to that variant.
 
 The IDs matter only when **Digital products in mobile apps** is set to **Sell with in-app purchase** under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps). See [Integration Settings](/settings-integration#in-app-purchases) for connecting the stores.
 

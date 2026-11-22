@@ -20737,6 +20737,17 @@
             ],
             "example": "5012345678900"
           },
+          "in_app_purchase": {
+            "type": ["object", "null"],
+            "description": "Set when this variant of a digital product is bought with an in-app purchase on the requesting platform. Send `X-App-Platform` to receive it.",
+            "properties": {
+              "store_product_id": {
+                "type": "string",
+                "description": "The App Store Connect or Google Play Console product ID to pass to the store\u2019s purchase flow.",
+                "example": "com.example.pack.standard"
+              }
+            }
+          },
           "price": {
             "type": [
               "string",
@@ -24268,6 +24279,16 @@
             ],
             "example": "5012345678900"
           },
+          "apple_product_id": {
+            "type": ["string", "null"],
+            "example": "com.example.pack.standard",
+            "description": "The App Store Connect product ID for in-app purchase. Digital products only."
+          },
+          "google_product_id": {
+            "type": ["string", "null"],
+            "example": "pack_standard",
+            "description": "The Google Play Console product ID for in-app purchase. Digital products only."
+          },
           "price": {
             "type": [
               "string",
@@ -25255,6 +25276,18 @@
             "example": "5012345678900",
             "maxLength": 255,
             "description": "Must be unique across products and variants."
+          },
+          "apple_product_id": {
+            "type": ["string", "null"],
+            "maxLength": 255,
+            "example": "com.example.pack.standard",
+            "description": "The App Store Connect product ID for in-app purchase. Digital products only. Must be unique across products and variants."
+          },
+          "google_product_id": {
+            "type": ["string", "null"],
+            "maxLength": 255,
+            "example": "pack_standard",
+            "description": "The Google Play Console product ID for in-app purchase. Digital products only. Must be unique across products and variants."
           },
           "track_stock": {
             "type": "boolean",

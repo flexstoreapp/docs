@@ -135,7 +135,7 @@ The order records the price you set on the product in FlexStore. What the custom
 2. In your store, open **Settings > Integration** and click **Connect** on the **App Store** row under In-app purchases.
 3. Enter the **Bundle ID** of your iOS app. Leave it empty to use the Bundle ID from [Sign in with Apple](#apple).
 4. Copy the **Server notification URL** into App Store Connect as the production and sandbox server URL, using version 2 notifications. Apple then tells your store when it refunds a purchase.
-5. On each product, paste the Product ID into **Apple product ID**. See [In-App Purchase](/products#in-app-purchase).
+5. On each product, or each variant of a product, paste the Product ID into **Apple product ID**. See [In-App Purchase](/products#in-app-purchase).
 
 ### Google Play
 
@@ -144,7 +144,7 @@ The order records the price you set on the product in FlexStore. What the custom
 3. In your store, open **Settings > Integration** and click **Connect** on the **Google Play** row under In-app purchases.
 4. Enter the **Android package name** of your app and paste the JSON key into **Service account key**.
 5. Create a Pub/Sub topic in Google Cloud with a push subscription to the **Real-time notification URL**, then select the topic under Monetization setup in Play Console. Google then tells your store when it refunds a purchase. The URL contains a private key, so keep it to yourself.
-6. On each product, paste the product ID into **Google product ID**.
+6. On each product, or each variant of a product, paste the product ID into **Google product ID**.
 
 ### Good to know
 
