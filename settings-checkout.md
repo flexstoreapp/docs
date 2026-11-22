@@ -33,7 +33,7 @@ This exists because the App Store and Google Play require digital goods to be so
 
 To sell a single product through your own checkout while the rest follow these options, use **Sell with your own checkout** under [Mobile Apps](/products#mobile-apps) on that product. It suits gift cards that are spent on physical goods, which the stores treat differently from digital goods.
 
-Customers who bought a download on your website can still open it under **Downloads** in the app, whichever option you choose.
+With **Hide digital products**, the app also hides **Downloads** and the download links on orders, so files bought on your website are not offered in the app. The App Store and Google Play only allow access to content bought elsewhere when the same items are also sold with in-app purchase in the app. Customers still receive the download links by email and can open them on your website. With the other two options the app keeps showing downloads. A product set to **Sell with your own checkout** keeps its downloads in the app either way.
 
 ## Shared Payment Link Lifetime (hours)
 

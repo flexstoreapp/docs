@@ -20195,7 +20195,7 @@
             "android"
           ]
         },
-        "description": "Send `ios` or `android` from a store-distributed app. When the store has digital products in mobile apps turned off, digital products are left out of listings, search, recommendations and the homepage, a digital product page returns `404`, and digital products cannot be added to the cart or checked out. Web and other clients omit it and see the full catalog. Unknown values are ignored."
+        "description": "Send `ios` or `android` from a store-distributed app. When the store has digital products in mobile apps turned off, digital products are left out of listings, search, recommendations and the homepage, a digital product page returns `404`, digital products cannot be added to the cart or checked out, and downloads are not returned or served. Web and other clients omit it and see the full catalog. Unknown values are ignored."
       },
       "AcceptLanguage": {
         "name": "Accept-Language",
