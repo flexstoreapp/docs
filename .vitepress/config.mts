@@ -285,6 +285,8 @@ export default defineConfig({
                     { text: 'Payment Drivers', link: '/developer/payment-drivers' },
                     { text: 'Newsletter Drivers', link: '/developer/newsletter-drivers' },
                     { text: 'Storefront Sections', link: '/developer/storefront-sections' },
+                    { text: 'Mobile App', link: '/developer/mobile-app' },
+                    { text: 'Publishing the Mobile App', link: '/developer/mobile-app-publishing' },
                 ],
             },
             {
