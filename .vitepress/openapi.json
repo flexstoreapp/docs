@@ -17344,26 +17344,6 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "mobile_app_digital_products_ios": {
-                    "type": "string",
-                    "enum": [
-                      "hidden",
-                      "in_app_purchase",
-                      "external_checkout"
-                    ],
-                    "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
-                    "example": "hidden"
-                  },
-                  "mobile_app_digital_products_android": {
-                    "type": "string",
-                    "enum": [
-                      "hidden",
-                      "in_app_purchase",
-                      "external_checkout"
-                    ],
-                    "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
-                    "example": "hidden"
-                  },
                   "checkout_reservation_minutes": {
                     "type": "integer",
                     "example": 10
@@ -18397,10 +18377,30 @@
                     ],
                     "example": null
                   },
+                  "mobile_app_digital_products_ios": {
+                    "type": "string",
+                    "enum": [
+                      "hidden",
+                      "in_app_purchase",
+                      "external_checkout"
+                    ],
+                    "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
+                    "example": "hidden"
+                  },
+                  "mobile_app_digital_products_android": {
+                    "type": "string",
+                    "enum": [
+                      "hidden",
+                      "in_app_purchase",
+                      "external_checkout"
+                    ],
+                    "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
+                    "example": "hidden"
+                  },
                   "integration_apple_iap_bundle_id": {
                     "type": ["string", "null"],
                     "example": null,
-                    "description": "The iOS app\u2019s bundle identifier for App Store purchases. Falls back to the Sign in with Apple bundle identifier when empty."
+                    "description": "The iOS app\u2019s bundle identifier for App Store purchases. It is separate from the Sign in with Apple bundle identifier."
                   },
                   "integration_google_play_package_name": {
                     "type": ["string", "null"],
@@ -33234,26 +33234,6 @@
             "type": "boolean",
             "example": true
           },
-          "mobile_app_digital_products_ios": {
-            "type": "string",
-            "enum": [
-              "hidden",
-              "in_app_purchase",
-              "external_checkout"
-            ],
-            "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
-            "example": "hidden"
-          },
-          "mobile_app_digital_products_android": {
-            "type": "string",
-            "enum": [
-              "hidden",
-              "in_app_purchase",
-              "external_checkout"
-            ],
-            "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
-            "example": "hidden"
-          },
           "checkout_shared_payment_hours": {
             "type": "integer",
             "example": 48
@@ -33525,10 +33505,30 @@
             "example": "com.your-store.web",
             "description": "The Services ID Apple issued for the storefront, used for Sign in with Apple on the website."
           },
+          "mobile_app_digital_products_ios": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "in_app_purchase",
+              "external_checkout"
+            ],
+            "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
+            "example": "hidden"
+          },
+          "mobile_app_digital_products_android": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "in_app_purchase",
+              "external_checkout"
+            ],
+            "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
+            "example": "hidden"
+          },
           "integration_apple_iap_bundle_id": {
             "type": ["string", "null"],
             "example": null,
-            "description": "The iOS app\u2019s bundle identifier for App Store purchases. Falls back to the Sign in with Apple bundle identifier when empty."
+            "description": "The iOS app\u2019s bundle identifier for App Store purchases. It is separate from the Sign in with Apple bundle identifier."
           },
           "integration_google_play_package_name": {
             "type": ["string", "null"],
