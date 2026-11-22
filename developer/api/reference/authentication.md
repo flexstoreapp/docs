@@ -35,6 +35,18 @@ A first-time token creates the customer. A returning one logs in to the existing
 
 Ask the provider SDK for a token issued to the store's own client id, the one saved in **Settings > Integration**, rather than the mobile app's. FlexStore verifies the token against the merchant's credentials, so a token minted for a different client is rejected.
 
+### Apple
+
+Sign in with Apple is native only, so there is no browser redirect and no client secret. Send the identity token the SDK returns as `access_token`:
+
+```bash
+curl -X POST https://your-store.com/api/v1/auth/social/apple \
+  -H 'Content-Type: application/json' \
+  -d '{"access_token": "eyJraWQiOi...", "device_name": "iPhone 17", "name": "Ada Lovelace"}'
+```
+
+FlexStore checks the token's signature against Apple's published keys and requires it to be issued to the bundle identifier saved in **Settings > Integration**, so it must come from the merchant's own app. Apple only shares the customer's name on the first authorization, so repeat it in `name` when you have it. A customer without one is named after their email address. Check `social_login.apple` in the store configuration before showing the button.
+
 ## Storage and lifetime
 
 Tokens do not expire on their own. Treat one like a password and keep it in the platform keychain, never in plain preferences.

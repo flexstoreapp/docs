@@ -55,7 +55,7 @@ Turn **List products in this catalog** off to stop serving the feed. The URL sta
 
 ## Social Login
 
-Social login lets customers log in with an existing account instead of creating a new email and password. Once set up, a **Continue with Google** button appears on the login and registration pages. Customers who use it get an account automatically, and if they already shop with the same email address, logging in with Google links to that account.
+Social login lets customers log in with an existing account instead of creating a new email and password. Once set up, a **Continue with Google** button appears on the login and registration pages, and a **Continue with Apple** button appears there too once Apple is set up. The same button appears in your iOS mobile app. Customers who use either get an account automatically, and if they already shop with the same email address, logging in links to that account.
 
 ### Google
 
@@ -83,3 +83,40 @@ You create credentials in Google's own console and paste them into the store. It
 **Step 5: paste the credentials into your store.** Copy the **Client ID** and **Client secret** Google shows you into the matching fields in the store's dialog, then click **Connect**.
 
 The **Continue with Google** button appears as soon as both values are saved. To turn social login off, open the Google row, clear both fields, and save. Your client secret is stored securely and never reaches the storefront.
+
+### Apple
+
+Sign in with Apple lets customers log in with their Apple ID, on your website, in your iOS app, or both. You set up each one separately, and either can be left empty. Apple also requires it for the app: if your iOS app offers Google login, it must offer Sign in with Apple too, or the App Store can reject the app.
+
+You need an [Apple Developer](https://developer.apple.com/) account, which is the same one you use to publish the app. Your store must run on a secure address (https), because Apple doesn't accept plain http or local addresses.
+
+#### On your website
+
+**Step 1: create an App ID.** In your Apple Developer account, open **Certificates, Identifiers & Profiles** and choose **Identifiers**. Click the **+** button, choose **App IDs**, then **App**, and continue. Give it a name and an identifier, tick **Sign in with Apple** under Capabilities, and register it. If you already have an App ID for your iOS app, you can open it, tick **Sign in with Apple**, and use that one instead.
+
+**Step 2: copy your redirect URI.** In your store, open **Settings > Integration** and click **Connect** on the **Apple** row under Social login. Copy the **Authorized redirect URI** from the dialog and leave it open.
+
+**Step 3: create a Services ID.** Back in Apple's Identifiers page, click **+** again and choose **Services IDs**. Enter a description and an identifier such as `com.your-store.web`, then register it. Open the new Services ID, tick **Sign in with Apple**, and click **Configure**:
+
+1. Choose the App ID from step 1 as the **Primary App ID**.
+2. Under **Domains and Subdomains**, enter your store's domain, for example `your-store.com`, without `https://`.
+3. Under **Return URLs**, paste the redirect URI you copied. It has to match exactly.
+4. Click **Next**, then **Done**, then **Continue** and **Save**. If Apple asks you to verify your domain, follow its on-screen instructions first.
+
+**Step 4: paste the Services ID into your store.** Enter the identifier from step 3 in the **Services ID** field of the dialog and click **Connect**.
+
+The **Continue with Apple** button appears on the login and registration pages as soon as the Services ID is saved. Customers who use it return to your store signed in.
+
+#### In your iOS app
+
+Open the Apple row in **Settings > Integration** and enter the **Bundle ID** of your iOS app, for example `com.your-store.app`. It is the identifier you gave the app, and it has to match exactly. Your App ID in Apple's account needs **Sign in with Apple** ticked, as in step 1 above. The button appears in the app as soon as the Bundle ID is saved.
+
+#### Turning it off
+
+Open the Apple row, clear the **Services ID** to remove the button from the website or clear the **Bundle ID** to remove it from the app, and save.
+
+#### Good to know
+
+- Apple shares a customer's name only the first time they sign in. If it isn't shared, the account is named after the first part of their email address, and the customer can change it from their profile.
+- Customers can choose **Hide My Email**. Apple then gives your store a private address that forwards to the customer's real inbox. Order emails only reach these addresses if you register your store's sending domain with Apple's private email relay service in the same developer account.
+- If a customer already shops with the same email address, signing in with Apple links to that account instead of creating a new one. A customer who hides their email gets a separate account, because Apple's private address doesn't match.

@@ -2042,7 +2042,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "google"
+                "google",
+                "apple"
               ],
               "example": "google"
             },
@@ -2055,7 +2056,7 @@
             "$ref": "#/components/parameters/Currency"
           }
         ],
-        "description": "Send the token the provider's SDK returned and get a FlexStore token back. The account is matched by provider account or email, and created if neither matches. Request the token for the store's own client id, not the app's, so it verifies against the merchant's credentials. A provider the merchant has not configured returns 404.",
+        "description": "Send the token the provider's SDK returned and get a FlexStore token back. The account is matched by provider account or email, and created if neither matches. Request the token for the store's own client id, not the app's, so it verifies against the merchant's credentials. A provider the merchant has not configured returns 404. For Apple, send the identity token the SDK returned; Apple only shares the customer's name on the first authorization, so the app may repeat it in `name` to complete the account.",
         "requestBody": {
           "required": true,
           "content": {
@@ -18083,7 +18084,7 @@
         ],
         "summary": "Get integration settings",
         "operationId": "adminGetIntegrationSettings",
-        "description": "Requires the `settings.integration.configure` permission. Analytics pixels, the Google login client, and the catalog feed connections. Every credential in the group is write only and reported as a `_set` boolean. `integration_google_merchant_token` and `integration_meta_catalog_token` are not writable here; they are issued by their own connection flows.",
+        "description": "Requires the `settings.integration.configure` permission. Analytics pixels, the Google and Apple login clients, and the catalog feed connections. Every credential in the group is write only and reported as a `_set` boolean. `integration_google_merchant_token` and `integration_meta_catalog_token` are not writable here; they are issued by their own connection flows.",
         "parameters": [
           {
             "$ref": "#/components/parameters/AcceptLanguage"
@@ -18175,6 +18176,20 @@
                     "example": null
                   },
                   "integration_google_login_client_secret": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_apple_login_client_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": null
+                  },
+                  "integration_apple_login_services_id": {
                     "type": [
                       "string",
                       "null"
@@ -22741,6 +22756,10 @@
             "description": "Which social log in providers the store has set up. A provider that is off answers 404.",
             "properties": {
               "google": {
+                "type": "boolean",
+                "example": false
+              },
+              "apple": {
                 "type": "boolean",
                 "example": false
               }
@@ -31321,6 +31340,15 @@
             "type": "string",
             "example": "Pixel 9",
             "description": "Labels the token so the customer can tell their devices apart."
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "example": "Ada Lovelace",
+            "description": "The name the provider shared, when it only does so on the first sign-in. Apple only."
           }
         },
         "required": [
@@ -33097,6 +33125,22 @@
               "null"
             ],
             "example": null
+          },
+          "integration_apple_login_client_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "com.your-store.app",
+            "description": "The iOS app's bundle identifier, used to verify Apple identity tokens."
+          },
+          "integration_apple_login_services_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "com.your-store.web",
+            "description": "The Services ID Apple issued for the storefront, used for Sign in with Apple on the website."
           },
           "integration_google_merchant_enabled": {
             "type": "boolean",
