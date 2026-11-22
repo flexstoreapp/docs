@@ -643,6 +643,125 @@
         ]
       }
     },
+    "/account/in-app-purchases": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Buy a digital product with an in-app purchase",
+        "operationId": "createInAppPurchase",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppPlatform"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/Currency"
+          }
+        ],
+        "description": "Hands a completed App Store or Google Play purchase to the store. The server verifies it with the store, creates a paid order at the product’s store price, and grants the downloads, which then appear under Downloads. Sending the same purchase again returns the original record with `200` instead of creating another order. Only available while the store sells digital products with in-app purchase, and only for digital products that have a product ID for the platform.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "platform",
+                  "product_id"
+                ],
+                "properties": {
+                  "platform": {
+                    "type": "string",
+                    "enum": [
+                      "ios",
+                      "android"
+                    ],
+                    "example": "ios"
+                  },
+                  "product_id": {
+                    "type": "integer",
+                    "example": 42,
+                    "description": "The FlexStore product that was bought."
+                  },
+                  "signed_transaction": {
+                    "type": "string",
+                    "description": "Required on `ios`. The signed transaction (JWS) StoreKit returned for the purchase."
+                  },
+                  "purchase_token": {
+                    "type": "string",
+                    "description": "Required on `android`. The purchase token Google Play Billing returned for the purchase."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The purchase was verified and an order was created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchase"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "The purchase was already recorded for this customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InAppPurchase"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "422": {
+            "description": "The purchase could not be verified, belongs to another account or app, or the product cannot be bought in-app.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The purchase belongs to another app."
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "signed_transaction": [
+                          "The purchase belongs to another app."
+                        ]
+                      },
+                      "x-additionalPropertiesName": "signed_transaction"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "customerToken": []
+          }
+        ]
+      }
+    },
     "/account/orders": {
       "get": {
         "tags": [
@@ -20718,6 +20837,17 @@
             ],
             "example": "5012345678900"
           },
+          "in_app_purchase": {
+            "type": ["object", "null"],
+            "description": "Set when this digital product is bought with an in-app purchase on the requesting platform. Send `X-App-Platform` to receive it.",
+            "properties": {
+              "store_product_id": {
+                "type": "string",
+                "description": "The App Store Connect or Google Play Console product ID to pass to the store’s purchase flow.",
+                "example": "com.example.pattern_pack"
+              }
+            }
+          },
           "brand": {
             "type": [
               "object",
@@ -22093,6 +22223,55 @@
           }
         }
       },
+      "InAppPurchase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0192f5c6-6a3e-7d3a-9b1e-2b6f1c0d4a11"
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "ios",
+              "android"
+            ],
+            "example": "ios"
+          },
+          "store_product_id": {
+            "type": "string",
+            "example": "com.example.pattern_pack"
+          },
+          "product_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "example": 42
+          },
+          "order_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "example": 10042
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "refunded"
+            ],
+            "example": "completed"
+          },
+          "purchased_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-11-22T10:30:00+00:00"
+          }
+        }
+      },
       "Download": {
         "type": "object",
         "properties": {
@@ -22824,6 +23003,12 @@
               "prices_include_tax": {
                 "type": "boolean",
                 "example": false
+              },
+              "mobile_digital_products": {
+                "type": "string",
+                "enum": ["hidden", "in_app_purchase", "external_checkout"],
+                "description": "How the store sells digital products in the iOS and Android apps. Send `X-App-Platform` and the catalog already follows this; the field tells an app which purchase flow to offer.",
+                "example": "hidden"
               },
               "display_tax_totals": {
                 "type": "string",
