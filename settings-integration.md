@@ -121,9 +121,23 @@ Open the Apple row, clear the **Services ID** to remove the button from the webs
 - Customers can choose **Hide My Email**. Apple then gives your store a private address that forwards to the customer's real inbox. Order emails only reach these addresses if you register your store's sending domain with Apple's private email relay service in the same developer account.
 - If a customer already shops with the same email address, signing in with Apple links to that account instead of creating a new one. A customer who hides their email gets a separate account, because Apple's private address doesn't match.
 
+## Digital Products in Apps
+
+Controls how your apps treat digital products, with one option for the **iOS app** and one for the **Android app**. Each store has its own rules, so the two can differ. Your website is not affected. The choices are:
+
+- **Hide digital products**: the default. The app leaves digital products out of the shop, search, categories, the homepage, wishlists and comparisons, and nobody can add one to the cart from the app. Physical products sell as usual. Choose this if you only sell physical goods, because it needs no in-app purchase setup.
+- **Sell with in-app purchase**: the app shows a digital product only when it has a product ID for that platform, set under [Mobile Apps](/products#mobile-apps) on the product or on each of its variants. Customers buy it with **Buy now** on the product page, using the App Store or Google Play payment sheet, and it never goes in the cart. FlexStore creates a paid order at the product's FlexStore price and the downloads appear straight away. The store charges the price set for the product in App Store Connect or Play Console, so mirror any sale price there too (see [Mobile Apps](/products#mobile-apps)). Customers must be logged in to buy. This needs the store accounts connected under [Integration settings](/settings-integration#in-app-purchases).
+- **Sell with your own checkout**: the app sells digital products through your own checkout, like any other product. App Store and Google Play usually do not allow this, so pick it only if you have cleared it with them.
+
+This exists because the App Store and Google Play require digital goods to be sold with in-app purchase, and an app that sends buyers to an outside payment page for them can be rejected.
+
+To sell a single product through your own checkout while the rest follow these options, use **Sell with your own checkout** under [Mobile Apps](/products#mobile-apps) on that product. It suits gift cards that are spent on physical goods, which the stores treat differently from digital goods.
+
+With **Hide digital products**, the app also hides **Downloads** and the download links on orders, so files bought on your website are not offered in the app. The App Store and Google Play only allow access to content bought elsewhere when the same items are also sold with in-app purchase in the app. Customers still receive the download links by email and can open them on your website. With the other two options the app keeps showing downloads. A product with **Sell with your own checkout** turned on keeps its downloads in the app, even when the app's option is **Hide digital products**, because customers buy it in the app and need the files.
+
 ## In-App Purchases
 
-In-app purchases let customers buy digital products inside your iOS and Android apps with the App Store or Google Play payment sheet. They are used when **Digital products in mobile apps** is set to **Sell with in-app purchase** under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps). If you only sell physical products, you can skip this page.
+In-app purchases let customers buy digital products inside your iOS and Android apps with the App Store or Google Play payment sheet. They are used when a platform's digital products option is set to **Sell with in-app purchase** under [Digital Products in Apps](#digital-products-in-apps). If you only sell physical products, you can skip this page.
 
 Each digital product is sold as a **consumable** in-app product in the store. That means a customer can buy it again later, and every purchase becomes one paid order in FlexStore with the download links attached. Subscriptions are not supported.
 
@@ -133,7 +147,7 @@ The order records the price you set on the product in FlexStore. What the custom
 
 1. In App Store Connect, add an in-app purchase of type **Consumable** for each digital product, with the price you want. Copy its Product ID.
 2. In your store, open **Settings > Integration** and click **Connect** on the **App Store** row under In-app purchases.
-3. Enter the **Bundle ID** of your iOS app. Leave it empty to use the Bundle ID from [Sign in with Apple](#apple).
+3. Enter the **Bundle ID** of your iOS app. This is separate from the Bundle ID for [Sign in with Apple](#apple), so enter it here even if you already use Sign in with Apple.
 4. Copy the **Server notification URL** into App Store Connect as the production and sandbox server URL, using version 2 notifications. Apple then tells your store when it refunds a purchase.
 5. On each product, or each variant of a product, paste the Product ID into **Apple product ID**. See [Mobile Apps](/products#mobile-apps).
 
