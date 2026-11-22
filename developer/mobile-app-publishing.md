@@ -103,7 +103,7 @@ The app sends an `X-App-Platform` header, and the store decides what it shows fr
 
 - **Hide digital products** is the default. Digital products are left out of the shop, search, categories, the homepage, wishlists and comparisons, and cannot be added to the cart or checked out from the app. A store that sells only physical products needs nothing else and does not set up in-app purchases.
 - **Sell with in-app purchase** shows a digital product only when it has a product ID for the platform. The product page then offers **Buy now**, which opens the App Store or Google Play payment sheet. The app sends the result to the store, which verifies it with Apple or Google, creates a paid order and grants the downloads.
-- **Sell with the store checkout** sells digital products through the normal checkout. The stores usually reject this, so use it only if you have cleared it with them. A single product can opt in with **Sell with the store checkout** on its **Mobile Apps** card, for example a gift card for physical goods.
+- **Sell with your own checkout** sells digital products through the normal checkout. The stores usually reject this, so use it only if you have cleared it with them. A single product can opt in with **Sell with your own checkout** on its **Mobile Apps** card, for example a gift card for physical goods.
 
 For in-app purchases, connect the stores under **Settings > Integration**, create a consumable product in each store, and enter the product IDs on the product. The [Integration settings](/settings-integration#in-app-purchases) page walks through it.
 

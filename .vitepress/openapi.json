@@ -17351,7 +17351,7 @@
                       "in_app_purchase",
                       "external_checkout"
                     ],
-                    "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+                    "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
                     "example": "hidden"
                   },
                   "mobile_app_digital_products_android": {
@@ -17361,7 +17361,7 @@
                       "in_app_purchase",
                       "external_checkout"
                     ],
-                    "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+                    "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
                     "example": "hidden"
                   },
                   "checkout_reservation_minutes": {
@@ -33241,7 +33241,7 @@
               "in_app_purchase",
               "external_checkout"
             ],
-            "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+            "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
             "example": "hidden"
           },
           "mobile_app_digital_products_android": {
@@ -33251,7 +33251,7 @@
               "in_app_purchase",
               "external_checkout"
             ],
-            "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+            "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with in-app purchase, and `external_checkout` sells them through the store\u2019s own checkout.",
             "example": "hidden"
           },
           "checkout_shared_payment_hours": {
