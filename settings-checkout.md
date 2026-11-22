@@ -21,10 +21,6 @@ On, and the **Ask someone else to pay** button appears at checkout, so a shopper
 
 Off, and the button disappears. Links that were already created keep working until they expire or are paid.
 
-## Digital Products in Apps
-
-How digital products appear in the iOS and Android apps is set under [Integration Settings](/settings-integration#digital-products-in-apps), next to the store connections it depends on.
-
 ## Shared Payment Link Lifetime (hours)
 
 How long a shared payment link stays valid after it is created. Once the time is up, anyone opening the link is told it has expired and the shopper needs to send a new one. Defaults to 48 hours, and accepts anything from 1 hour to 30 days (720 hours).
