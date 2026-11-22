@@ -66,6 +66,16 @@ Searching through `query` is recorded in the merchant's search reports, the same
 
 `GET /shop/facets` returns the counts behind a filter sheet. It takes `category`, `brand` and `query`, which set the context the counts are computed in; the other filters above do not narrow it. Inside a category context the `categories` list is `null`, and inside a brand context the `brands` list is `null`, since that filter is already fixed.
 
+## In-app purchases
+
+A store-distributed app has to sell digital products with the platform's own billing. Send `X-App-Platform: ios` or `android` on every request and the catalog follows the store's setting:
+
+- `GET /config` returns `checkout.mobile_digital_products`, one of `hidden`, `in_app_purchase` or `external_checkout`.
+- With `hidden`, digital products are left out of listings, search, recommendations and the homepage, a digital product page returns `404`, and they cannot be added to the cart or checked out.
+- With `in_app_purchase`, only digital products that have a store product ID for the platform are shown. `GET /products/{product}` returns `in_app_purchase.store_product_id` for them, and they still cannot go in the cart.
+
+After the customer completes the purchase in the store, send it to `POST /account/in-app-purchases` with the store product ID and, on iOS, the signed transaction (`signed_transaction`) or, on Android, the purchase token (`purchase_token`). The server verifies it with the store, creates a paid order at the product's price and grants the downloads. Finish or consume the transaction in the store only after the call succeeds. Sending the same purchase again returns the recorded purchase with `200`, so it is safe to retry.
+
 ## Reference
 
 **Store**

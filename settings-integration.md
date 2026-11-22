@@ -120,3 +120,35 @@ Open the Apple row, clear the **Services ID** to remove the button from the webs
 - Apple shares a customer's name only the first time they sign in. If it isn't shared, the account is named after the first part of their email address, and the customer can change it from their profile.
 - Customers can choose **Hide My Email**. Apple then gives your store a private address that forwards to the customer's real inbox. Order emails only reach these addresses if you register your store's sending domain with Apple's private email relay service in the same developer account.
 - If a customer already shops with the same email address, signing in with Apple links to that account instead of creating a new one. A customer who hides their email gets a separate account, because Apple's private address doesn't match.
+
+## In-App Purchases
+
+In-app purchases let customers buy digital products inside your iOS and Android apps with the App Store or Google Play payment sheet. They are used when **Digital products in mobile apps** is set to **Sell with in-app purchase** under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps). If you only sell physical products, you can skip this page.
+
+Each digital product is sold as a **consumable** in-app product in the store. That means a customer can buy it again later, and every purchase becomes one paid order in FlexStore with the download links attached. Subscriptions are not supported.
+
+The order records the price you set on the product in FlexStore. What the customer actually pays, and the store's commission, come from the price you set in App Store Connect or Play Console.
+
+### App Store
+
+1. In App Store Connect, add an in-app purchase of type **Consumable** for each digital product, with the price you want. Copy its Product ID.
+2. In your store, open **Settings > Integration** and click **Connect** on the **App Store** row under In-app purchases.
+3. Enter the **Bundle ID** of your iOS app. Leave it empty to use the Bundle ID from [Sign in with Apple](#apple).
+4. Copy the **Server notification URL** into App Store Connect as the production and sandbox server URL, using version 2 notifications. Apple then tells your store when it refunds a purchase.
+5. On each product, paste the Product ID into **Apple product ID**. See [In-App Purchase](/products#in-app-purchase).
+
+### Google Play
+
+1. In Play Console, create an in-app product for each digital product, with the price you want. Copy its product ID.
+2. In the Google Cloud console, create a service account and download its JSON key. Then invite the service account in Play Console, with permission to view financial data and manage orders.
+3. In your store, open **Settings > Integration** and click **Connect** on the **Google Play** row under In-app purchases.
+4. Enter the **Android package name** of your app and paste the JSON key into **Service account key**.
+5. Create a Pub/Sub topic in Google Cloud with a push subscription to the **Real-time notification URL**, then select the topic under Monetization setup in Play Console. Google then tells your store when it refunds a purchase. The URL contains a private key, so keep it to yourself.
+6. On each product, paste the product ID into **Google product ID**.
+
+### Good to know
+
+- When a purchase is refunded in App Store Connect or Play Console, the order is marked refunded and the downloads stop working. It behaves like a [gateway refund](/orders#refunds-from-the-payment-gateway), with only the total recorded.
+- Without the notification URLs, purchases still work, but you have to refund the order in the admin panel yourself.
+- A purchase is only recorded once the store confirms it to your server. If the customer's connection drops after paying, the app sends it again the next time it opens.
+- Purchases made in the store's testing environments create real orders in your store, so test on a copy of it.

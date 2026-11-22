@@ -23,11 +23,15 @@ Off, and the button disappears. Links that were already created keep working unt
 
 ## Digital Products in Mobile Apps
 
-Off by default. With it off, your iOS and Android apps do not show digital products: they are left out of the shop, search, categories, the homepage, wishlists and comparisons, and nobody can add one to the cart from the app. Your website is not affected, and everything physical sells as usual.
+Controls how your iOS and Android apps treat digital products. Your website is not affected. There are three choices:
 
-This exists because the App Store and Google Play require their own in-app billing for digital goods, and an app that sends buyers to an outside payment page for them can be rejected. A store that sells only physical products can leave it off and publish without setting up in-app purchases.
+- **Hide digital products**: the default. The apps leave digital products out of the shop, search, categories, the homepage, wishlists and comparisons, and nobody can add one to the cart from the app. Physical products sell as usual. Choose this if you only sell physical goods, because it needs no in-app purchase setup.
+- **Sell with in-app purchase**: the apps show a digital product only when it has a product ID for that platform, set under [In-App Purchase](/products#in-app-purchase) on the product. Customers buy it with **Buy now** on the product page, using the App Store or Google Play payment sheet, and it never goes in the cart. FlexStore creates a paid order at the product's price and the downloads appear straight away. Customers must be logged in to buy. This needs the store accounts connected under [Integration settings](/settings-integration#in-app-purchases).
+- **Sell with the store checkout**: the apps sell digital products through your normal checkout, like any other product. App Store and Google Play usually do not allow this, so pick it only if you have cleared it with them.
 
-Turn it on only if you have cleared selling digital products in the app with the stores. Customers who already bought a download on your website can still find their files in the app under their account.
+This exists because the App Store and Google Play require their own in-app billing for digital goods, and an app that sends buyers to an outside payment page for them can be rejected.
+
+Customers who bought a download on your website can still open it under **Downloads** in the app, whichever option you choose.
 
 ## Shared Payment Link Lifetime (hours)
 

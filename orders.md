@@ -207,6 +207,10 @@ They differ from admin panel refunds in three ways:
 
 If the same refund gets recorded from both the admin panel and the gateway, the webhook is ignored.
 
+### Refunds from the App Store and Google Play
+
+Orders bought with in-app purchase show **App Store** or **Google Play** as the payment method. When the store refunds the purchase and the notification URLs are set up under [Integration Settings](/settings-integration#in-app-purchases), the order is updated the same way as a gateway refund, and the customer's downloads stop working.
+
 ## Cancelling an Order
 
 An order can be canceled until any of its items has shipped. Once a fulfillment exists, including one that is only partly shipped, the **Cancel order** option is hidden. Cancel the fulfillment first if it was created by mistake, or create a [return](/returns) for the shipped items instead.

@@ -97,11 +97,19 @@ Add your App Store Connect app ID and the path to the Google key to the `submit`
 
 ## Digital products
 
-The app sends customers to an external payment page for checkout. Both stores require their own in-app billing for digital goods and content used in the app. Apple's rule is guideline 3.1.1, and Google's is the Play payments policy. A store that sells only physical goods or services is not affected.
+Both stores require their own in-app billing for digital goods and content used in the app. Apple's rule is guideline 3.1.1, and Google's is the Play payments policy. A store that sells only physical goods or services is not affected.
 
-The app sends an `X-App-Platform` header, and the store hides digital products from it by default. This covers the shop, search, categories, the homepage, wishlists and comparisons, and a digital product cannot be added to the cart or checked out from the app. A store that sells only physical products needs nothing else and does not set up in-app purchases.
+The app sends an `X-App-Platform` header, and the store decides what it shows from **Digital products in mobile apps** under **Settings > Checkout**:
 
-To sell digital products in the app, turn on **Digital products in mobile apps** under **Settings > Checkout**. Do this only after you have cleared it with the stores, and read Apple's [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google's [payments policy](https://support.google.com/googleplay/android-developer/answer/9858738) first.
+- **Hide digital products** is the default. Digital products are left out of the shop, search, categories, the homepage, wishlists and comparisons, and cannot be added to the cart or checked out from the app. A store that sells only physical products needs nothing else and does not set up in-app purchases.
+- **Sell with in-app purchase** shows a digital product only when it has a product ID for the platform. The product page then offers **Buy now**, which opens the App Store or Google Play payment sheet. The app sends the result to the store, which verifies it with Apple or Google, creates a paid order and grants the downloads.
+- **Sell with the store checkout** sells digital products through the normal checkout. The stores usually reject this, so use it only if you have cleared it with them.
+
+For in-app purchases, connect the stores under **Settings > Integration**, create a consumable product in each store, and enter the product IDs on the product. The [Integration settings](/settings-integration#in-app-purchases) page walks through it.
+
+In-app purchases need native code, so they work in development builds and release builds but not in Expo Go. The app picks up purchases the store never finished, for example after a dropped connection, the next time a signed in customer opens it.
+
+Read Apple's [App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and Google's [payments policy](https://support.google.com/googleplay/android-developer/answer/9858738) before you decide.
 
 ## 5. Build and submit for Android
 

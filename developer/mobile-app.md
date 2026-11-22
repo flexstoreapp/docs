@@ -130,6 +130,7 @@ Expo Go has limits:
 
 - It only includes the native modules that Expo ships with it. A package that needs its own native code will not load in Expo Go.
 - The Google and Apple sign-in buttons are hidden, since those need a native build. The code checks for Expo Go and hides them.
+- In-app purchases are unavailable. The product page shows a disabled button instead of the store payment sheet.
 - The device running Expo Go must be able to reach `EXPO_PUBLIC_API_URL`, as described in step 2.
 
 Use Expo Go while you change screens, styles and copy. When you add a package with native code or need to test sign-in, build the app as described in [Publishing](/developer/mobile-app-publishing#ways-to-build).
