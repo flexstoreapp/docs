@@ -126,6 +126,12 @@ Fill in the ones for the platforms you publish on. A product is shown in an app 
 
 The IDs matter only when **Digital products in mobile apps** is set to **Sell with in-app purchase** under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps). See [Integration Settings](/settings-integration#in-app-purchases) for connecting the stores.
 
+### Mobile Apps
+
+This card appears for digital products and has one option, **Sell with the store checkout**. When it is on, the iOS and Android apps show this product and sell it through your normal checkout, whatever the digital products options under [Checkout Settings](/settings-checkout#digital-products-in-mobile-apps) say. Customers add it to the cart like any physical product.
+
+Use it for products such as gift cards that are spent on physical goods, or when you have cleared selling the product this way with the stores. App Store and Google Play usually require their own billing for digital goods, so an app that sells a digital product through an outside payment page can be rejected.
+
 ### Recommendations
 
 Two hand-picked lists, one per tab. Nothing shows unless you pick it, and shoppers see the products in your order.

@@ -70,7 +70,7 @@ Searching through `query` is recorded in the merchant's search reports, the same
 
 A store-distributed app has to sell digital products with the platform's own billing. Send `X-App-Platform: ios` or `android` on every request and the catalog follows the store's setting:
 
-- `GET /config` returns `checkout.mobile_digital_products`, one of `hidden`, `in_app_purchase` or `external_checkout`.
+- `GET /config` returns `checkout.mobile_digital_products`, with an `ios` and an `android` value, each one of `hidden`, `in_app_purchase` or `external_checkout`. The two platforms can differ. A digital product with `app_external_checkout` set is shown and sold through the normal checkout whatever its platform's value is.
 - With `hidden`, digital products are left out of listings, search, recommendations and the homepage, a digital product page returns `404`, and they cannot be added to the cart or checked out.
 - With `in_app_purchase`, only digital products that have a store product ID for the platform are shown. `GET /products/{product}` returns `in_app_purchase.store_product_id` for a product without variants. For a product with variants, each entry in `variants` carries its own `in_app_purchase`. A variant with no ID for the platform cannot be bought there. They still cannot go in the cart.
 

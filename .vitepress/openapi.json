@@ -17344,14 +17344,24 @@
                     "type": "boolean",
                     "example": true
                   },
-                  "mobile_app_digital_products": {
+                  "mobile_app_digital_products_ios": {
                     "type": "string",
                     "enum": [
                       "hidden",
                       "in_app_purchase",
                       "external_checkout"
                     ],
-                    "description": "How digital products appear in the iOS and Android apps. `hidden` leaves them out, `in_app_purchase` sells them with Apple In-App Purchase and Google Play Billing, and `external_checkout` sells them through the store checkout.",
+                    "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+                    "example": "hidden"
+                  },
+                  "mobile_app_digital_products_android": {
+                    "type": "string",
+                    "enum": [
+                      "hidden",
+                      "in_app_purchase",
+                      "external_checkout"
+                    ],
+                    "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
                     "example": "hidden"
                   },
                   "checkout_reservation_minutes": {
@@ -23031,10 +23041,20 @@
                 "example": false
               },
               "mobile_digital_products": {
-                "type": "string",
-                "enum": ["hidden", "in_app_purchase", "external_checkout"],
-                "description": "How the store sells digital products in the iOS and Android apps. Send `X-App-Platform` and the catalog already follows this; the field tells an app which purchase flow to offer.",
-                "example": "hidden"
+                "type": "object",
+                "description": "How the store sells digital products in each app. Send `X-App-Platform` and the catalog already follows this; the field tells an app which purchase flow to offer.",
+                "properties": {
+                  "ios": {
+                    "type": "string",
+                    "enum": ["hidden", "in_app_purchase", "external_checkout"],
+                    "example": "hidden"
+                  },
+                  "android": {
+                    "type": "string",
+                    "enum": ["hidden", "in_app_purchase", "external_checkout"],
+                    "example": "hidden"
+                  }
+                }
               },
               "display_tax_totals": {
                 "type": "string",
@@ -24675,6 +24695,11 @@
             "type": ["string", "null"],
             "example": "pattern_pack"
           },
+          "app_external_checkout": {
+            "type": "boolean",
+            "example": false,
+            "description": "Digital products only. When true, the mobile apps sell this product through the store checkout whatever the store\u2019s digital products setting says."
+          },
           "track_stock": {
             "type": [
               "boolean",
@@ -25594,6 +25619,11 @@
             "maxLength": 255,
             "example": "pattern_pack",
             "description": "The Google Play Console product ID for in-app purchase. Digital products without variants only. Must be unique across products."
+          },
+          "app_external_checkout": {
+            "type": "boolean",
+            "example": false,
+            "description": "Digital products only. When true, the mobile apps sell this product through the store checkout whatever the store\u2019s digital products setting says."
           },
           "track_stock": {
             "type": [
@@ -33204,14 +33234,24 @@
             "type": "boolean",
             "example": true
           },
-          "mobile_app_digital_products": {
+          "mobile_app_digital_products_ios": {
             "type": "string",
             "enum": [
               "hidden",
               "in_app_purchase",
               "external_checkout"
             ],
-            "description": "How digital products appear in the iOS and Android apps. `hidden` leaves them out, `in_app_purchase` sells them with Apple In-App Purchase and Google Play Billing, and `external_checkout` sells them through the store checkout.",
+            "description": "How digital products appear in the iOS app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
+            "example": "hidden"
+          },
+          "mobile_app_digital_products_android": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "in_app_purchase",
+              "external_checkout"
+            ],
+            "description": "How digital products appear in the Android app. `hidden` leaves them out, `in_app_purchase` sells them with the store\u2019s billing, and `external_checkout` sells them through the store checkout.",
             "example": "hidden"
           },
           "checkout_shared_payment_hours": {
