@@ -245,7 +245,7 @@ Without EAS you manage the version and build numbers yourself, and `eas update` 
 | Symptom | Likely cause |
 | --- | --- |
 | Google sign-in fails with `DEVELOPER_ERROR` on Android | The SHA-1 of the signing key is missing from the Android OAuth client. See the social sign-in section of [Mobile App](/developer/mobile-app). |
-| The Google button is missing | Google is off in **Settings > Integration**, or on iOS `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` is empty in the build profile. |
+| The Google button is missing | Google is off in **Settings > Integration**, or on iOS `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` is missing from the build profile. |
 | The Apple button is missing on iOS | The Bundle ID in **Settings > Integration** is empty or differs from `ios.bundleIdentifier`. |
 | The app shows no products or can't log in | `EXPO_PUBLIC_API_URL` in the build profile points to the wrong URL or to plain HTTP. |
 | Values from `.env` don't appear in the build | EAS Build does not read `.env`. Put the values in `eas.json`. |

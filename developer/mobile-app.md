@@ -97,7 +97,7 @@ Google and Apple buttons appear on the login screen only when both sides are set
 
 **Google.** Set these in `.env` for local runs and in `eas.json` for release builds:
 
-- `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID`, the iOS OAuth client ID. Leave it empty if you don't offer Google on iOS.
+- `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID`, the iOS OAuth client ID. Leave it out of the build profile if you don't offer Google on iOS.
 - `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID`, the Web client ID. Use the same one you entered in **Settings > Integration**.
 
 Android needs an OAuth client of type Android in the same Google Cloud project. Each client is tied to a signing key, so create one for each key you build with:
