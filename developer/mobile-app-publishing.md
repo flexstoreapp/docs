@@ -56,11 +56,17 @@ Versions work like this:
 
 ## 2. Link the project to EAS
 
+Install the EAS CLI once, globally. Every `eas` command in this guide works after that:
+
+```bash
+npm install --global eas-cli
+```
+
 From the `expo` folder, sign in and create the EAS project:
 
 ```bash
-npx eas-cli@latest login
-npx eas-cli@latest init
+eas login
+eas init
 ```
 
 ## 3. Create the app in each store
@@ -114,8 +120,8 @@ Read Apple's [App Review Guidelines](https://developer.apple.com/app-store/revie
 ## 5. Build and submit for Android
 
 ```bash
-npx eas-cli@latest build --profile production --platform android
-npx eas-cli@latest submit --profile production --platform android
+eas build --profile production --platform android
+eas submit --profile production --platform android
 ```
 
 The production build is an Android App Bundle (`.aab`), which is the format Play requires.
@@ -134,8 +140,8 @@ The first `submit` creates a release on the internal testing track. Play Console
 ## 6. Build and submit for iOS
 
 ```bash
-npx eas-cli@latest build --profile production --platform ios
-npx eas-cli@latest submit --profile production --platform ios
+eas build --profile production --platform ios
+eas submit --profile production --platform ios
 ```
 
 On the first iOS build, EAS CLI asks you to sign in to your Apple Developer account and sets up the signing certificates and profiles for you.
@@ -153,12 +159,12 @@ In App Store Connect, complete the App Privacy questions, screenshots, descripti
 Preview builds are for testers. They don't go through the stores.
 
 ```bash
-npx eas-cli@latest build --profile preview --platform android
-npx eas-cli@latest build --profile preview --platform ios
+eas build --profile preview --platform android
+eas build --profile preview --platform ios
 ```
 
 - The Android preview build is an APK that testers can install directly.
-- The iOS preview build is an internal build. Only devices registered to your Apple account can install it. Register a device with `npx eas-cli@latest device:create`, then build again so the new device is included.
+- The iOS preview build is an internal build. Only devices registered to your Apple account can install it. Register a device with `eas device:create`, then build again so the new device is included.
 
 ## 8. Ship an update
 
@@ -167,7 +173,7 @@ For a new version in the stores, change `version` in `app.json`, then run the pr
 Changes that only touch JavaScript can be sent over the air with EAS Update, without a store review. The project includes `expo-updates` and the `production` and `preview` profiles name a channel. Before the first update:
 
 ```bash
-npx eas-cli@latest update:configure
+eas update:configure
 ```
 
 Installed apps only pick up updates from builds that include `expo-updates`, so ship at least one new build after this step.
@@ -175,7 +181,7 @@ Installed apps only pick up updates from builds that include `expo-updates`, so 
 Then publish a JavaScript update to the production channel:
 
 ```bash
-npx eas-cli@latest update --channel production --message "Fix checkout copy"
+eas update --channel production --message "Fix checkout copy"
 ```
 
 ## 9. Build on your own machine (optional)
@@ -183,7 +189,7 @@ npx eas-cli@latest update --channel production --message "Fix checkout copy"
 EAS can build on your computer as well as in the cloud. Add `--local` to an `eas build` command, and it uses the same profile and `env` values from `eas.json`:
 
 ```bash
-npx eas-cli@latest build --local --profile production --platform android --output ./release/flexstore.aab
+eas build --local --profile production --platform android --output ./release/flexstore.aab
 ```
 
 The output is a release file you upload yourself in Play Console or App Store Connect. Local builds need Xcode on a Mac for iOS, and the Android SDK (through Android Studio) for Android. The EAS CLI marks local builds as experimental, so use cloud builds unless you need to build on your own machine.

@@ -103,7 +103,7 @@ Google and Apple buttons appear on the login screen only when both sides are set
 Android needs an OAuth client of type Android in the same Google Cloud project. Each client is tied to a signing key, so create one for each key you build with:
 
 - Local debug builds use a debug key with its own SHA-1 fingerprint.
-- EAS builds use the keystore EAS manages. Run `npx eas-cli@latest credentials` to see its SHA-1.
+- EAS builds use the keystore EAS manages. Run `eas credentials` to see its SHA-1.
 - Play builds use the app signing certificate that Play Console shows for your app.
 
 A missing or wrong SHA-1 makes Google sign-in fail with `DEVELOPER_ERROR` on Android.
