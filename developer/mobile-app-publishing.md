@@ -47,7 +47,7 @@ You also need your store's privacy policy. Write it under **Settings > Policy**.
 EAS Build does not read the `.env` file. Every value a release build needs goes in `eas.json`, under the profile's `env` key. Check the `production` profile first:
 
 - `EXPO_PUBLIC_API_URL` must be your store's API URL over HTTPS, ending in `/api/v1`. The bundled value is a placeholder.
-- `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` and `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` go here too if you offer Google sign-in. See the social sign-in section of [Mobile App](/developer/mobile-app).
+- `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` and `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` go here too, with their values, if you offer Google sign-in. If you don't, leave them out. See the social sign-in section of [Mobile App](/developer/mobile-app).
 
 Versions work like this:
 
