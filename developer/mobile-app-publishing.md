@@ -119,6 +119,8 @@ Read Apple's [App Review Guidelines](https://developer.apple.com/app-store/revie
 
 ## 5. Build and submit for Android
 
+Expo's official video walkthrough of this build: [How to create an Android production build](https://youtu.be/nxlt8uwqhpE).
+
 ```bash
 eas build --profile production --platform android
 eas submit --profile production --platform android
@@ -138,6 +140,8 @@ The first `submit` creates a release on the internal testing track. Play Console
 **Testing requirement for new personal accounts.** If your Play account is a personal one created recently, Google won't let you publish to production until you've run a closed test. A closed test is a release that only invited testers can install. It needs at least 12 testers who stay opted in for at least 14 days. Plan for this before you expect a production release. Google's [testing requirements page](https://support.google.com/googleplay/android-developer/answer/14151465) has the current rules.
 
 ## 6. Build and submit for iOS
+
+Expo's official video walkthrough of this build: [How to create an iOS production build](https://youtu.be/VZL_e0cEwo8).
 
 ```bash
 eas build --profile production --platform ios
